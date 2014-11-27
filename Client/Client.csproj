@@ -67,7 +67,6 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Content\js\" />
     <Folder Include="Content\css\" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +83,7 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Content\css\style.css" />
-    <Content Include="Content\js\functions.js" />
+    <Content Include="Scripts\js\functions.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
