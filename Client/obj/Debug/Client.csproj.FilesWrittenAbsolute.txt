@@ -1,0 +1,12 @@
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/Client.dll.mdb
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/Client.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/obj/Debug/Client.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/obj/Debug/Client.dll.mdb
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/Microsoft.Web.Infrastructure.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.Razor.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.Helpers.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.WebPages.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.WebPages.Deployment.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.WebPages.Razor.dll
+/Users/edouard/Projects/TP_MultiThreading_FTP/Client/bin/System.Web.Mvc.dll
