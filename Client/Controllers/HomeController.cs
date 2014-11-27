@@ -19,6 +19,11 @@ namespace Client.Controllers
 
 			return View ();
 		}
+
+		public ActionResult Click(){
+			var test = "Its just a test";
+			ViewData ["test"] = test;
+		}
 	}
 }
 
