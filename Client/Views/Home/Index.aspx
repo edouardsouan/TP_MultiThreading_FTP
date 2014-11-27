@@ -19,6 +19,13 @@
 	    		<input type="file" class="form-control"/>
   			</div>
 		</div>
+
+		<% using (Html.BeginForm())
+	       { %>
+	        <label for="UserName">User Name:</label>
+	        <br />
+	        <%= Html.TextBox("UserName") %>
+	    <%}%>
 	</div>
 
 	<!-- Import des Scripts-->

@@ -1,12 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Home/Index.aspx">
-    <Files>
-      <File FileName="Controllers/HomeController.cs" Line="1" Column="1" />
-      <File FileName="Views/Home/Index.aspx" Line="42" Column="42" />
-      <File FileName="Scripts/js/functions.js" Line="18" Column="18" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
