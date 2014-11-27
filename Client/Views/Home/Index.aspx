@@ -3,7 +3,7 @@
 <html>
 <head runat="server">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="Content/css/style.css">
+	<link rel="stylesheet" href="../../Content/css/style.css">
 	<title><%: ViewData["Title"]%></title>
 </head>
 <body>
@@ -15,15 +15,14 @@
 		</div>
 		<div class="jumbotron">
 			<div class="form-group">
-    		<label for="localPath">Local Path</label>
-    		<input type="text" class="form-control col-md-3" id="localPath" placeholder="Ex: C:\Users\Guest\MesDocs">
-    		<button class="btn btn-info">...</button>
+	    		<label for="localPath">Local Path</label>
+	    		<input type="file" class="form-control"/>
   			</div>
 		</div>
 	</div>
 
 	<!-- Import des Scripts-->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 
