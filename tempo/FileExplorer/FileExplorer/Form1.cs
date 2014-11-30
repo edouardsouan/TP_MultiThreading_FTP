@@ -32,13 +32,17 @@ namespace FileExplorer
         {
             TreeNode rootNode;
 
-            DirectoryInfo info = new DirectoryInfo(@"../..");
-            if (info.Exists)
+            string[] drives = Environment.GetLogicalDrives();
+            foreach (string driver in drives)
             {
-                rootNode = new TreeNode(info.Name);
-                rootNode.Tag = info;
-                GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
+                DirectoryInfo info = new DirectoryInfo(driver);
+                if (info.Exists)
+                {
+                    rootNode = new TreeNode(info.Name);
+                    rootNode.Tag = info;
+                    GetDirectories(info.GetDirectories(), rootNode);
+                    treeView1.Nodes.Add(rootNode);
+                }
             }
         }
 
@@ -49,15 +53,26 @@ namespace FileExplorer
             DirectoryInfo[] subSubDirs;
             foreach (DirectoryInfo subDir in subDirs)
             {
-                aNode = new TreeNode(subDir.Name, 0, 0);
-                aNode.Tag = subDir;
-                aNode.ImageKey = "folder";
-                subSubDirs = subDir.GetDirectories();
-                if (subSubDirs.Length != 0)
+                try
                 {
-                    GetDirectories(subSubDirs, aNode);
+                    aNode = new TreeNode(subDir.Name, 0, 0);
+                    aNode.Tag = subDir;
+                    aNode.ImageKey = "folder";
+                    subSubDirs = subDir.GetDirectories();
+                    if (subSubDirs.Length != 0)
+                    {
+                        GetDirectories(subSubDirs, aNode);
+                    }
+                    nodeToAddTo.Nodes.Add(aNode);
                 }
-                nodeToAddTo.Nodes.Add(aNode);
+                catch (PathTooLongException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
         }
 
