@@ -16,17 +16,17 @@ namespace KFile
     public partial class Form1 : Form
     {
         #region Variables
-        private Byte[] Buffer = new Byte[512];
-        private int Bytes;
-        private bool Logged = false;
-        private Socket FTPSocket = null;
-        private string Password = "";
-        private int Port;
-        private string Result="";
-        private string Server = "";
-        private int StatusCode;
-        private string StatusMessage = "";
-        private string UserName = "";
+        private Byte[] buffer = new Byte[512];
+        private int bytes;
+        private bool isLogged = false;
+        private Socket ftpSocket = null;
+        private string password = "";
+        private int port;
+        private string result="";
+        private string server = "";
+        private int statusCode;
+        private string statusMessage = "";
+        private string userName = "";
         #endregion
 
         #region Constructor
@@ -48,15 +48,15 @@ namespace KFile
         #region Buttons actions
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            Server = txtServer.Text;
-            UserName = txtusername.Text;
-            Password = txtPassword.Text;
-            Port = int.Parse(txtPort.Text);
+            server = txtServer.Text;
+            userName = txtusername.Text;
+            password = txtPassword.Text;
+            port = int.Parse(txtPort.Text);
             FTPLogin();
 
             // TODO : put it in the log window
             // Alert the user for the moment
-            if (Logged)
+            if (isLogged)
             {
                 MessageBox.Show("Logged !");
             }
@@ -72,34 +72,34 @@ namespace KFile
         private void FTPLogin()
         {
             // Close the connection if one is already open
-            if (Logged)
+            if (isLogged)
             {
                 CloseConnection();
             }
 
             // Clean IP variables
             IPAddress remoteAddress = null;
-            IPEndPoint addrEndPoint = null;
+            IPEndPoint addressEndPoint = null;
             
             // Try to open the connection, can we proceed ?
-            WriteTextInLogWindow(logWindow, "Status : Opening Connection to : " + Server + "\n", Color.Red);
+            WriteTextInLogWindow(logWindow, "Status : Opening Connection to : " + server + "\n", Color.Red);
             try
             {
-                FTPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                ftpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 WriteTextInLogWindow(logWindow, "Status : Resolving IP Address\n", Color.Red);
-                remoteAddress = Dns.GetHostEntry(Server).AddressList[0];
+                remoteAddress = Dns.GetHostEntry(server).AddressList[0];
                 WriteTextInLogWindow(logWindow, "Status : IP Address Found ->" + remoteAddress.ToString() + "\n", Color.Red);
-                addrEndPoint = new IPEndPoint(remoteAddress, Port);
-                WriteTextInLogWindow(logWindow, "Status : EndPoint Found ->" + addrEndPoint.ToString() + "\n", Color.Red);
-                FTPSocket.Connect(addrEndPoint);
+                addressEndPoint = new IPEndPoint(remoteAddress, port);
+                WriteTextInLogWindow(logWindow, "Status : EndPoint Found ->" + addressEndPoint.ToString() + "\n", Color.Red);
+                ftpSocket.Connect(addressEndPoint);
 
                 StartFTPConnection();
             }
             catch (Exception ex)
             {
-                if (FTPSocket != null && FTPSocket.Connected)
+                if (ftpSocket != null && ftpSocket.Connected)
                 {
-                    FTPSocket.Close();
+                    ftpSocket.Close();
                 }
                 WriteTextInLogWindow(logWindow, "Status : Couldn't connect to remote server. " + ex.Message + "\n", Color.Red);
             }
@@ -114,10 +114,10 @@ namespace KFile
         private void FTPLoginHandleFTPSocketResponse()
         {
             // 220 : the server is ready for a new user
-            if (StatusCode != 220)
+            if (statusCode != 220)
             {
                 CloseConnection();
-                WriteTextInLogWindow(logWindow, "Status : " + Result.Substring(4) + "\n", Color.Red); //Error
+                WriteTextInLogWindow(logWindow, "Status : " + result.Substring(4) + "\n", Color.Red); //Error
             }
             else
             {
@@ -127,54 +127,54 @@ namespace KFile
 
         private void FTPLoginSendUserName()
         {
-            SendCommand("USER " + UserName);
+            SendCommand("USER " + userName);
 
             // 230 : the user is logged in, proceed
             // 331 : the user has been recognized, waiting for the password
             // 530 : connection fail, inform the user
-            if (!(StatusCode == 230 || StatusCode == 331) || StatusCode == 530)
+            if (!(statusCode == 230 || statusCode == 331) || statusCode == 530)
             {
                 FTPLogout();
-                WriteTextInLogWindow(logWindow, "Status : " + Result.Substring(4) + "\n", Color.Red);
+                WriteTextInLogWindow(logWindow, "Status : " + result.Substring(4) + "\n", Color.Red);
             }
             else
             {
                 // Need to send the password to the server
-                if (StatusCode != 230)
+                if (statusCode != 230)
                 {
                     FTPLoginSendPassword();
                 }
                 else
                 {
-                    Logged = true;
-                    WriteTextInLogWindow(logWindow, "Status : Connected to " + Server + "\n", Color.Red);
+                    isLogged = true;
+                    WriteTextInLogWindow(logWindow, "Status : Connected to " + server + "\n", Color.Red);
                 }
             }
         }
 
         private void FTPLoginSendPassword()
         {
-            SendCommand("PASS " + Password);
+            SendCommand("PASS " + password);
 
             // 202 : the command is not implemented, superfluous at this site / password not required
             // 230 : the user is logged in, proceed
-            if (!(StatusCode == 202 || StatusCode == 230))
+            if (!(statusCode == 202 || statusCode == 230))
             {
                 FTPLogout();
-                WriteTextInLogWindow(logWindow, "Status : " + Result.Substring(4) + "\n", Color.Red);
+                WriteTextInLogWindow(logWindow, "Status : " + result.Substring(4) + "\n", Color.Red);
             }
             else
             {
-                Logged = true;
-                WriteTextInLogWindow(logWindow, "Status : Connected to " + Server + "\n", Color.Red);
+                isLogged = true;
+                WriteTextInLogWindow(logWindow, "Status : Connected to " + server + "\n", Color.Red);
             }
         }
 
         private void ReadResponse()
         {
-            StatusMessage = "";
-            Result = SplitResponse();
-            StatusCode = int.Parse(Result.Substring(0, 3));
+            statusMessage = "";
+            result = SplitResponse();
+            statusCode = int.Parse(result.Substring(0, 3));
         }
 
         private string SplitResponse()
@@ -185,15 +185,15 @@ namespace KFile
             {
                 TranslateBytesIntoStatusMessage();
 
-                string[] msg = StatusMessage.Split('\n');
-                if (StatusMessage.Length > 2)
+                string[] msg = statusMessage.Split('\n');
+                if (statusMessage.Length > 2)
                 {
                     // Remove Last \n
-                    StatusMessage = msg[msg.Length - 2];
+                    statusMessage = msg[msg.Length - 2];
                 }
                 else
                 {
-                    StatusMessage = msg[0];
+                    statusMessage = msg[0];
                 }
 
                 for (int i = 0; i < msg.Length - 1; i++)
@@ -201,12 +201,12 @@ namespace KFile
                     WriteTextInLogWindow(logWindow, "Response : " + msg[i] + "\n", Color.Green);
                 }
 
-                splitedResponse = StatusMessage;
+                splitedResponse = statusMessage;
             }
             catch (Exception ex)
             {
                 WriteTextInLogWindow(logWindow, "Status : ERROR. " + ex.Message + "\n", Color.Red);
-                FTPSocket.Close();
+                ftpSocket.Close();
             }
 
             return splitedResponse;
@@ -215,9 +215,9 @@ namespace KFile
         private void TranslateBytesIntoStatusMessage()
         {
             // Count number of Bytes : socket lenght
-            Bytes = FTPSocket.Receive(Buffer, Buffer.Length, 0);
+            bytes = ftpSocket.Receive(buffer, buffer.Length, 0);
             // Convert bytes into a string so we can understand the message
-            StatusMessage += Encoding.ASCII.GetString(Buffer, 0, Bytes);
+            statusMessage += Encoding.ASCII.GetString(buffer, 0, bytes);
         }
 
 
@@ -225,8 +225,8 @@ namespace KFile
         {
             WriteTextInLogWindow(logWindow, "Command : " + msg + "\n", Color.Blue);
             Byte[] CommandBytes = Encoding.ASCII.GetBytes((msg + "\r\n").ToCharArray());
-            FTPSocket.Send(CommandBytes, CommandBytes.Length, 0);
-            //read Response
+            ftpSocket.Send(CommandBytes, CommandBytes.Length, 0);
+            
             ReadResponse();
         }
         #endregion
@@ -234,8 +234,8 @@ namespace KFile
         #region Close Connection Properly
         private void CloseConnection()
         {
-            WriteTextInLogWindow(logWindow, "Status : Closing Connection to " + Server + "\n", Color.Red);
-            if (FTPSocket != null)
+            WriteTextInLogWindow(logWindow, "Status : Closing Connection to " + server + "\n", Color.Red);
+            if (ftpSocket != null)
             {
                 SendCommand("QUIT");
             }
@@ -244,12 +244,12 @@ namespace KFile
 
         private void FTPLogout()
         {
-            if (FTPSocket != null)
+            if (ftpSocket != null)
             {
-                FTPSocket.Close();
-                FTPSocket = null;
+                ftpSocket.Close();
+                ftpSocket = null;
             }
-            Logged = false;
+            isLogged = false;
         }
         #endregion
 
