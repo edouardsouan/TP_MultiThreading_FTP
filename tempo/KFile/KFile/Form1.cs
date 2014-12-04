@@ -58,11 +58,11 @@ namespace KFile
             // Alert the user for the moment
             if (isLogged)
             {
-                MessageBox.Show("Logged !");
+                WriteTextInLogWindow(logWindow, "Logged !", Color.Red);
             }
             else
             {
-                MessageBox.Show("Please check your user name and your password.");
+                WriteTextInLogWindow(logWindow, "Please check your user name and your password.", Color.Red);
             }
         }
         #endregion
@@ -87,7 +87,10 @@ namespace KFile
             {
                 ftpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 WriteTextInLogWindow(logWindow, "Status : Resolving IP Address\n", Color.Red);
-                remoteAddress = Dns.GetHostEntry(server).AddressList[0];
+                // remoteAddress = Dns.GetHostEntry(server).AddressList[0]; for IPv6 but our serveur support only IPv4
+                //remoteAddress = IPAddress.Parse(Dns.GetHostEntry(server).AddressList[0].ToString());
+                IPAddress[] ipv4Addresses = Array.FindAll(Dns.GetHostEntry(string.Empty).AddressList, a => a.AddressFamily == AddressFamily.InterNetwork);
+                remoteAddress = ipv4Addresses[0];
                 WriteTextInLogWindow(logWindow, "Status : IP Address Found ->" + remoteAddress.ToString() + "\n", Color.Red);
                 addressEndPoint = new IPEndPoint(remoteAddress, port);
                 WriteTextInLogWindow(logWindow, "Status : EndPoint Found ->" + addressEndPoint.ToString() + "\n", Color.Red);
@@ -208,6 +211,7 @@ namespace KFile
                 WriteTextInLogWindow(logWindow, "Status : ERROR. " + ex.Message + "\n", Color.Red);
                 ftpSocket.Close();
             }
+            WriteTextInLogWindow(logWindow, "SplitResponse() : statusMessage.Split =" + splitedResponse + "\n", Color.Red);
 
             return splitedResponse;
         }
@@ -216,15 +220,18 @@ namespace KFile
         {
             // Count number of Bytes : socket lenght
             bytes = ftpSocket.Receive(buffer, buffer.Length, 0);
+            WriteTextInLogWindow(logWindow, "TranslateBytesIntoStatusMessage() : nb bytes = " + bytes + "\n", Color.Red);
             // Convert bytes into a string so we can understand the message
             statusMessage += Encoding.ASCII.GetString(buffer, 0, bytes);
+            WriteTextInLogWindow(logWindow, "TranslateBytesIntoStatusMessage() : statusMessage = " + statusMessage + "\n", Color.Red);
         }
 
 
         private void SendCommand(string msg)
         {
-            WriteTextInLogWindow(logWindow, "Command : " + msg + "\n", Color.Blue);
+            WriteTextInLogWindow(logWindow, "SendCommand : msg = " + msg + "\n", Color.Blue);
             Byte[] CommandBytes = Encoding.ASCII.GetBytes((msg + "\r\n").ToCharArray());
+            WriteTextInLogWindow(logWindow, "SendCommand : CommandBytes = " + Encoding.UTF8.GetString(CommandBytes) + "\n", Color.Blue);
             ftpSocket.Send(CommandBytes, CommandBytes.Length, 0);
             
             ReadResponse();
@@ -250,6 +257,8 @@ namespace KFile
                 ftpSocket = null;
             }
             isLogged = false;
+
+            WriteTextInLogWindow(logWindow, "Close socket and logout", Color.Red);
         }
         #endregion
 
@@ -258,7 +267,7 @@ namespace KFile
         {
             // TODO : show message in a log window (rchLog)
             // Like upper part in FileZila
-            MessageBox.Show(text);
+           Console.WriteLine(" KFile log ---- "+text);
         }
         #endregion
     }

@@ -38,12 +38,18 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.txtPort = new System.Windows.Forms.ToolStripTextBox();
             this.btnConnect = new System.Windows.Forms.ToolStripButton();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.fileSystemWatcher2 = new System.IO.FileSystemWatcher();
-            this.logWindow = new System.Windows.Forms.RichTextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -60,53 +66,53 @@
             this.btnConnect});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(714, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(952, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(48, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(61, 24);
             this.toolStripLabel1.Text = "Server : ";
             // 
             // txtServer
             // 
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(125, 25);
+            this.txtServer.Size = new System.Drawing.Size(165, 27);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(71, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(89, 24);
             this.toolStripLabel2.Text = "UserName : ";
             // 
             // txtusername
             // 
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(100, 25);
+            this.txtusername.Size = new System.Drawing.Size(132, 27);
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(66, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(82, 24);
             this.toolStripLabel3.Text = "Password : ";
             // 
             // txtPassword
             // 
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(100, 25);
+            this.txtPassword.Size = new System.Drawing.Size(132, 27);
             // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(38, 22);
+            this.toolStripLabel4.Size = new System.Drawing.Size(47, 24);
             this.toolStripLabel4.Text = "Port : ";
             // 
             // txtPort
             // 
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(100, 25);
+            this.txtPort.Size = new System.Drawing.Size(100, 27);
             this.txtPort.Text = "21";
             // 
             // btnConnect
@@ -115,41 +121,66 @@
             this.btnConnect.Image = global::KFile.Properties.Resources.connect_to_database;
             this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(23, 22);
+            this.btnConnect.Size = new System.Drawing.Size(23, 24);
             this.btnConnect.Text = "Connect";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // fileSystemWatcher1
+            // splitContainer1
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // fileSystemWatcher2
+            // splitContainer1.Panel1
             // 
-            this.fileSystemWatcher2.EnableRaisingEvents = true;
-            this.fileSystemWatcher2.SynchronizingObject = this;
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
-            // rchLog
+            // splitContainer1.Panel2
             // 
-            this.logWindow.Location = new System.Drawing.Point(0, 28);
-            this.logWindow.Name = "rchLog";
-            this.logWindow.Size = new System.Drawing.Size(228, 117);
-            this.logWindow.TabIndex = 1;
-            this.logWindow.Text = "";
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer1.Size = new System.Drawing.Size(952, 297);
+            this.splitContainer1.SplitterDistance = 146;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Size = new System.Drawing.Size(952, 146);
+            this.splitContainer2.SplitterDistance = 460;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Size = new System.Drawing.Size(952, 147);
+            this.splitContainer3.SplitterDistance = 458;
+            this.splitContainer3.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 263);
-            this.Controls.Add(this.logWindow);
+            this.ClientSize = new System.Drawing.Size(952, 324);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher2)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,9 +198,9 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripTextBox txtPort;
         private System.Windows.Forms.ToolStripButton btnConnect;
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.IO.FileSystemWatcher fileSystemWatcher2;
-        private System.Windows.Forms.RichTextBox logWindow;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
     }
 }
 
