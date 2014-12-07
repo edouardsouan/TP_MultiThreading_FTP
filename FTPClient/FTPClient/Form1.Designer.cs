@@ -35,7 +35,7 @@
             this.toolStripLabelServer = new System.Windows.Forms.ToolStripLabel();
             this.txtServer = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelUserName = new System.Windows.Forms.ToolStripLabel();
-            this.txtusername = new System.Windows.Forms.ToolStripTextBox();
+            this.txtUsername = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelPassword = new System.Windows.Forms.ToolStripLabel();
             this.txtPassword = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelPort = new System.Windows.Forms.ToolStripLabel();
@@ -73,7 +73,7 @@
             this.toolStripLabelServer,
             this.txtServer,
             this.toolStripLabelUserName,
-            this.txtusername,
+            this.txtUsername,
             this.toolStripLabelPassword,
             this.txtPassword,
             this.toolStripLabelPort,
@@ -103,10 +103,10 @@
             this.toolStripLabelUserName.Size = new System.Drawing.Size(71, 22);
             this.toolStripLabelUserName.Text = "UserName : ";
             // 
-            // txtusername
+            // txtUsername
             // 
-            this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(128, 25);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(128, 25);
             // 
             // toolStripLabelPassword
             // 
@@ -262,7 +262,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelServer;
         private System.Windows.Forms.ToolStripTextBox txtServer;
         private System.Windows.Forms.ToolStripLabel toolStripLabelUserName;
-        private System.Windows.Forms.ToolStripTextBox txtusername;
+        private System.Windows.Forms.ToolStripTextBox txtUsername;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPassword;
         private System.Windows.Forms.ToolStripTextBox txtPassword;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
