@@ -110,7 +110,7 @@ namespace KFile
 
         private void StartFTPConnection()
         {
-            ReadResponse();
+            int statusCode = FetchStatusCode();
             FTPLoginHandleFTPSocketResponse();
         }
 
@@ -120,7 +120,7 @@ namespace KFile
             if (statusCode != 220)
             {
                 CloseConnection();
-                WriteTextInLogWindow(logWindow, "Status : " + result.Substring(4) + "\n", Color.Red); //Error
+                WriteTextInLogWindow(logWindow, "Status : " + result.Substring(4), Color.Red); //Error
             }
             else
             {
@@ -150,7 +150,7 @@ namespace KFile
                 else
                 {
                     isLogged = true;
-                    WriteTextInLogWindow(logWindow, "Status : Connected to " + server + "\n", Color.Red);
+                    WriteTextInLogWindow(logWindow, "Status : Connected to " + server, Color.Red);
                 }
             }
         }
@@ -171,13 +171,17 @@ namespace KFile
                 isLogged = true;
                 WriteTextInLogWindow(logWindow, "Status : Connected to " + server + "\n", Color.Red);
             }
+
+			SendFile ("/Users/edouard/Documents/test.txt","/www/tempo");
         }
 
-		private void ReadResponse()
+		private int FetchStatusCode()
         {
             statusMessage = "";
             result = SplitResponse();
-            statusCode = int.Parse(result.Substring(0, 3));
+            int statusCode = int.Parse(result.Substring(0, 3));
+
+			return statusCode;
         }
 
         private string SplitResponse()
@@ -229,7 +233,7 @@ namespace KFile
             WriteTextInLogWindow(logWindow, "SendCommand : msg = " + msg, Color.Blue);
             Byte[] CommandBytes = Encoding.ASCII.GetBytes((msg + "\r\n").ToCharArray());      
             ftpSocket.Send(CommandBytes, CommandBytes.Length, 0);          
-            ReadResponse();
+            int statusCode = FetchStatusCode();
         }
         #endregion
 
@@ -267,5 +271,27 @@ namespace KFile
 			logWindow.SelectionColor = logWindow.ForeColor;
         }
         #endregion
+
+		#region Send File
+		public void SendFile(string filePath, string repositoryPath){
+			/*
+			 * if (ftpSocket != null) {
+				ftpSocket = null;
+			}
+			*/
+			SendCommand ("CD " + repositoryPath);
+			SendCommand("STOR");
+			//FileStream fileStream = new FileStream (filePath, FileMode.Open, FileAccess.Read);
+			// Send file fileName to remote device
+			WriteTextInLogWindow(logWindow ,"Sending "+filePath+" to the host.", Color.Black);
+			ftpSocket.SendFile(filePath);
+
+			// Release the socket.
+			/* ftpSocket.Shutdown(SocketShutdown.Both);
+			ftpSocket.Close();
+			*/
+		}
+
+		#endregion
     }
 }
