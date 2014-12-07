@@ -23,6 +23,7 @@ namespace FTPClient
             PopulateTreeViewWithLogicalDrives();
         }
 
+        #region PopulateTreeView
         private void PopulateTreeViewWithLogicalDrives()
         {
             TreeNode rootNode;
@@ -74,12 +75,12 @@ namespace FTPClient
                 newFileNode.ImageIndex = 1;
                 nodeClicked.Nodes.Add(newFileNode);
             }
-
         }
+        #endregion
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void toolStripButtonConnection_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine("YOLO");
         }
     }
 }
