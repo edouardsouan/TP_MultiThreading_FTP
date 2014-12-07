@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.treeViewLocalFiles = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -42,6 +46,7 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,9 +97,33 @@
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
             this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.treeViewLocalFiles);
             this.splitContainer4.Size = new System.Drawing.Size(884, 350);
             this.splitContainer4.SplitterDistance = 440;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "directory_16.png");
+            this.imageList.Images.SetKeyName(1, "file_16.png");
+            // 
+            // treeViewLocalFiles
+            // 
+            this.treeViewLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewLocalFiles.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewLocalFiles.ImageIndex = 0;
+            this.treeViewLocalFiles.ImageList = this.imageList;
+            this.treeViewLocalFiles.Location = new System.Drawing.Point(0, 0);
+            this.treeViewLocalFiles.Name = "treeViewLocalFiles";
+            this.treeViewLocalFiles.SelectedImageIndex = 0;
+            this.treeViewLocalFiles.Size = new System.Drawing.Size(440, 350);
+            this.treeViewLocalFiles.TabIndex = 0;
+            this.treeViewLocalFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseClick);
             // 
             // Form1
             // 
@@ -104,6 +133,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "FTP Client";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -113,6 +143,7 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -125,6 +156,8 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.TreeView treeViewLocalFiles;
     }
 }
 
