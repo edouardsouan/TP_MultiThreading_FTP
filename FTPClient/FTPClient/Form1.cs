@@ -89,7 +89,7 @@ namespace FTPClient
         }
         #endregion
 
-
+        #region FTP
         private void toolStripButtonConnection_Click(object sender, EventArgs e)
         {
             string server = txtServer.Text;
@@ -99,7 +99,6 @@ namespace FTPClient
             FTPLogin(server, username, password, port);
         }
 
-        #region FTP
         private void FTPLogin(string server, string username, string password, int port)
         {
             if (logged)
@@ -123,7 +122,7 @@ namespace FTPClient
 
                 if (IsServerReadyForANewUser())
                 {
-                    
+                    FTPLogin(username, password);
                 }
             }
             catch (Exception ex)
@@ -154,21 +153,46 @@ namespace FTPClient
             return canGoOn;
         }
 
-        private void FTPLoginSendUserName(string userName)
+        private void FTPLogin(string userName, string password)
         {
             int replyCode = SendCommand("USER " + userName);
 
-            // TODO 230, 331, 530
+            if( !( replyCode == 230 || replyCode == 331 || replyCode == 530) )
+            {
+                FTPLogout();
+                WriteTextInLogWindow("STATUS : " + replyCode.ToString(), Color.Red);
+            }
+            else
+            {
+                if (replyCode != 230)
+                {
+                    FTPLoginSendPassword(password);
+                }
+                else
+                {
+                    logged = true;
+                    WriteTextInLogWindow("STATUS : connection succeed ", Color.Green);
+                }
+            }
         }
 
+        private void FTPLoginSendPassword(string password)
+        {
+            int replyCode = SendCommand("PASS "+password);
 
-
-
-
-
-
-
-
+            // 202 : the command is not implemented, superfluous at this site / password not required
+            // 230 : the user is logged in, proceed
+            if (!(replyCode == 202 || replyCode == 230))
+            {
+                FTPLogout();
+                WriteTextInLogWindow("STATUS : " + replyCode.ToString(), Color.Red);
+            }
+            else
+            {
+                logged = true;
+                WriteTextInLogWindow("STATUS : connection succeed ", Color.Green);
+            }
+        }
 
         private void FTPLogout()
         {
