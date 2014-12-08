@@ -15,26 +15,219 @@ namespace FTPClient
 {
     public partial class Form1 : Form
     {
-        private Socket ftpSocket = null;
-        private bool logged = false;
+        #region Variables
+        private Socket FTPSocket = null;
+        private bool isLogged = false;
+        #endregion
 
+        #region Constructor
         public Form1()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Destructor
         ~Form1()
         {
-            FTPLogout();
+            LogOut();
+        }
+        #endregion
+
+        #region FTP Connection
+        private void LogOut()
+        {
+            if (FTPSocket != null)
+            {
+                FTPSocket.Close();
+                FTPSocket = null;
+            }
+            isLogged = false;
         }
 
+        private void CloseConnection(string server)
+        {
+            WriteLog( "STATUS : Closing Connection to " + server, Color.Red);
+            if (FTPSocket != null)
+            {
+                SendCommand("QUIT");
+            }
+            LogOut();
+        }
+
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            string server = txtServer.Text;
+            string userName = txtUsername.Text;
+            string password = txtPassword.Text;
+            int port = int.Parse(txtPort.Text);
+
+            FTPLogin(server, userName, password, port);
+        }
+
+        private void FTPLogin(string server, string userName, string password, int port)
+        {
+            if (isLogged)
+            {
+                CloseConnection(server);
+            }
+
+            WriteLog("STATUS : Opening Connection to : " + server, Color.Black);
+            try
+            {
+                if (FTPCheckServerReady(server, port))
+                {
+                    if (FTPCheckUserAndPassword(server, userName, password, port))
+                    {
+                        isLogged = true;
+                        WriteLog("STATUS : Logged to " + server, Color.Green);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (FTPSocket != null && FTPSocket.Connected)
+                {
+                    FTPSocket.Close();
+                }
+                WriteLog("ERROR : Couldn't connect to the server. " + ex.Message, Color.Red);
+            }
+        }
+
+        private bool FTPCheckServerReady(string server, int port)
+        {
+            bool isServerReady = true;
+            IPAddress remoteAddress = null;
+            IPEndPoint addressEndPoint = null;
+
+            FTPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            WriteLog("STATUS : Resolving IP Address", Color.Black);
+
+            remoteAddress = Dns.GetHostEntry(server).AddressList[0];
+            WriteLog("STATUS : IP Address Found -> " + remoteAddress.ToString(), Color.Black);
+
+            addressEndPoint = new IPEndPoint(remoteAddress, port);
+            WriteLog("STATUS : EndPoint Found -> " + addressEndPoint.ToString(), Color.Black);
+
+            FTPSocket.Connect(addressEndPoint);
+
+            if ( ReadResponse() != 220)
+            {
+                isServerReady = false;
+                CloseConnection(server);
+                WriteLog("ERROR : the server is not ready for a new user.", Color.Red);
+            }
+
+            return isServerReady;
+        }
+
+        private bool FTPCheckUserAndPassword(string server, string userName, string password, int port)
+        {
+            bool isUserAndPwdCorrect = false;
+
+            int statusCode = SendCommand("USER " + userName);
+            if (!(statusCode == 230 || statusCode == 331))
+            {
+                LogOut();
+                WriteLog("ERROR : Login failed. Please check your user name.", Color.Red);
+            }
+            else
+            {
+                if (statusCode == 331)
+                {
+                    WriteLog("STATUS : the user name is ok but the server needs a password.", Color.Green);
+                    statusCode = SendCommand("PASS " + password);
+                }
+
+                if (statusCode == 202 || statusCode == 230)
+                {
+                    // 230 : user logged in
+                    // 202 : command not implemented, superfluous at this site
+                    isUserAndPwdCorrect = true;
+                    WriteLog("STATUS : Connected to " + server, Color.Green);
+                }
+                else
+                {
+                    LogOut();
+                    WriteLog("ERROR : Login failed. Please check your user name and your password.", Color.Red);
+                }
+            }
+
+            return isUserAndPwdCorrect;
+        }
+
+        private int SendCommand(string msg)
+        {
+            if (!msg.Contains("PASS"))
+            {
+                WriteLog("COMMAND : " + msg, Color.Blue);
+            }
+
+            Byte[] CommandBytes = Encoding.ASCII.GetBytes((msg + "\r\n").ToCharArray());
+            FTPSocket.Send(CommandBytes, CommandBytes.Length, 0);
+
+            return ReadResponse();
+        }
+
+        private int ReadResponse()
+        {
+            string result = SplitResponse();
+
+            // StatusCode = int.Parse(result.Substring(0, 3));
+            return int.Parse(result.Substring(0, 3));
+        }
+
+        private string SplitResponse()
+        {
+            string splitResponse = "";
+
+            try
+            {
+                string statusMessage = "";
+                Byte[] Buffer = new Byte[512];
+                int Bytes;
+                
+                do
+                {
+                    Bytes = FTPSocket.Receive(Buffer, Buffer.Length, 0);
+                    statusMessage += Encoding.ASCII.GetString(Buffer, 0, Bytes);
+                } while (Bytes > Buffer.Length);
+
+                string[] msg = statusMessage.Split('\n');
+
+                if (statusMessage.Length > 2)
+                {
+                    statusMessage = msg[msg.Length - 2]; //Remove Last \n
+                }
+                else
+                {
+                    statusMessage = msg[0];
+                }
+
+                for (int i = 0; i < msg.Length - 1; i++)
+                {
+                    WriteLog("RESPONSE : " + msg[i], Color.Black);
+                }
+                
+                splitResponse = statusMessage;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("STATUS : ERROR. " + ex.Message , Color.Red);
+                FTPSocket.Close();
+            }
+
+            return splitResponse;
+        }
+        #endregion
+
+        #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
             PopulateTreeViewWithLogicalDrives();
         }
 
-
-        #region PopulateTreeView
         private void PopulateTreeViewWithLogicalDrives()
         {
             TreeNode rootNode;
@@ -54,12 +247,26 @@ namespace FTPClient
 
         private void treeViewLocalFiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            TreeNode nodeClicked = e.Node;
-
-            if (nodeClicked.Nodes.Count == 0)
+            try
             {
-                PropulateTreeNodeWithDirectories(nodeClicked);
-                PropulateTreeNodeWithFiles(nodeClicked);
+                TreeNode nodeClicked = e.Node;
+
+                // BUG chemin bizarre, non trouvé d'où exception
+                // peut être pas la bonne façon... ?
+                FileAttributes attr = File.GetAttributes(nodeClicked.FullPath); 
+
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    if (nodeClicked.Nodes.Count == 0)
+                    {
+                        PropulateTreeNodeWithDirectories(nodeClicked);
+                        PropulateTreeNodeWithFiles(nodeClicked);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                WriteLog("ERROR : "+ex.Message, Color.Red);
             }
         }
 
@@ -86,193 +293,38 @@ namespace FTPClient
                 newFileNode.ImageIndex = 1;
                 nodeClicked.Nodes.Add(newFileNode);
             }
+
         }
         #endregion
 
-        #region FTP
-        private void toolStripButtonConnection_Click(object sender, EventArgs e)
+        #region Upload
+        private void treeViewLocalFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            string server = txtServer.Text;
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-            int port = int.Parse(txtPort.Text);
-            FTPLogin(server, username, password, port);
+            // TODO
+            
+            TreeNode nodeClicked = e.Node;
+            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            WriteLog("UploadFile : "+nodeClicked.FullPath, Color.Blue);
+            // UploadFile();
         }
-
-        private void FTPLogin(string server, string username, string password, int port)
+        /*
+        private void UploadFile(string LocalPath)
         {
-            if (logged)
+            if (!isLogged)
             {
-                CloseConnection();
+                AppendText("STATUS : Login First Please.", Color.Red);
             }
-            IPAddress remoteAddress = null;
-            IPEndPoint addressEndPoint = null;
-
-            WriteTextInLogWindow("Status : Opening Connection to " + server, Color.Green);
-            try
-            {
-                ftpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                WriteTextInLogWindow("Status : Resolving IP Adress ", Color.Green);
-
-                remoteAddress = Dns.GetHostEntry(server).AddressList[0];
-                WriteTextInLogWindow("Status : IP Adresse found ->  " + remoteAddress, Color.Green);
-
-                addressEndPoint = new IPEndPoint(remoteAddress, port);
-                WriteTextInLogWindow("Status : IP EndPoint found ->  " + addressEndPoint, Color.Green);
-
-                if (IsServerReadyForANewUser())
-                {
-                    FTPLogin(username, password);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ftpSocket != null && ftpSocket.Connected)
-                {
-                    ftpSocket.Close();
-                }
-                WriteTextInLogWindow("ERROR : Couldn't connect to remote server. " + ex.Message, Color.Red);
-            }
+            
         }
-
-        private bool IsServerReadyForANewUser()
-        {
-            bool canGoOn = false;
-            int replyCode = FetchNumericReplyCode();
-
-            if (replyCode != 220)
-            {
-                CloseConnection();
-                WriteTextInLogWindow("STATUS : " + replyCode.ToString(), Color.Red);
-            }
-            else
-            {
-                canGoOn = true;
-            }
-
-            return canGoOn;
-        }
-
-        private void FTPLogin(string userName, string password)
-        {
-            int replyCode = SendCommand("USER " + userName);
-
-            if( !( replyCode == 230 || replyCode == 331 || replyCode == 530) )
-            {
-                FTPLogout();
-                WriteTextInLogWindow("STATUS : " + replyCode.ToString(), Color.Red);
-            }
-            else
-            {
-                if (replyCode != 230)
-                {
-                    FTPLoginSendPassword(password);
-                }
-                else
-                {
-                    logged = true;
-                    WriteTextInLogWindow("STATUS : connection succeed ", Color.Green);
-                }
-            }
-        }
-
-        private void FTPLoginSendPassword(string password)
-        {
-            int replyCode = SendCommand("PASS "+password);
-
-            // 202 : the command is not implemented, superfluous at this site / password not required
-            // 230 : the user is logged in, proceed
-            if (!(replyCode == 202 || replyCode == 230))
-            {
-                FTPLogout();
-                WriteTextInLogWindow("STATUS : " + replyCode.ToString(), Color.Red);
-            }
-            else
-            {
-                logged = true;
-                WriteTextInLogWindow("STATUS : connection succeed ", Color.Green);
-            }
-        }
-
-        private void FTPLogout()
-        {
-            if (ftpSocket != null)
-            {
-                ftpSocket.Close();
-                ftpSocket = null;
-            }
-            logged = false;
-
-            WriteTextInLogWindow("Status : Connection has been closed", Color.Green);
-        }
-
-        private void CloseConnection()
-        {
-            WriteTextInLogWindow("Status : Closing Connection to ", Color.Black);
-            if (ftpSocket != null)
-            {
-                int replyCode = SendCommand("QUIT");
-                WriteTextInLogWindow("Response : " + replyCode.ToString(), Color.Black);
-            }
-            FTPLogout();
-        }
-
-        private int SendCommand(string command)
-        {
-            WriteTextInLogWindow("Command : "+command, Color.Blue);
-
-            Byte[] commandBytes = Encoding.ASCII.GetBytes((command+"\r\n").ToCharArray());
-            ftpSocket.Send(commandBytes, commandBytes.Length, 0);
-
-            return FetchNumericReplyCode();
-        }
-
-        private int FetchNumericReplyCode()
-        {
-            string splitedResponse = "";
-
-            try
-            {
-                string statusMessage = TranslateBytesIntoStatusMessage();
-                String[] messageMultiligne = statusMessage.Split('\n');
-
-                if (messageMultiligne.Length > 2)
-                {
-                    splitedResponse = messageMultiligne[messageMultiligne.Length - 2];
-                }
-                else
-                {
-                    splitedResponse = messageMultiligne[0];
-                }
-
-                for (int iMessage = 0; iMessage < messageMultiligne.Length - 1; iMessage++ )
-                {
-                    WriteTextInLogWindow("Response : " + messageMultiligne[iMessage], Color.Black);
-                }
-            }
-            catch(Exception ex)
-            {
-                WriteTextInLogWindow("Status : ERROR "+ex.Message, Color.Red);
-                ftpSocket.Close();
-            }
-
-            return int.Parse(splitedResponse.Substring(0, 3));
-        }
-
-        private string TranslateBytesIntoStatusMessage()
-        {
-            Byte[] socketBuffer = new Byte[512];
-            int bytesReceived = ftpSocket.Receive(socketBuffer, socketBuffer.Length, 0);
-            return Encoding.ASCII.GetString(socketBuffer, 0, bytesReceived);
-        }
+         */
         #endregion
+
 
         #region Log Window
-        private void WriteTextInLogWindow(string message, Color colour)
+        private void WriteLog(string text, Color color)
         {
-            DateTime now = DateTime.Now;
-            logWindow.SelectionColor = colour;
-            logWindow.AppendText(now + " - " + message + "\n");
+            logWindow.SelectionColor = color;
+            logWindow.AppendText(DateTime.Now+" - "+text+"\n");
         }
         #endregion
     }

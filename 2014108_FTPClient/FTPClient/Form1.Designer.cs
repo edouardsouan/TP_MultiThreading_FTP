@@ -41,6 +41,7 @@
             this.toolStripLabelPort = new System.Windows.Forms.ToolStripLabel();
             this.txtPort = new System.Windows.Forms.ToolStripTextBox();
             this.btnConnect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.logWindow = new System.Windows.Forms.RichTextBox();
@@ -77,7 +78,8 @@
             this.txtPassword,
             this.toolStripLabelPort,
             this.txtPort,
-            this.btnConnect});
+            this.btnConnect,
+            this.toolStripButtonConnection});
             this.toolStripConnection.Location = new System.Drawing.Point(0, 0);
             this.toolStripConnection.Name = "toolStripConnection";
             this.toolStripConnection.Size = new System.Drawing.Size(1028, 27);
@@ -94,6 +96,7 @@
             // 
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(169, 27);
+            this.txtServer.Text = "ftp.kimsavinfo.fr";
             // 
             // toolStripLabelUserName
             // 
@@ -105,6 +108,7 @@
             // 
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(169, 27);
+            this.txtUsername.Text = "kimsavin";
             // 
             // toolStripLabelPassword
             // 
@@ -116,6 +120,7 @@
             // 
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(169, 27);
+            this.txtPassword.Text = "Se8yBapG";
             // 
             // toolStripLabelPort
             // 
@@ -132,12 +137,19 @@
             // btnConnect
             // 
             this.btnConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConnect.Image = global::FTPClient.Properties.Resources.connexion;
             this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(23, 24);
-            this.btnConnect.Text = "toolStripButton1";
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnConnect.Text = "Connect";
+            // 
+            // toolStripButtonConnection
+            // 
+            this.toolStripButtonConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonConnection.Image = global::FTPClient.Properties.Resources.connexion;
+            this.toolStripButtonConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonConnection.Name = "toolStripButtonConnection";
+            this.toolStripButtonConnection.Size = new System.Drawing.Size(23, 24);
+            this.toolStripButtonConnection.Text = "toolStripButton1";
             // 
             // splitContainer1
             // 
@@ -194,7 +206,7 @@
             // 
             this.splitContainer3.Panel1.Controls.Add(this.treeViewLocalFiles);
             this.splitContainer3.Size = new System.Drawing.Size(1028, 360);
-            this.splitContainer3.SplitterDistance = 462;
+            this.splitContainer3.SplitterDistance = 465;
             this.splitContainer3.TabIndex = 0;
             // 
             // treeViewLocalFiles
@@ -206,10 +218,8 @@
             this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.treeViewLocalFiles.Name = "treeViewLocalFiles";
             this.treeViewLocalFiles.SelectedImageIndex = 0;
-            this.treeViewLocalFiles.Size = new System.Drawing.Size(462, 360);
+            this.treeViewLocalFiles.Size = new System.Drawing.Size(465, 360);
             this.treeViewLocalFiles.TabIndex = 0;
-            this.treeViewLocalFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseClick);
-            this.treeViewLocalFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseDoubleClick);
             // 
             // Form1
             // 
@@ -218,10 +228,9 @@
             this.ClientSize = new System.Drawing.Size(1028, 750);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStripConnection);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "FTP Client";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.toolStripConnection.ResumeLayout(false);
             this.toolStripConnection.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -257,6 +266,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
         private System.Windows.Forms.ToolStripTextBox txtPort;
         private System.Windows.Forms.ToolStripButton btnConnect;
+        private System.Windows.Forms.ToolStripButton toolStripButtonConnection;
     }
 }
 
