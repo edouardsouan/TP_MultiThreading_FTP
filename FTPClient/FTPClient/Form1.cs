@@ -126,7 +126,7 @@ namespace FTPClient
         {
             bool isUserAndPwdCorrect = false;
 
-            int statusCode = SendCommand("USER " + userName);
+            int statusCode = SendCommand("USER", userName);
             if (!(statusCode == 230 || statusCode == 331))
             {
                 LogOut();
@@ -137,7 +137,7 @@ namespace FTPClient
                 if (statusCode == 331)
                 {
                     WriteLog("STATUS : the user name is ok but the server needs a password.", Color.Green);
-                    statusCode = SendCommand("PASS " + password);
+                    statusCode = SendCommand("PASS", password);
                 }
 
                 if (statusCode == 202 || statusCode == 230)
@@ -157,14 +157,15 @@ namespace FTPClient
             return isUserAndPwdCorrect;
         }
 
-        private int SendCommand(string msg)
+		private int SendCommand(string command ,string msg="")
         {
-            if (!msg.Contains("PASS"))
+			command = command.ToUpper();
+            if (!command.Contains("PASS"))
             {
-                WriteLog("COMMAND : " + msg, Color.Blue);
+				WriteLog("COMMAND : "+command+ " "+ msg, Color.Blue);
             }
 
-            Byte[] CommandBytes = Encoding.ASCII.GetBytes((msg + "\r\n").ToCharArray());
+            Byte[] CommandBytes = Encoding.ASCII.GetBytes((command +" "+ msg + "\r\n").ToCharArray());
             FTPSocket.Send(CommandBytes, CommandBytes.Length, 0);
 
             return ReadResponse();
@@ -260,7 +261,7 @@ namespace FTPClient
                     if (nodeClicked.Nodes.Count == 0)
                     {
                         PropulateTreeNodeWithDirectories(nodeClicked);
-                        PropulateTreeNodeWithFiles(nodeClicked);
+                        PopulateTreeNodeWithFiles(nodeClicked);
                     }
                 }
             }
@@ -283,7 +284,7 @@ namespace FTPClient
 
         }
 
-        private void PropulateTreeNodeWithFiles(TreeNode nodeClicked)
+        private void PopulateTreeNodeWithFiles(TreeNode nodeClicked)
         {
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
             foreach (FileInfo file in nodeClickedInfo.GetFiles())
@@ -307,16 +308,16 @@ namespace FTPClient
             WriteLog("UploadFile : "+nodeClicked.FullPath, Color.Blue);
             // UploadFile();
         }
-        /*
-        private void UploadFile(string LocalPath)
+        
+		private void UploadFile(string localPath, string remotePath)
         {
-            if (!isLogged)
-            {
-                AppendText("STATUS : Login First Please.", Color.Red);
-            }
+			if (!isLogged) {
+				WriteLog("STATUS :Please loggin .", Color.Red);
+			} else {
+				
+			}
             
         }
-         */
         #endregion
 
 
