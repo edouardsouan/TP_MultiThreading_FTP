@@ -63,8 +63,9 @@
             // 
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "directory_16.png");
-            this.imageList.Images.SetKeyName(1, "file_16.png");
+            this.imageList.Images.SetKeyName(0, "logical_disk_16.png");
+            this.imageList.Images.SetKeyName(1, "directory_16.png");
+            this.imageList.Images.SetKeyName(2, "file_16.png");
             // 
             // toolStripConnection
             // 
@@ -80,53 +81,53 @@
             this.btnConnect});
             this.toolStripConnection.Location = new System.Drawing.Point(0, 0);
             this.toolStripConnection.Name = "toolStripConnection";
-            this.toolStripConnection.Size = new System.Drawing.Size(1028, 27);
+            this.toolStripConnection.Size = new System.Drawing.Size(771, 25);
             this.toolStripConnection.TabIndex = 0;
             this.toolStripConnection.Text = "toolStrip1";
             // 
             // toolStripLabelServer
             // 
             this.toolStripLabelServer.Name = "toolStripLabelServer";
-            this.toolStripLabelServer.Size = new System.Drawing.Size(61, 24);
+            this.toolStripLabelServer.Size = new System.Drawing.Size(48, 22);
             this.toolStripLabelServer.Text = "Server : ";
             // 
             // txtServer
             // 
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(169, 27);
+            this.txtServer.Size = new System.Drawing.Size(128, 25);
             // 
             // toolStripLabelUserName
             // 
             this.toolStripLabelUserName.Name = "toolStripLabelUserName";
-            this.toolStripLabelUserName.Size = new System.Drawing.Size(89, 24);
+            this.toolStripLabelUserName.Size = new System.Drawing.Size(71, 22);
             this.toolStripLabelUserName.Text = "UserName : ";
             // 
             // txtUsername
             // 
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(169, 27);
+            this.txtUsername.Size = new System.Drawing.Size(128, 25);
             // 
             // toolStripLabelPassword
             // 
             this.toolStripLabelPassword.Name = "toolStripLabelPassword";
-            this.toolStripLabelPassword.Size = new System.Drawing.Size(82, 24);
+            this.toolStripLabelPassword.Size = new System.Drawing.Size(66, 22);
             this.toolStripLabelPassword.Text = "Password : ";
             // 
             // txtPassword
             // 
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(169, 27);
+            this.txtPassword.Size = new System.Drawing.Size(128, 25);
             // 
             // toolStripLabelPort
             // 
             this.toolStripLabelPort.Name = "toolStripLabelPort";
-            this.toolStripLabelPort.Size = new System.Drawing.Size(47, 24);
+            this.toolStripLabelPort.Size = new System.Drawing.Size(38, 22);
             this.toolStripLabelPort.Text = "Port : ";
             // 
             // txtPort
             // 
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(76, 27);
+            this.txtPort.Size = new System.Drawing.Size(58, 25);
             this.txtPort.Text = "21";
             // 
             // btnConnect
@@ -135,30 +136,31 @@
             this.btnConnect.Image = global::FTPClient.Properties.Resources.connexion;
             this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(23, 24);
+            this.btnConnect.Size = new System.Drawing.Size(23, 22);
             this.btnConnect.Text = "toolStripButton1";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1028, 723);
-            this.splitContainer1.SplitterDistance = 486;
+            this.splitContainer1.Size = new System.Drawing.Size(771, 584);
+            this.splitContainer1.SplitterDistance = 392;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -169,17 +171,18 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1028, 486);
-            this.splitContainer2.SplitterDistance = 122;
+            this.splitContainer2.Size = new System.Drawing.Size(771, 392);
+            this.splitContainer2.SplitterDistance = 98;
+            this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
             // logWindow
             // 
             this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logWindow.Location = new System.Drawing.Point(0, 0);
-            this.logWindow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.logWindow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logWindow.Name = "logWindow";
-            this.logWindow.Size = new System.Drawing.Size(1028, 122);
+            this.logWindow.Size = new System.Drawing.Size(771, 98);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
             // 
@@ -187,14 +190,15 @@
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.treeViewLocalFiles);
-            this.splitContainer3.Size = new System.Drawing.Size(1028, 360);
-            this.splitContainer3.SplitterDistance = 462;
+            this.splitContainer3.Size = new System.Drawing.Size(771, 291);
+            this.splitContainer3.SplitterDistance = 346;
+            this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
             // 
             // treeViewLocalFiles
@@ -203,22 +207,21 @@
             this.treeViewLocalFiles.ImageIndex = 0;
             this.treeViewLocalFiles.ImageList = this.imageList;
             this.treeViewLocalFiles.Location = new System.Drawing.Point(0, 0);
-            this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.treeViewLocalFiles.Name = "treeViewLocalFiles";
             this.treeViewLocalFiles.SelectedImageIndex = 0;
-            this.treeViewLocalFiles.Size = new System.Drawing.Size(462, 360);
+            this.treeViewLocalFiles.Size = new System.Drawing.Size(346, 291);
             this.treeViewLocalFiles.TabIndex = 0;
             this.treeViewLocalFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseClick);
             this.treeViewLocalFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseDoubleClick);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 750);
+            this.ClientSize = new System.Drawing.Size(771, 609);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStripConnection);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "FTP Client";
             this.Load += new System.EventHandler(this.Form1_Load);

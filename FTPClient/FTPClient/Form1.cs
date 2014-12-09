@@ -241,6 +241,8 @@ namespace FTPClient
                 {
                     rootNode = new TreeNode(directoryInfo.Name);
                     rootNode.Tag = directoryInfo;
+                    rootNode.ImageIndex = 0;
+                    rootNode.SelectedImageIndex = 0;
                     treeViewLocalFiles.Nodes.Add(rootNode);
                 }
             }
@@ -251,12 +253,7 @@ namespace FTPClient
             try
             {
                 TreeNode nodeClicked = e.Node;
-
-                // BUG chemin bizarre, non trouvé d'où exception
-                // peut être pas la bonne façon... ?
-                FileAttributes attr = File.GetAttributes(nodeClicked.FullPath); 
-
-                if (attr.HasFlag(FileAttributes.Directory))
+                if (IsNodeADirectory(nodeClicked))
                 {
                     if (nodeClicked.Nodes.Count == 0)
                     {
@@ -273,15 +270,16 @@ namespace FTPClient
 
         private void PropulateTreeNodeWithDirectories(TreeNode nodeClicked)
         {
+            
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
             foreach (DirectoryInfo subDir in nodeClickedInfo.GetDirectories())
             {
                 TreeNode newDirNode = new TreeNode(subDir.Name, 0, 0);
-                newDirNode.Tag = nodeClickedInfo;
-                newDirNode.ImageIndex = 0;
+                newDirNode.Tag = subDir;
+                newDirNode.ImageIndex = 1;
+                newDirNode.SelectedImageIndex = 1;
                 nodeClicked.Nodes.Add(newDirNode);
             }
-
         }
 
         private void PopulateTreeNodeWithFiles(TreeNode nodeClicked)
@@ -290,8 +288,9 @@ namespace FTPClient
             foreach (FileInfo file in nodeClickedInfo.GetFiles())
             {
                 TreeNode newFileNode = new TreeNode(file.Name, 0, 0);
-                newFileNode.Tag = nodeClickedInfo;
-                newFileNode.ImageIndex = 1;
+                newFileNode.Tag = file;
+                newFileNode.ImageIndex = 2;
+                newFileNode.SelectedImageIndex = 2;
                 nodeClicked.Nodes.Add(newFileNode);
             }
 
@@ -301,10 +300,17 @@ namespace FTPClient
         #region Upload
         private void treeViewLocalFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            // TODO
-            
             TreeNode nodeClicked = e.Node;
-            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+
+            if (IsNodeADirectory(nodeClicked))
+            {
+                DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            }
+            else
+            {
+                FileInfo nodeClickedInfo = (FileInfo)nodeClicked.Tag;
+            }
+
             WriteLog("UploadFile : "+nodeClicked.FullPath, Color.Blue);
             // UploadFile();
         }
@@ -317,6 +323,16 @@ namespace FTPClient
 				
 			}
             
+        }
+
+        private bool IsNodeADirectory(TreeNode node)
+        {
+            bool isADirectory = false;
+            if (node.ImageIndex == 0 || node.ImageIndex == 1)
+            {
+                isADirectory = true;
+            }
+            return isADirectory;
         }
         #endregion
 
