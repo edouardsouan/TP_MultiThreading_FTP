@@ -208,7 +208,7 @@ namespace FTPClient
                 serverNode.SelectedImageIndex = 2;
             }
 
-            treeViewServer.Nodes.Add(serverNode);
+            parentNode.Nodes.Add(serverNode);
         }
 
         private void treeViewServer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -218,6 +218,7 @@ namespace FTPClient
             {
                 if (nodeClicked.Nodes.Count == 0)
                 {
+                    Console.WriteLine("Path : "+nodeClicked.FullPath);
                     GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
                 }
             }
