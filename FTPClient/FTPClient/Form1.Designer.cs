@@ -40,7 +40,7 @@
             this.txtPassword = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelPort = new System.Windows.Forms.ToolStripLabel();
             this.txtPort = new System.Windows.Forms.ToolStripTextBox();
-            this.btnConnect = new System.Windows.Forms.ToolStripButton();
+            this.btnConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.logWindow = new System.Windows.Forms.RichTextBox();
@@ -78,7 +78,7 @@
             this.txtPassword,
             this.toolStripLabelPort,
             this.txtPort,
-            this.btnConnect});
+            this.btnConnection});
             this.toolStripConnection.Location = new System.Drawing.Point(0, 0);
             this.toolStripConnection.Name = "toolStripConnection";
             this.toolStripConnection.Size = new System.Drawing.Size(771, 25);
@@ -130,21 +130,21 @@
             this.txtPort.Size = new System.Drawing.Size(58, 25);
             this.txtPort.Text = "21";
             // 
-            // btnConnect
+            // btnConnection
             // 
-            this.btnConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnConnect.Image = global::FTPClient.Properties.Resources.connexion;
-            this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(23, 22);
-            this.btnConnect.Text = "toolStripButton1";
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnConnection.Image = global::FTPClient.Properties.Resources.connexion;
+            this.btnConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConnection.Name = "btnConnection";
+            this.btnConnection.Size = new System.Drawing.Size(23, 22);
+            this.btnConnection.Text = "toolStripButton1";
+            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 25);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -160,7 +160,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -180,7 +180,7 @@
             // 
             this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logWindow.Location = new System.Drawing.Point(0, 0);
-            this.logWindow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logWindow.Margin = new System.Windows.Forms.Padding(2);
             this.logWindow.Name = "logWindow";
             this.logWindow.Size = new System.Drawing.Size(771, 98);
             this.logWindow.TabIndex = 0;
@@ -190,7 +190,7 @@
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
@@ -207,13 +207,12 @@
             this.treeViewLocalFiles.ImageIndex = 0;
             this.treeViewLocalFiles.ImageList = this.imageList;
             this.treeViewLocalFiles.Location = new System.Drawing.Point(0, 0);
-            this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewLocalFiles.Name = "treeViewLocalFiles";
             this.treeViewLocalFiles.SelectedImageIndex = 0;
             this.treeViewLocalFiles.Size = new System.Drawing.Size(346, 291);
             this.treeViewLocalFiles.TabIndex = 0;
             this.treeViewLocalFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseClick);
-            this.treeViewLocalFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseDoubleClick);
             // 
             // Form1
             // 
@@ -259,7 +258,7 @@
         private System.Windows.Forms.ToolStripTextBox txtPassword;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
         private System.Windows.Forms.ToolStripTextBox txtPort;
-        private System.Windows.Forms.ToolStripButton btnConnect;
+        private System.Windows.Forms.ToolStripButton btnConnection;
     }
 }
 
