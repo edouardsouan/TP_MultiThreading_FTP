@@ -1,1 +1,0 @@
-X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPWebClient\FTPWebClient\bin\Debug\FTPWebClient.exe.config
