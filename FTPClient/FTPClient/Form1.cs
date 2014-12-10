@@ -16,8 +16,6 @@ namespace FTPClient
     public partial class Form1 : Form
     {
         #region Variables
-        private Socket FTPSocket = null;
-        private bool isLogged = false;
         #endregion
 
         #region Constructor
