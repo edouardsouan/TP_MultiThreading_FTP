@@ -129,49 +129,38 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            Task<string> asyncResult = GetAsyncResponse();
-           
+            GetTreeViewFromServer();
         }
 
-        private async Task<string> GetAsyncResponse()
+        private async void GetTreeViewFromServer()
         {
             string serverTarget = "ftp://" + this.txtServer.Text;
-            string userName = this.txtUserName.Text;
-            string userPassword = this.txtPassword.Text;
-            string result = "";
 
             try
             {
-                // Get the object used to communicate with the server.
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
-                request.KeepAlive = false;
-                // This example assumes the FTP site uses anonymous logon.
-                request.Credentials = new NetworkCredential(userName, userPassword);
+                FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+                ftpRequest.KeepAlive = false;
+                ftpRequest.Credentials = new NetworkCredential( this.txtUserName.Text, this.txtPassword.Text);
+                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-                //FtpWebResponse response = (FtpWebResponse)request.GetResponseAsync();
-                FtpWebResponse response = (FtpWebResponse)await request.GetResponseAsync();
-                WriteLog(response.BannerMessage, Color.Green);
-                WriteLog(response.WelcomeMessage, Color.Green);
-                WriteLog(response.StatusDescription, Color.Blue);
-                WriteLog(response.StatusCode.ToString(), Color.Blue);
+                FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+                WriteLog(ftpResponse.BannerMessage, Color.Green);
+                WriteLog(ftpResponse.WelcomeMessage, Color.Green);
+                WriteLog(ftpResponse.StatusDescription, Color.Blue);
+                WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
                 WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
 
-                Stream responseStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(responseStream);
+                Stream responseStream = ftpResponse.GetResponseStream();
+                StreamReader streamReader = new StreamReader(responseStream);
+                Console.WriteLine(streamReader.ReadToEnd());
 
-                result = response.StatusDescription;
-
-                reader.Close();
-                response.Close();
+                streamReader.Close();
+                ftpResponse.Close();
             }
             catch (WebException ex)
             {
                 WriteLog(ex.Message, Color.Red);
             }
-            
-            return result;
         }       
     }
 }
