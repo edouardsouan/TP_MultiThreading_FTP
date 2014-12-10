@@ -82,6 +82,8 @@ namespace FTPClient
                     {
                         isLogged = true;
                         WriteLog("STATUS : Logged to " + server, Color.Green);
+
+                        // Populate treeView server
                     }
                 }
             }
@@ -226,10 +228,10 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
-            PopulateTreeViewWithLogicalDrives();
+            PopulateLocalTreeViewWithLogicalDrives();
         }
 
-        private void PopulateTreeViewWithLogicalDrives()
+        private void PopulateLocalTreeViewWithLogicalDrives()
         {
             TreeNode rootNode;
 
@@ -257,8 +259,8 @@ namespace FTPClient
                 {
                     if (nodeClicked.Nodes.Count == 0)
                     {
-                        PropulateTreeNodeWithDirectories(nodeClicked);
-                        PopulateTreeNodeWithFiles(nodeClicked);
+                        PropulateLocalTreeNodeWithDirectories(nodeClicked);
+                        PopulateLocalTreeNodeWithFiles(nodeClicked);
                     }
                 }
             }
@@ -268,7 +270,7 @@ namespace FTPClient
             }
         }
 
-        private void PropulateTreeNodeWithDirectories(TreeNode nodeClicked)
+        private void PropulateLocalTreeNodeWithDirectories(TreeNode nodeClicked)
         {
             
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
@@ -282,7 +284,7 @@ namespace FTPClient
             }
         }
 
-        private void PopulateTreeNodeWithFiles(TreeNode nodeClicked)
+        private void PopulateLocalTreeNodeWithFiles(TreeNode nodeClicked)
         {
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
             foreach (FileInfo file in nodeClickedInfo.GetFiles())

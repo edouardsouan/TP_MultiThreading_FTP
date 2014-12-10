@@ -1,0 +1,65 @@
+
+ KFile log ---- Status : Resolving IP Address
+
+ KFile log ---- Status : IP Address Found ->213.186.33.206
+
+ KFile log ---- Status : EndPoint Found ->213.186.33.206:21
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : nb bytes = 146
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : statusMessage = 220-Bienvenue,
+220-
+220-    On Vous H??berge ?
+220-
+220-Vous ??tes connect?? sur webm237.
+220 This is a private system - No anonymous login
+
+
+ KFile log ---- Response : 220-Bienvenue,
+
+ KFile log ---- Response : 220-
+
+ KFile log ---- Response : 220-    On Vous H??berge ?
+
+ KFile log ---- Response : 220-
+
+ KFile log ---- Response : 220-Vous ??tes connect?? sur webm237.
+
+ KFile log ---- Response : 220 This is a private system - No anonymous login
+
+ KFile log ---- SplitResponse() : statusMessage.Split =220 This is a private system - No anonymous login
+
+ KFile log ---- SendCommand : msg = USER userNameTOTO
+
+ KFile log ---- SendCommand : CommandBytes = USER userNameTOTO
+
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : nb bytes = 41
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : statusMessage = 331 User userNameTOTO OK. Password required
+
+
+ KFile log ---- Response : 331 User userNameTOTO OK. Password required
+
+ KFile log ---- SplitResponse() : statusMessage.Split =331 User userNameTOTO OK. Password required
+
+ KFile log ---- SendCommand : msg = PASS userPasswordTATA
+
+ KFile log ---- SendCommand : CommandBytes = PASS userPasswordTATA
+
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : nb bytes = 95
+
+ KFile log ---- TranslateBytesIntoStatusMessage() : statusMessage = 230-User userNameTOTO has group access to:  users     
+230 OK. Current restricted directory is /
+
+
+ KFile log ---- Response : 230-User userNameTOTO has group access to:  users     
+
+ KFile log ---- Response : 230 OK. Current restricted directory is /
+
+ KFile log ---- SplitResponse() : statusMessage.Split =230 OK. Current restricted directory is /
+
+ KFile log ---- Status : Connected to ftp.userNameTOTOfo.fr
+
+ KFile log ---- Logged !
