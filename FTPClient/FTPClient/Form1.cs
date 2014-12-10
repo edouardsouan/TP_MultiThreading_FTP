@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -127,7 +129,33 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
+            // change path : serverTarget ="ftp://" + this.txtServer.Text+"/www";
+            // TODO :  mettre le /www en param pass
+            string serverTarget ="ftp://" + this.txtServer.Text+"/www";
+            Uri uri = new Uri(serverTarget);
+            string userName = this.txtUserName.Text;
+            string userPassword = this.txtPassword.Text;
+            // FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(uri);
 
+            // Get the object used to communicate with the server.
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+            // This example assumes the FTP site uses anonymous logon.
+            request.Credentials = new NetworkCredential(userName, userPassword);
+
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+
+            Stream responseStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(responseStream);
+
+            Console.WriteLine(reader.ReadToEnd());
+            Console.WriteLine("Directory List Complete, status {0}", response.StatusDescription);
+
+            reader.Close();
+            response.Close();
         }
+
+       
     }
 }

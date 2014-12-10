@@ -35,7 +35,7 @@
             this.toolStripLabelServer = new System.Windows.Forms.ToolStripLabel();
             this.txtServer = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelUserName = new System.Windows.Forms.ToolStripLabel();
-            this.txtUsername = new System.Windows.Forms.ToolStripTextBox();
+            this.txtUserName = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelPassword = new System.Windows.Forms.ToolStripLabel();
             this.txtPassword = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabelPort = new System.Windows.Forms.ToolStripLabel();
@@ -73,7 +73,7 @@
             this.toolStripLabelServer,
             this.txtServer,
             this.toolStripLabelUserName,
-            this.txtUsername,
+            this.txtUserName,
             this.toolStripLabelPassword,
             this.txtPassword,
             this.toolStripLabelPort,
@@ -95,6 +95,7 @@
             // 
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(128, 25);
+            this.txtServer.Text = "ftp.kimsavinfo.fr";
             // 
             // toolStripLabelUserName
             // 
@@ -102,10 +103,11 @@
             this.toolStripLabelUserName.Size = new System.Drawing.Size(71, 22);
             this.toolStripLabelUserName.Text = "UserName : ";
             // 
-            // txtUsername
+            // txtUserName
             // 
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(128, 25);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(128, 25);
+            this.txtUserName.Text = "kimsavin";
             // 
             // toolStripLabelPassword
             // 
@@ -117,6 +119,7 @@
             // 
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(128, 25);
+            this.txtPassword.Text = "Se8yBapG";
             // 
             // toolStripLabelPort
             // 
@@ -253,7 +256,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelServer;
         private System.Windows.Forms.ToolStripTextBox txtServer;
         private System.Windows.Forms.ToolStripLabel toolStripLabelUserName;
-        private System.Windows.Forms.ToolStripTextBox txtUsername;
+        private System.Windows.Forms.ToolStripTextBox txtUserName;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPassword;
         private System.Windows.Forms.ToolStripTextBox txtPassword;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
