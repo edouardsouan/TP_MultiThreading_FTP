@@ -129,12 +129,12 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            GetTreeViewFromServer();
+            GetTreeViewFromServer("/");
         }
 
-        private async void GetTreeViewFromServer()
+        private async void GetTreeViewFromServer(string serverPath)
         {
-            string serverTarget = "ftp://" + this.txtServer.Text;
+            string serverTarget = "ftp://" + this.txtServer.Text + serverPath;
 
             try
             {
