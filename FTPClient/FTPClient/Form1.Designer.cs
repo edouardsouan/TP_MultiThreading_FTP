@@ -45,7 +45,8 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.logWindow = new System.Windows.Forms.RichTextBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.treeViewLocalFiles = new System.Windows.Forms.TreeView();
+            this.treeViewLocal = new System.Windows.Forms.TreeView();
+            this.treeViewServer = new System.Windows.Forms.TreeView();
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -56,6 +57,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,24 +200,40 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.treeViewLocalFiles);
+            this.splitContainer3.Panel1.Controls.Add(this.treeViewLocal);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.treeViewServer);
             this.splitContainer3.Size = new System.Drawing.Size(771, 291);
             this.splitContainer3.SplitterDistance = 346;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
             // 
-            // treeViewLocalFiles
+            // treeViewLocal
             // 
-            this.treeViewLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewLocalFiles.ImageIndex = 0;
-            this.treeViewLocalFiles.ImageList = this.imageList;
-            this.treeViewLocalFiles.Location = new System.Drawing.Point(0, 0);
-            this.treeViewLocalFiles.Margin = new System.Windows.Forms.Padding(2);
-            this.treeViewLocalFiles.Name = "treeViewLocalFiles";
-            this.treeViewLocalFiles.SelectedImageIndex = 0;
-            this.treeViewLocalFiles.Size = new System.Drawing.Size(346, 291);
-            this.treeViewLocalFiles.TabIndex = 0;
-            this.treeViewLocalFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocalFiles_NodeMouseClick);
+            this.treeViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewLocal.ImageIndex = 0;
+            this.treeViewLocal.ImageList = this.imageList;
+            this.treeViewLocal.Location = new System.Drawing.Point(0, 0);
+            this.treeViewLocal.Margin = new System.Windows.Forms.Padding(2);
+            this.treeViewLocal.Name = "treeViewLocal";
+            this.treeViewLocal.SelectedImageIndex = 0;
+            this.treeViewLocal.Size = new System.Drawing.Size(346, 291);
+            this.treeViewLocal.TabIndex = 0;
+            this.treeViewLocal.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseClick);
+            // 
+            // treeViewServer
+            // 
+            this.treeViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewServer.ImageIndex = 0;
+            this.treeViewServer.ImageList = this.imageList;
+            this.treeViewServer.Location = new System.Drawing.Point(0, 0);
+            this.treeViewServer.Name = "treeViewServer";
+            this.treeViewServer.SelectedImageIndex = 0;
+            this.treeViewServer.Size = new System.Drawing.Size(422, 291);
+            this.treeViewServer.TabIndex = 0;
+            this.treeViewServer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseClick);
             // 
             // Form1
             // 
@@ -237,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -252,7 +271,7 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.RichTextBox logWindow;
-        private System.Windows.Forms.TreeView treeViewLocalFiles;
+        private System.Windows.Forms.TreeView treeViewLocal;
         private System.Windows.Forms.ToolStripLabel toolStripLabelServer;
         private System.Windows.Forms.ToolStripTextBox txtServer;
         private System.Windows.Forms.ToolStripLabel toolStripLabelUserName;
@@ -262,6 +281,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
         private System.Windows.Forms.ToolStripTextBox txtPort;
         private System.Windows.Forms.ToolStripButton btnConnection;
+        private System.Windows.Forms.TreeView treeViewServer;
     }
 }
 

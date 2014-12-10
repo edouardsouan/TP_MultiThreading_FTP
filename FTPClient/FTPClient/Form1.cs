@@ -25,6 +25,13 @@ namespace FTPClient
         {
             InitializeComponent();
             txtPassword.TextBox.PasswordChar = '*';
+
+            TreeNode serverNode = new TreeNode();
+            serverNode = new TreeNode("/");
+            serverNode.Tag = "/";
+            serverNode.ImageIndex = 0;
+            serverNode.SelectedImageIndex = 0;
+            treeViewServer.Nodes.Add(serverNode);
         }
         #endregion
 
@@ -55,12 +62,12 @@ namespace FTPClient
                     rootNode.Tag = directoryInfo;
                     rootNode.ImageIndex = 0;
                     rootNode.SelectedImageIndex = 0;
-                    treeViewLocalFiles.Nodes.Add(rootNode);
+                    treeViewLocal.Nodes.Add(rootNode);
                 }
             }
         }
 
-        private void treeViewLocalFiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeViewLocal_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
             {
@@ -129,12 +136,13 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            GetTreeViewFromServer("/");
+            GetTreeViewFromServer("/", treeViewServer.Nodes[0]);
         }
 
-        private async void GetTreeViewFromServer(string serverPath)
+        private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + serverPath;
+            Console.WriteLine(serverTarget);
 
             try
             {
@@ -152,7 +160,10 @@ namespace FTPClient
 
                 Stream responseStream = ftpResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
-                Console.WriteLine(streamReader.ReadToEnd());
+
+                string rawResult = streamReader.ReadToEnd();
+                string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+                BuildServerTreeView(data.Split('\n'), parentNode);
 
                 streamReader.Close();
                 ftpResponse.Close();
@@ -161,6 +172,55 @@ namespace FTPClient
             {
                 WriteLog(ex.Message, Color.Red);
             }
-        }       
+        }
+
+        private void BuildServerTreeView(string[] directories, TreeNode parentNode)
+        {
+            string directory;
+            string fileType;
+            int startIndex;
+            string fileName;
+
+            foreach (string rawDirectory in directories)
+            {
+                directory = rawDirectory.Remove(rawDirectory.LastIndexOf("\r"), 1);
+                fileType = directory.Substring(0,1);
+                startIndex = directory.LastIndexOf(" ");
+                fileName = directory.Substring(startIndex);
+
+                AddNodeServerTreeView(fileName, fileType, parentNode);
+            }
+        }
+
+        private void AddNodeServerTreeView(string name, string fileType, TreeNode parentNode)
+        {
+            TreeNode serverNode = new TreeNode(name);
+            serverNode.Tag = name;
+
+            if (fileType.Equals("d"))
+            {
+                serverNode.ImageIndex = 1;
+                serverNode.SelectedImageIndex = 1;
+            }
+            else
+            {
+                serverNode.ImageIndex = 2;
+                serverNode.SelectedImageIndex = 2;
+            }
+
+            treeViewServer.Nodes.Add(serverNode);
+        }
+
+        private void treeViewServer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode nodeClicked = e.Node;
+            if (IsNodeADirectory(nodeClicked))
+            {
+                if (nodeClicked.Nodes.Count == 0)
+                {
+                    GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
+                }
+            }
+        }
     }
 }
