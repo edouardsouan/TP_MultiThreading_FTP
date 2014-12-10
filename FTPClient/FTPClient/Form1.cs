@@ -18,6 +18,7 @@ namespace FTPClient
     public partial class Form1 : Form
     {
         #region Variables
+        bool isSendingListCommand = false;
         #endregion
 
         #region Constructor
@@ -134,6 +135,7 @@ namespace FTPClient
         }
         #endregion
 
+        #region Treeview with server directories and local files
         private void btnConnection_Click(object sender, EventArgs e)
         {
             GetTreeViewFromServer("/", treeViewServer.Nodes[0]);
@@ -142,35 +144,43 @@ namespace FTPClient
         private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + serverPath;
-            Console.WriteLine(serverTarget);
 
-            try
+            if (!isSendingListCommand)
             {
-                FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-                ftpRequest.KeepAlive = false;
-                ftpRequest.Credentials = new NetworkCredential( this.txtUserName.Text, this.txtPassword.Text);
-                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                try
+                {
+                    isSendingListCommand = true;
+                    FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+                    ftpRequest.KeepAlive = false;
+                    ftpRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+                    ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-                FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
-                WriteLog(ftpResponse.BannerMessage, Color.Green);
-                WriteLog(ftpResponse.WelcomeMessage, Color.Green);
-                WriteLog(ftpResponse.StatusDescription, Color.Blue);
-                WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
-                WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
+                    FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+                    WriteLog(ftpResponse.BannerMessage, Color.Green);
+                    WriteLog(ftpResponse.WelcomeMessage, Color.Green);
+                    WriteLog(ftpResponse.StatusDescription, Color.Blue);
+                    WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
+                    WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
 
-                Stream responseStream = ftpResponse.GetResponseStream();
-                StreamReader streamReader = new StreamReader(responseStream);
+                    Stream responseStream = ftpResponse.GetResponseStream();
+                    StreamReader streamReader = new StreamReader(responseStream);
 
-                string rawResult = streamReader.ReadToEnd();
-                string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
-                BuildServerTreeView(data.Split('\n'), parentNode);
+                    string rawResult = streamReader.ReadToEnd();
+                    string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+                    BuildServerTreeView(data.Split('\n'), parentNode);
 
-                streamReader.Close();
-                ftpResponse.Close();
-            }
-            catch (WebException ex)
-            {
-                WriteLog(ex.Message, Color.Red);
+                    streamReader.Close();
+                    ftpResponse.Close();
+                }
+                catch (WebException ex)
+                {
+                    WriteLog(ex.Message, Color.Red);
+                    isSendingListCommand = false;
+                }
+                finally
+                {
+                    isSendingListCommand = false;
+                }
             }
         }
 
@@ -185,10 +195,13 @@ namespace FTPClient
             {
                 directory = rawDirectory.Remove(rawDirectory.LastIndexOf("\r"), 1);
                 fileType = directory.Substring(0,1);
-                startIndex = directory.LastIndexOf(" ");
+                startIndex = directory.LastIndexOf(" ") + 1;
                 fileName = directory.Substring(startIndex);
 
-                AddNodeServerTreeView(fileName, fileType, parentNode);
+                if(!(fileName.Equals(".") || fileName.Equals("..")))
+                {
+                    AddNodeServerTreeView(fileName, fileType, parentNode);
+                }
             }
         }
 
@@ -218,10 +231,10 @@ namespace FTPClient
             {
                 if (nodeClicked.Nodes.Count == 0)
                 {
-                    Console.WriteLine("Path : "+nodeClicked.FullPath);
                     GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
                 }
             }
         }
+        #endregion
     }
 }
