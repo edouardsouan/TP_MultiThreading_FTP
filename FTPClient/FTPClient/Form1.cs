@@ -129,33 +129,49 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            // change path : serverTarget ="ftp://" + this.txtServer.Text+"/www";
-            // TODO :  mettre le /www en param pass
-            string serverTarget ="ftp://" + this.txtServer.Text+"/www";
-            Uri uri = new Uri(serverTarget);
-            string userName = this.txtUserName.Text;
-            string userPassword = this.txtPassword.Text;
-            // FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(uri);
-
-            // Get the object used to communicate with the server.
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-            // This example assumes the FTP site uses anonymous logon.
-            request.Credentials = new NetworkCredential(userName, userPassword);
-
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-
-            Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream);
-
-            Console.WriteLine(reader.ReadToEnd());
-            Console.WriteLine("Directory List Complete, status {0}", response.StatusDescription);
-
-            reader.Close();
-            response.Close();
+            Task<string> asyncResult = GetAsyncResponse();
+           
         }
 
-       
+        private async Task<string> GetAsyncResponse()
+        {
+            string serverTarget = "ftp://" + this.txtServer.Text;
+            string userName = this.txtUserName.Text;
+            string userPassword = this.txtPassword.Text;
+            string result = "";
+
+            try
+            {
+                // Get the object used to communicate with the server.
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
+                request.KeepAlive = false;
+                // This example assumes the FTP site uses anonymous logon.
+                request.Credentials = new NetworkCredential(userName, userPassword);
+
+                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+                //FtpWebResponse response = (FtpWebResponse)request.GetResponseAsync();
+                FtpWebResponse response = (FtpWebResponse)await request.GetResponseAsync();
+                WriteLog(response.BannerMessage, Color.Green);
+                WriteLog(response.WelcomeMessage, Color.Green);
+                WriteLog(response.StatusDescription, Color.Blue);
+                WriteLog(response.StatusCode.ToString(), Color.Blue);
+                WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
+
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
+
+                result = response.StatusDescription;
+
+                reader.Close();
+                response.Close();
+            }
+            catch (WebException ex)
+            {
+                WriteLog(ex.Message, Color.Red);
+            }
+            
+            return result;
+        }       
     }
 }
