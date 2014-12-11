@@ -27,6 +27,8 @@ namespace FTPClient
             InitializeComponent();
             txtPassword.TextBox.PasswordChar = '*';
 
+            listViewLocal.Items.Clear();
+
             TreeNode serverNode = new TreeNode();
             serverNode = new TreeNode("/");
             serverNode.Tag = "/";
@@ -52,7 +54,8 @@ namespace FTPClient
         private void PopulateLocalTreeViewWithLogicalDrives()
         {
             TreeNode rootNode;
-
+            List<DirectoryInfo> directories = new List<DirectoryInfo>();
+            
             string[] drives = Environment.GetLogicalDrives();
             foreach (string drive in drives)
             {
@@ -64,8 +67,12 @@ namespace FTPClient
                     rootNode.ImageIndex = 0;
                     rootNode.SelectedImageIndex = 0;
                     treeViewLocal.Nodes.Add(rootNode);
+                    
+                    directories.Add(directoryInfo);
                 }
             }
+
+            PopulateLocalListView(directories.ToArray());
         }
 
         private void treeViewLocal_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -73,12 +80,24 @@ namespace FTPClient
             try
             {
                 TreeNode nodeClicked = e.Node;
+
                 if (IsNodeADirectory(nodeClicked))
                 {
+                    listViewLocal.Items.Clear();
                     if (nodeClicked.Nodes.Count == 0)
                     {
                         PropulateLocalTreeNodeWithDirectories(nodeClicked);
                         PopulateLocalTreeNodeWithFiles(nodeClicked);
+                    }
+                    else
+                    {
+                        List<FileSystemInfo> fileSystInfos = new List<FileSystemInfo>();
+                        TreeNodeCollection nodes = nodeClicked.Nodes;
+                        foreach (TreeNode node in nodes)
+                        {
+                            fileSystInfos.Add((FileSystemInfo)node.Tag);
+                        }
+                        PopulateLocalListView(fileSystInfos.ToArray());
                     }
                 }
             }
@@ -88,10 +107,52 @@ namespace FTPClient
             }
         }
 
+        private void PopulateLocalListView(FileSystemInfo[] files)
+        {
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
+            string extension = "";
+            string size = "";
+
+            foreach (FileSystemInfo subFile in files)
+            {
+                item = new ListViewItem(subFile.Name, 0);
+                extension = subFile.Extension;
+                try
+                {
+                    // TODO : obtenir la size, BUG
+                    size = (new FileInfo(subFile.Name)).Length.ToString();
+                }
+                catch
+                {
+                    size = "";
+                }
+
+
+                subItems = new ListViewItem.ListViewSubItem[]
+                    {new ListViewItem.ListViewSubItem(item, size),
+                    new ListViewItem.ListViewSubItem(item, extension), 
+                     new ListViewItem.ListViewSubItem(item, 
+						subFile.LastAccessTime.ToShortDateString())};
+                if (extension.Equals("")){
+                    item.ImageIndex = 1;
+                }
+                else {
+                    item.ImageIndex = 2;
+                }
+                
+                item.SubItems.AddRange(subItems);
+                listViewLocal.Items.Add(item);
+            }
+
+            listViewLocal.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private void PropulateLocalTreeNodeWithDirectories(TreeNode nodeClicked)
         {
-            
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            List<DirectoryInfo> files = new List<DirectoryInfo>();
+
             foreach (DirectoryInfo subDir in nodeClickedInfo.GetDirectories())
             {
                 TreeNode newDirNode = new TreeNode(subDir.Name, 0, 0);
@@ -99,12 +160,18 @@ namespace FTPClient
                 newDirNode.ImageIndex = 1;
                 newDirNode.SelectedImageIndex = 1;
                 nodeClicked.Nodes.Add(newDirNode);
+
+                files.Add(subDir);
             }
+
+            PopulateLocalListView(files.ToArray());
         }
 
         private void PopulateLocalTreeNodeWithFiles(TreeNode nodeClicked)
         {
             DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            List<FileInfo> files = new List<FileInfo>();
+
             foreach (FileInfo file in nodeClickedInfo.GetFiles())
             {
                 TreeNode newFileNode = new TreeNode(file.Name, 0, 0);
@@ -112,8 +179,11 @@ namespace FTPClient
                 newFileNode.ImageIndex = 2;
                 newFileNode.SelectedImageIndex = 2;
                 nodeClicked.Nodes.Add(newFileNode);
+
+                files.Add(file);
             }
 
+            PopulateLocalListView(files.ToArray());
         }
 
         private bool IsNodeADirectory(TreeNode node)
