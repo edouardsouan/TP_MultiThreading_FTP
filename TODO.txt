@@ -12,5 +12,6 @@ Arbo et listview :
 
 DONE, prévenir les gars :
 - logWindow en read only
-- abri côté server OP avec la listView
+- abri côté server OP avec la listView avec toutes les infos
 - passer la taille des fichiers en Ko : d’où le modulo 1024
+- fonction pour déterminer le type et être plus explicite
