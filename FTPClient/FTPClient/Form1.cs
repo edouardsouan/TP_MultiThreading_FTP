@@ -296,7 +296,8 @@ namespace FTPClient
             TreeNode nodeClicked = e.Node;
             if (IsNodeADirectory(nodeClicked))
             {
-                listViewServer.Clear();
+
+                listViewServer.Items.Clear();
                 if (nodeClicked.Nodes.Count == 0)
                 {
                     GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
@@ -325,7 +326,7 @@ namespace FTPClient
             {
                 item = new ListViewItem(subFile.GetName(), 0);
                 extension = subFile.GetDataType();
-                size = subFile.GetSize();
+                size = subFile.GetSize().ToString();
 
                 subItems = new ListViewItem.ListViewSubItem[]
                     {new ListViewItem.ListViewSubItem(item, size),

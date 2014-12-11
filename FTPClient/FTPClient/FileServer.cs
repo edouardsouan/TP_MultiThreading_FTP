@@ -14,7 +14,7 @@ namespace FTPClient
         private string linkNumnber;
         private string owner;
         private string group;
-        private string size;
+        private long size;
         private string lastModifiedDate;
         private string name;
         #endregion
@@ -57,7 +57,8 @@ namespace FTPClient
             this.linkNumnber = cleanedFields.ElementAt(1);
             this.owner = cleanedFields.ElementAt(2);
             this.group = cleanedFields.ElementAt(3);
-            this.size = cleanedFields.ElementAt(4);
+            this.size = Convert.ToInt64(cleanedFields.ElementAt(4)) % 1024;
+            Console.WriteLine(Convert.ToInt64(cleanedFields.ElementAt(4)));
             this.lastModifiedDate = cleanedFields.ElementAt(5) + ":" + cleanedFields.ElementAt(6) + ":" + cleanedFields.ElementAt(7);
             this.name = cleanedFields.ElementAt(8);
         }
@@ -65,7 +66,7 @@ namespace FTPClient
 
         #region getters
         public string GetDataType() { return this.dataType; }
-        public string GetSize() { return this.size; }
+        public long GetSize() { return this.size; }
         public string GetLastModifiedDate() { return this.lastModifiedDate; }
         public string GetName() { return this.name; }
         #endregion
