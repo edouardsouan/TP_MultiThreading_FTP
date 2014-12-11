@@ -180,7 +180,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(771, 584);
-            this.splitContainer1.SplitterDistance = 392;
+            this.splitContainer1.SplitterDistance = 501;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -199,8 +199,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(771, 392);
-            this.splitContainer2.SplitterDistance = 98;
+            this.splitContainer2.Size = new System.Drawing.Size(771, 501);
+            this.splitContainer2.SplitterDistance = 92;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -211,7 +211,7 @@
             this.logWindow.Margin = new System.Windows.Forms.Padding(2);
             this.logWindow.Name = "logWindow";
             this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(771, 98);
+            this.logWindow.Size = new System.Drawing.Size(771, 92);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
             // 
@@ -229,7 +229,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer3.Size = new System.Drawing.Size(771, 291);
+            this.splitContainer3.Size = new System.Drawing.Size(771, 406);
             this.splitContainer3.SplitterDistance = 375;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
@@ -248,8 +248,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.listViewLocal);
-            this.splitContainer4.Size = new System.Drawing.Size(375, 291);
-            this.splitContainer4.SplitterDistance = 196;
+            this.splitContainer4.Size = new System.Drawing.Size(375, 406);
+            this.splitContainer4.SplitterDistance = 216;
             this.splitContainer4.TabIndex = 0;
             // 
             // treeViewLocal
@@ -261,7 +261,7 @@
             this.treeViewLocal.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewLocal.Name = "treeViewLocal";
             this.treeViewLocal.SelectedImageIndex = 0;
-            this.treeViewLocal.Size = new System.Drawing.Size(375, 196);
+            this.treeViewLocal.Size = new System.Drawing.Size(375, 216);
             this.treeViewLocal.TabIndex = 0;
             this.treeViewLocal.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseClick);
             // 
@@ -275,7 +275,7 @@
             this.listViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLocal.Location = new System.Drawing.Point(0, 0);
             this.listViewLocal.Name = "listViewLocal";
-            this.listViewLocal.Size = new System.Drawing.Size(375, 91);
+            this.listViewLocal.Size = new System.Drawing.Size(375, 186);
             this.listViewLocal.SmallImageList = this.imageList;
             this.listViewLocal.TabIndex = 1;
             this.listViewLocal.UseCompatibleStateImageBehavior = false;
@@ -315,8 +315,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.listViewServer);
-            this.splitContainer5.Size = new System.Drawing.Size(393, 291);
-            this.splitContainer5.SplitterDistance = 196;
+            this.splitContainer5.Size = new System.Drawing.Size(393, 406);
+            this.splitContainer5.SplitterDistance = 216;
             this.splitContainer5.TabIndex = 0;
             // 
             // treeViewServer
@@ -327,7 +327,7 @@
             this.treeViewServer.Location = new System.Drawing.Point(0, 0);
             this.treeViewServer.Name = "treeViewServer";
             this.treeViewServer.SelectedImageIndex = 0;
-            this.treeViewServer.Size = new System.Drawing.Size(393, 196);
+            this.treeViewServer.Size = new System.Drawing.Size(393, 216);
             this.treeViewServer.TabIndex = 0;
             this.treeViewServer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseClick);
             // 
@@ -344,7 +344,7 @@
             this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewServer.Location = new System.Drawing.Point(0, 0);
             this.listViewServer.Name = "listViewServer";
-            this.listViewServer.Size = new System.Drawing.Size(393, 91);
+            this.listViewServer.Size = new System.Drawing.Size(393, 186);
             this.listViewServer.SmallImageList = this.imageList;
             this.listViewServer.TabIndex = 0;
             this.listViewServer.UseCompatibleStateImageBehavior = false;

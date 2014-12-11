@@ -76,7 +76,7 @@ namespace FTPClient
             {
                 if (!this.name.Substring(0, 1).Equals("."))
                 {
-                    int formatIndex = this.name.LastIndexOf(".")+1;
+                    int formatIndex = this.name.LastIndexOf(".");
 
                     if(formatIndex > -1)
                         this.dataType = this.name.Substring(formatIndex);

@@ -165,35 +165,35 @@ namespace FTPClient
             ListViewItem item = null;
             string extension = "";
             string size = "";
+            string LastAccessTime = "";
 
             foreach (FileSystemInfo subFile in files)
             {
                 item = new ListViewItem(subFile.Name, 0);
                 extension = subFile.Extension;
+                LastAccessTime = subFile.LastAccessTime.ToShortDateString();
+
                 try
                 {
-                    // TODO : obtenir la size, BUG
-                    size = (new FileInfo(subFile.Name)).Length.ToString();
+                    FileInfo fileInfo = (FileInfo)subFile;
+                    size = (fileInfo.Length / 1000).ToString();
                 }
                 catch
                 {
                     size = "";
                 }
 
-
                 subItems = new ListViewItem.ListViewSubItem[]
-                    {new ListViewItem.ListViewSubItem(item, size),
-                    new ListViewItem.ListViewSubItem(item, extension), 
-                     new ListViewItem.ListViewSubItem(item, 
-						subFile.LastAccessTime.ToShortDateString())};
+                    {
+                        new ListViewItem.ListViewSubItem(item, size),
+                        new ListViewItem.ListViewSubItem(item, extension), 
+                        new ListViewItem.ListViewSubItem(item, LastAccessTime)
+                    };
+
                 if (extension.Equals(""))
-                {
                     item.ImageIndex = 1;
-                }
                 else
-                {
                     item.ImageIndex = 2;
-                }
 
                 item.SubItems.AddRange(subItems);
                 listViewLocal.Items.Add(item);
