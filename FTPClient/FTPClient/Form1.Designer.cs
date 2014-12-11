@@ -47,6 +47,19 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.treeViewLocal = new System.Windows.Forms.TreeView();
             this.treeViewServer = new System.Windows.Forms.TreeView();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.listViewLocal = new System.Windows.Forms.ListView();
+            this.listViewServer = new System.Windows.Forms.ListView();
+            this.fileNameServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileSizeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileTypeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastModifiedServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.fileNameLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileSizeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileTypeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastModifiedLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,6 +72,14 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -200,13 +221,13 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.treeViewLocal);
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.treeViewServer);
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
             this.splitContainer3.Size = new System.Drawing.Size(771, 291);
-            this.splitContainer3.SplitterDistance = 346;
+            this.splitContainer3.SplitterDistance = 375;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -219,7 +240,7 @@
             this.treeViewLocal.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewLocal.Name = "treeViewLocal";
             this.treeViewLocal.SelectedImageIndex = 0;
-            this.treeViewLocal.Size = new System.Drawing.Size(346, 291);
+            this.treeViewLocal.Size = new System.Drawing.Size(375, 196);
             this.treeViewLocal.TabIndex = 0;
             this.treeViewLocal.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseClick);
             // 
@@ -231,9 +252,126 @@
             this.treeViewServer.Location = new System.Drawing.Point(0, 0);
             this.treeViewServer.Name = "treeViewServer";
             this.treeViewServer.SelectedImageIndex = 0;
-            this.treeViewServer.Size = new System.Drawing.Size(422, 291);
+            this.treeViewServer.Size = new System.Drawing.Size(393, 196);
             this.treeViewServer.TabIndex = 0;
             this.treeViewServer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseClick);
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.treeViewLocal);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.listView1);
+            this.splitContainer4.Panel2.Controls.Add(this.listViewLocal);
+            this.splitContainer4.Size = new System.Drawing.Size(375, 291);
+            this.splitContainer4.SplitterDistance = 196;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.treeViewServer);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.listViewServer);
+            this.splitContainer5.Size = new System.Drawing.Size(393, 291);
+            this.splitContainer5.SplitterDistance = 196;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // listViewLocal
+            // 
+            this.listViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewLocal.Location = new System.Drawing.Point(0, 0);
+            this.listViewLocal.Name = "listViewLocal";
+            this.listViewLocal.Size = new System.Drawing.Size(375, 91);
+            this.listViewLocal.TabIndex = 0;
+            this.listViewLocal.UseCompatibleStateImageBehavior = false;
+            this.listViewLocal.View = System.Windows.Forms.View.Details;
+            // 
+            // listViewServer
+            // 
+            this.listViewServer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileNameServer,
+            this.fileSizeServer,
+            this.fileTypeServer,
+            this.lastModifiedServer});
+            this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewServer.Location = new System.Drawing.Point(0, 0);
+            this.listViewServer.Name = "listViewServer";
+            this.listViewServer.Size = new System.Drawing.Size(393, 91);
+            this.listViewServer.TabIndex = 0;
+            this.listViewServer.UseCompatibleStateImageBehavior = false;
+            this.listViewServer.View = System.Windows.Forms.View.Details;
+            // 
+            // fileNameServer
+            // 
+            this.fileNameServer.Text = "File Name";
+            this.fileNameServer.Width = 112;
+            // 
+            // fileSizeServer
+            // 
+            this.fileSizeServer.Text = "File Size";
+            this.fileSizeServer.Width = 85;
+            // 
+            // fileTypeServer
+            // 
+            this.fileTypeServer.Text = "File Type";
+            this.fileTypeServer.Width = 94;
+            // 
+            // lastModifiedServer
+            // 
+            this.lastModifiedServer.Text = "Last Modified";
+            this.lastModifiedServer.Width = 127;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileNameLocal,
+            this.fileSizeLocal,
+            this.fileTypeLocal,
+            this.lastModifiedLocal});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(375, 91);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // fileNameLocal
+            // 
+            this.fileNameLocal.Text = "File Name";
+            this.fileNameLocal.Width = 112;
+            // 
+            // fileSizeLocal
+            // 
+            this.fileSizeLocal.Text = "File Size";
+            this.fileSizeLocal.Width = 85;
+            // 
+            // fileTypeLocal
+            // 
+            this.fileTypeLocal.Text = "File Type";
+            this.fileTypeLocal.Width = 94;
+            // 
+            // lastModifiedLocal
+            // 
+            this.lastModifiedLocal.Text = "Last Modified";
+            this.lastModifiedLocal.Width = 127;
             // 
             // Form1
             // 
@@ -258,6 +396,14 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,6 +428,19 @@
         private System.Windows.Forms.ToolStripTextBox txtPort;
         private System.Windows.Forms.ToolStripButton btnConnection;
         private System.Windows.Forms.TreeView treeViewServer;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.ListView listViewLocal;
+        private System.Windows.Forms.ListView listViewServer;
+        private System.Windows.Forms.ColumnHeader fileNameServer;
+        private System.Windows.Forms.ColumnHeader fileSizeServer;
+        private System.Windows.Forms.ColumnHeader fileTypeServer;
+        private System.Windows.Forms.ColumnHeader lastModifiedServer;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader fileNameLocal;
+        private System.Windows.Forms.ColumnHeader fileSizeLocal;
+        private System.Windows.Forms.ColumnHeader fileTypeLocal;
+        private System.Windows.Forms.ColumnHeader lastModifiedLocal;
     }
 }
 
