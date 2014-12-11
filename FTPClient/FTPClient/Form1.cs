@@ -305,55 +305,14 @@ namespace FTPClient
             string fileType;
             int startIndex;
             string fileName;
+            
 
             foreach (string rawDirectory in directories)
             {
-                Byte[] textByte =  Encoding.ASCII.GetBytes(rawDirectory);
-                List<string> testArray = new List<string>();
-                bool isSpaceBefore = false;
-                int iArray = 0;
-                string stringTempo = "";
-                foreach (Byte byteTest in textByte)
-                {
-                    if (byteTest == 32)
-                    {
-                        if (!isSpaceBefore)
-                        {
-                            iArray++;
-                            testArray.Add(stringTempo);
-                            stringTempo = "";
-                        }
-                        isSpaceBefore = true;
-                    }
-                    else
-                    {
-                        isSpaceBefore = false;
-                        Byte[] byteTempo = new Byte[]{byteTest};
-                        stringTempo += Encoding.ASCII.GetString(byteTempo);
-                    }
-
-                    // Console.WriteLine(byteTest);
-                }
-                testArray.Add(stringTempo);
-
-                Console.WriteLine(rawDirectory);
-                for(int iField = 0; iField < testArray.ToArray().Count(); iField++)
-                {
-                    Console.WriteLine(iField+" = "+ testArray.ElementAt(iField));
-                }
-
-
-
-
-
-
-
-
-
-               
 
                 directory = rawDirectory.Remove(rawDirectory.LastIndexOf("\r"), 1);
-
+                FileServer fileserver = new FileServer(rawDirectory);
+                Console.WriteLine(fileserver.GetName());
                 fileType = directory.Substring(0,1);
                 startIndex = directory.LastIndexOf(" ") + 1;
                 fileName = directory.Substring(startIndex);
