@@ -143,7 +143,7 @@ namespace FTPClient
 
         private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
-            string serverTarget = "ftp://" + this.txtServer.Text + serverPath;
+            string serverTarget = "ftp://" + this.txtServer.Text + serverPath + "/";
 
             if (!isSendingListCommand)
             {
