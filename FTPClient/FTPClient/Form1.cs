@@ -254,6 +254,51 @@ namespace FTPClient
             }
         }
 
+        private void PopulateServerListView(FileSystemInfo[] files)
+        {
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
+            string extension = "";
+            string size = "";
+
+            foreach (FileSystemInfo subFile in files)
+            {
+                // DEBUT CHANGER
+                item = new ListViewItem(subFile.Name, 0);
+                extension = subFile.Extension;
+                try
+                {
+                    // TODO : obtenir la size, BUG
+                    size = (new FileInfo(subFile.Name)).Length.ToString();
+                }
+                catch
+                {
+                    size = "";
+                }
+
+
+                subItems = new ListViewItem.ListViewSubItem[]
+                    {new ListViewItem.ListViewSubItem(item, size),
+                    new ListViewItem.ListViewSubItem(item, extension), 
+                     new ListViewItem.ListViewSubItem(item, 
+						subFile.LastAccessTime.ToShortDateString())};
+                if (extension.Equals(""))
+                {
+                    item.ImageIndex = 1;
+                }
+                else
+                {
+                    item.ImageIndex = 2;
+                }
+                // FIN CHANGER
+
+                item.SubItems.AddRange(subItems);
+                listViewServer.Items.Add(item);
+            }
+
+            listViewServer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private void BuildServerTreeView(string[] directories, TreeNode parentNode)
         {
             string directory;
@@ -263,7 +308,52 @@ namespace FTPClient
 
             foreach (string rawDirectory in directories)
             {
+                Byte[] textByte =  Encoding.ASCII.GetBytes(rawDirectory);
+                List<string> testArray = new List<string>();
+                bool isSpaceBefore = false;
+                int iArray = 0;
+                string stringTempo = "";
+                foreach (Byte byteTest in textByte)
+                {
+                    if (byteTest == 32)
+                    {
+                        if (!isSpaceBefore)
+                        {
+                            iArray++;
+                            testArray.Add(stringTempo);
+                            stringTempo = "";
+                        }
+                        isSpaceBefore = true;
+                    }
+                    else
+                    {
+                        isSpaceBefore = false;
+                        Byte[] byteTempo = new Byte[]{byteTest};
+                        stringTempo += Encoding.ASCII.GetString(byteTempo);
+                    }
+
+                    // Console.WriteLine(byteTest);
+                }
+                testArray.Add(stringTempo);
+
+                Console.WriteLine(rawDirectory);
+                for(int iField = 0; iField < testArray.ToArray().Count(); iField++)
+                {
+                    Console.WriteLine(iField+" = "+ testArray.ElementAt(iField));
+                }
+
+
+
+
+
+
+
+
+
+               
+
                 directory = rawDirectory.Remove(rawDirectory.LastIndexOf("\r"), 1);
+
                 fileType = directory.Substring(0,1);
                 startIndex = directory.LastIndexOf(" ") + 1;
                 fileName = directory.Substring(startIndex);
@@ -299,9 +389,20 @@ namespace FTPClient
             TreeNode nodeClicked = e.Node;
             if (IsNodeADirectory(nodeClicked))
             {
+                listViewServer.Clear();
                 if (nodeClicked.Nodes.Count == 0)
                 {
                     GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
+                }
+                else
+                {
+                    List<FileSystemInfo> fileSystInfos = new List<FileSystemInfo>();
+                    TreeNodeCollection nodes = nodeClicked.Nodes;
+                    foreach (TreeNode node in nodes)
+                    {
+                        // fileSystInfos.Add((FileSystemInfo)node.Tag);
+                    }
+                    PopulateServerListView(fileSystInfos.ToArray());
                 }
             }
         }
