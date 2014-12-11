@@ -9,31 +9,37 @@ namespace FTPClient
     class FileServer
     {
         #region properties
-        private string type;
+        private string dataType;
         private string rights;
-        private string random;
+        private string linkNumnber;
+        private string owner;
+        private string group;
         private string size;
-        private string user;
-        private string date;
+        private string lastModifiedDate;
         private string name;
         #endregion
 
         #region constructor
-        public FileServer(string rawFileServer) {
-            Byte[] textByte = Encoding.ASCII.GetBytes(rawFileServer);
-            List<string> testArray = new List<string>();
+        public FileServer(string rawFileServer) 
+        {
+            string rawFileToClean = rawFileServer.Remove(rawFileServer.LastIndexOf("\r"), 1);
+            Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileToClean);
+            
             bool isSpaceBefore = false;
-            int iArray = 0;
-            string stringTempo = "";
-            foreach (Byte byteTest in textByte)
+            int iCleanField = 0;
+            List<string> cleanedFields = new List<string>();
+            string cleanField = "";
+
+            // 32 = ASCII code for ntimely space
+            foreach (Byte byteTest in byteFields)
             {
                 if (byteTest == 32)
                 {
                     if (!isSpaceBefore)
                     {
-                        iArray++;
-                        testArray.Add(stringTempo);
-                        stringTempo = "";
+                        iCleanField++;
+                        cleanedFields.Add(cleanField);
+                        cleanField = "";
                     }
                     isSpaceBefore = true;
                 }
@@ -41,27 +47,26 @@ namespace FTPClient
                 {
                     isSpaceBefore = false;
                     Byte[] byteTempo = new Byte[] { byteTest };
-                    stringTempo += Encoding.ASCII.GetString(byteTempo);
+                    cleanField += Encoding.ASCII.GetString(byteTempo);
                 }
-
-                // Console.WriteLine(byteTest);
             }
-            testArray.Add(stringTempo);
+            cleanedFields.Add(cleanField);
 
-            this.type = testArray.ElementAt(0).Substring(0,1);
-            this.rights = testArray.ElementAt(0).Substring(1);
-            this.random = testArray.ElementAt(1);
-            this.size = testArray.ElementAt(2);
-            this.user = testArray.ElementAt(3);
-            this.date = testArray.ElementAt(4) + ":" + testArray.ElementAt(5) + ":" + testArray.ElementAt(6) + ":" + testArray.ElementAt(7);
-            this.name = testArray.ElementAt(8);
+            this.dataType = cleanedFields.ElementAt(0).Substring(0, 1);
+            this.rights  = cleanedFields.ElementAt(0).Substring(1);
+            this.linkNumnber = cleanedFields.ElementAt(1);
+            this.owner = cleanedFields.ElementAt(2);
+            this.group = cleanedFields.ElementAt(3);
+            this.size = cleanedFields.ElementAt(4);
+            this.lastModifiedDate = cleanedFields.ElementAt(5) + ":" + cleanedFields.ElementAt(6) + ":" + cleanedFields.ElementAt(7);
+            this.name = cleanedFields.ElementAt(8);
         }
         #endregion
 
         #region getters
-        public string GetType() { return this.type; }
+        public string GetDataType() { return this.dataType; }
         public string GetSize() { return this.size; }
-        public string GetDate() { return this.date; }
+        public string GetLastModifiedDate() { return this.lastModifiedDate; }
         public string GetName() { return this.name; }
         #endregion
     }

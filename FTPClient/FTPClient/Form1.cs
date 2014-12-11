@@ -254,82 +254,30 @@ namespace FTPClient
             }
         }
 
-        private void PopulateServerListView(FileSystemInfo[] files)
-        {
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-            string extension = "";
-            string size = "";
-
-            foreach (FileSystemInfo subFile in files)
-            {
-                // DEBUT CHANGER
-                item = new ListViewItem(subFile.Name, 0);
-                extension = subFile.Extension;
-                try
-                {
-                    // TODO : obtenir la size, BUG
-                    size = (new FileInfo(subFile.Name)).Length.ToString();
-                }
-                catch
-                {
-                    size = "";
-                }
-
-
-                subItems = new ListViewItem.ListViewSubItem[]
-                    {new ListViewItem.ListViewSubItem(item, size),
-                    new ListViewItem.ListViewSubItem(item, extension), 
-                     new ListViewItem.ListViewSubItem(item, 
-						subFile.LastAccessTime.ToShortDateString())};
-                if (extension.Equals(""))
-                {
-                    item.ImageIndex = 1;
-                }
-                else
-                {
-                    item.ImageIndex = 2;
-                }
-                // FIN CHANGER
-
-                item.SubItems.AddRange(subItems);
-                listViewServer.Items.Add(item);
-            }
-
-            listViewServer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-
         private void BuildServerTreeView(string[] directories, TreeNode parentNode)
         {
-            string directory;
-            string fileType;
-            int startIndex;
-            string fileName;
-            
+            FileServer fileServer;
+            List<FileServer> fileSystInfos = new List<FileServer>();
 
             foreach (string rawDirectory in directories)
             {
-
-                directory = rawDirectory.Remove(rawDirectory.LastIndexOf("\r"), 1);
-                FileServer fileserver = new FileServer(rawDirectory);
-                Console.WriteLine(fileserver.GetName());
-                fileType = directory.Substring(0,1);
-                startIndex = directory.LastIndexOf(" ") + 1;
-                fileName = directory.Substring(startIndex);
-
-                if(!(fileName.Equals(".") || fileName.Equals("..")))
+                fileServer = new FileServer(rawDirectory);
+                if (!(fileServer.GetName().Equals(".") || fileServer.GetName().Equals("..")))
                 {
-                    AddNodeServerTreeView(fileName, fileType, parentNode);
+                    AddNodeServerTreeView(fileServer, parentNode);
+                    fileSystInfos.Add(fileServer);
                 }
             }
+
+            PopulateServerListView(fileSystInfos.ToArray());
         }
 
-        private void AddNodeServerTreeView(string name, string fileType, TreeNode parentNode)
+        private void AddNodeServerTreeView(FileServer fileServer, TreeNode parentNode)
         {
-            TreeNode serverNode = new TreeNode(name);
-            serverNode.Tag = name;
+            TreeNode serverNode = new TreeNode(fileServer.GetName());
+            serverNode.Tag = fileServer;
 
-            if (fileType.Equals("d"))
+            if (fileServer.GetDataType().Equals("d"))
             {
                 serverNode.ImageIndex = 1;
                 serverNode.SelectedImageIndex = 1;
@@ -355,16 +303,52 @@ namespace FTPClient
                 }
                 else
                 {
-                    List<FileSystemInfo> fileSystInfos = new List<FileSystemInfo>();
+                    List<FileServer> fileSystInfos = new List<FileServer>();
                     TreeNodeCollection nodes = nodeClicked.Nodes;
                     foreach (TreeNode node in nodes)
                     {
-                        // fileSystInfos.Add((FileSystemInfo)node.Tag);
+                        fileSystInfos.Add((FileServer)node.Tag);
                     }
                     PopulateServerListView(fileSystInfos.ToArray());
                 }
             }
         }
+
+        private void PopulateServerListView(FileServer[] files)
+        {
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
+            string extension = "";
+            string size = "";
+
+            foreach (FileServer subFile in files)
+            {
+                item = new ListViewItem(subFile.GetName(), 0);
+                extension = subFile.GetDataType();
+                size = subFile.GetSize();
+
+                subItems = new ListViewItem.ListViewSubItem[]
+                    {new ListViewItem.ListViewSubItem(item, size),
+                    new ListViewItem.ListViewSubItem(item, extension), 
+                     new ListViewItem.ListViewSubItem(item, 
+						subFile.GetLastModifiedDate())};
+                // subFile.LastAccessTime.ToShortDateString()
+                if (extension.Equals("d"))
+                {
+                    item.ImageIndex = 1;
+                }
+                else
+                {
+                    item.ImageIndex = 2;
+                }
+
+                item.SubItems.AddRange(subItems);
+                listViewServer.Items.Add(item);
+            }
+
+            listViewServer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         #endregion
     }
 }

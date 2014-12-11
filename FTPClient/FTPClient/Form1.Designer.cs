@@ -207,6 +207,7 @@
             this.logWindow.Location = new System.Drawing.Point(0, 0);
             this.logWindow.Margin = new System.Windows.Forms.Padding(2);
             this.logWindow.Name = "logWindow";
+            this.logWindow.ReadOnly = true;
             this.logWindow.Size = new System.Drawing.Size(771, 98);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
