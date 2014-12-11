@@ -14,7 +14,7 @@ namespace FTPClient
         private string linkNumnber;
         private string owner;
         private string group;
-        private long size;
+        private long size; // Ko
         private string lastModifiedDate;
         private string name;
         #endregion
@@ -52,20 +52,44 @@ namespace FTPClient
             }
             cleanedFields.Add(cleanField);
 
-            this.dataType = cleanedFields.ElementAt(0).Substring(0, 1);
             this.rights  = cleanedFields.ElementAt(0).Substring(1);
             this.linkNumnber = cleanedFields.ElementAt(1);
             this.owner = cleanedFields.ElementAt(2);
             this.group = cleanedFields.ElementAt(3);
             this.size = Convert.ToInt64(cleanedFields.ElementAt(4)) % 1024;
-            Console.WriteLine(Convert.ToInt64(cleanedFields.ElementAt(4)));
             this.lastModifiedDate = cleanedFields.ElementAt(5) + ":" + cleanedFields.ElementAt(6) + ":" + cleanedFields.ElementAt(7);
             this.name = cleanedFields.ElementAt(8);
+            SetDataType(cleanedFields.ElementAt(0));
+        }
+
+        private void SetDataType(string dataField)
+        {
+            this.dataType = "File";
+            
+            string codeType = dataField.Substring(0, 1);
+
+            if (codeType.Equals("d"))
+            {
+                this.dataType = "Directory";
+            }
+            else
+            {
+                if (!this.name.Substring(0, 1).Equals("."))
+                {
+                    int formatIndex = this.name.LastIndexOf(".")+1;
+
+                    if(formatIndex > -1)
+                        this.dataType = this.name.Substring(formatIndex);
+                }
+            }
         }
         #endregion
 
         #region getters
         public string GetDataType() { return this.dataType; }
+        public string GetRights() { return this.rights; }
+        public string GetOwner() { return this.owner; }
+        public string GetGroup() { return this.group; }
         public long GetSize() { return this.size; }
         public string GetLastModifiedDate() { return this.lastModifiedDate; }
         public string GetName() { return this.name; }

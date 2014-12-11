@@ -59,6 +59,9 @@
             this.fileSizeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileTypeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastModifiedServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileRights = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -334,7 +337,10 @@
             this.fileNameServer,
             this.fileSizeServer,
             this.fileTypeServer,
-            this.lastModifiedServer});
+            this.lastModifiedServer,
+            this.fileRights,
+            this.fileOwner,
+            this.fileGroup});
             this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewServer.Location = new System.Drawing.Point(0, 0);
             this.listViewServer.Name = "listViewServer";
@@ -363,6 +369,18 @@
             // 
             this.lastModifiedServer.Text = "Last Modified";
             this.lastModifiedServer.Width = 127;
+            // 
+            // fileRights
+            // 
+            this.fileRights.Text = "Rights";
+            // 
+            // fileOwner
+            // 
+            this.fileOwner.Text = "Owner";
+            // 
+            // fileGroup
+            // 
+            this.fileGroup.Text = "Group";
             // 
             // Form1
             // 
@@ -431,6 +449,9 @@
         private System.Windows.Forms.ColumnHeader fileSizeLocal;
         private System.Windows.Forms.ColumnHeader fileTypeLocal;
         private System.Windows.Forms.ColumnHeader lastModifiedLocal;
+        private System.Windows.Forms.ColumnHeader fileRights;
+        private System.Windows.Forms.ColumnHeader fileOwner;
+        private System.Windows.Forms.ColumnHeader fileGroup;
     }
 }
 

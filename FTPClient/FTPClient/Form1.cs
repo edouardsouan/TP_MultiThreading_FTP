@@ -277,7 +277,7 @@ namespace FTPClient
             TreeNode serverNode = new TreeNode(fileServer.GetName());
             serverNode.Tag = fileServer;
 
-            if (fileServer.GetDataType().Equals("d"))
+            if (fileServer.GetDataType().Equals("Directory"))
             {
                 serverNode.ImageIndex = 1;
                 serverNode.SelectedImageIndex = 1;
@@ -321,20 +321,32 @@ namespace FTPClient
             ListViewItem item = null;
             string extension = "";
             string size = "";
+            string date = "";
+            string rights = "";
+            string owner = "";
+            string group = "";
 
             foreach (FileServer subFile in files)
             {
                 item = new ListViewItem(subFile.GetName(), 0);
-                extension = subFile.GetDataType();
                 size = subFile.GetSize().ToString();
+                extension = subFile.GetDataType();
+                date = subFile.GetLastModifiedDate();
+                rights = subFile.GetRights();
+                owner = subFile.GetOwner();
+                group = subFile.GetGroup();
 
                 subItems = new ListViewItem.ListViewSubItem[]
-                    {new ListViewItem.ListViewSubItem(item, size),
-                    new ListViewItem.ListViewSubItem(item, extension), 
-                     new ListViewItem.ListViewSubItem(item, 
-						subFile.GetLastModifiedDate())};
+                    {
+                        new ListViewItem.ListViewSubItem(item, size),
+                        new ListViewItem.ListViewSubItem(item, extension), 
+                        new ListViewItem.ListViewSubItem(item, date),
+                        new ListViewItem.ListViewSubItem(item, rights),
+                        new ListViewItem.ListViewSubItem(item, owner),
+                        new ListViewItem.ListViewSubItem(item, group)
+                    };
                 // subFile.LastAccessTime.ToShortDateString()
-                if (extension.Equals("d"))
+                if (extension.Equals("Directory"))
                 {
                     item.ImageIndex = 1;
                 }

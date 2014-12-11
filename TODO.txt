@@ -9,3 +9,8 @@ Arbo Server :
 Arbo et listview :
 - quand on clique sur un dossier dans la listevVew alors on doit pouvoir naviguer dans l’arborescence également
 
+
+DONE, prévenir les gars :
+- logWindow en read only
+- abri côté server OP avec la listView
+- passer la taille des fichiers en Ko : d’où le modulo 1024
