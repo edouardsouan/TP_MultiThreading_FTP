@@ -30,7 +30,7 @@ namespace FTPClient
             List<string> cleanedFields = new List<string>();
             string cleanField = "";
 
-            // 32 = ASCII code for ntimely space
+            // 32 = ASCII code for untimely space
             foreach (Byte byteTest in byteFields)
             {
                 if (byteTest == 32)
