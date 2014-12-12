@@ -15,3 +15,4 @@ X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPCl
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.pdb
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache

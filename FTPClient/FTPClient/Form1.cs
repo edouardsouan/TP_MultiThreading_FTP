@@ -87,7 +87,7 @@ namespace FTPClient
             PopulateLocalListView(directories.ToArray());
         }
 
-        private void treeViewLocal_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
             {
@@ -297,7 +297,7 @@ namespace FTPClient
             parentNode.Nodes.Add(serverNode);
         }
 
-        private void treeViewServer_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode nodeClicked = e.Node;
             if (IsNodeADirectory(nodeClicked))

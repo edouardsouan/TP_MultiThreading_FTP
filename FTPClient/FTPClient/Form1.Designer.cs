@@ -263,7 +263,7 @@
             this.treeViewLocal.SelectedImageIndex = 0;
             this.treeViewLocal.Size = new System.Drawing.Size(375, 216);
             this.treeViewLocal.TabIndex = 0;
-            this.treeViewLocal.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseClick);
+            this.treeViewLocal.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseDoubleClick);
             // 
             // listViewLocal
             // 
@@ -329,7 +329,7 @@
             this.treeViewServer.SelectedImageIndex = 0;
             this.treeViewServer.Size = new System.Drawing.Size(393, 216);
             this.treeViewServer.TabIndex = 0;
-            this.treeViewServer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseClick);
+            this.treeViewServer.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseDoubleClick);
             // 
             // listViewServer
             // 
