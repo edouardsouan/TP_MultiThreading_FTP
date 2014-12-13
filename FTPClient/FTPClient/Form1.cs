@@ -46,8 +46,19 @@ namespace FTPClient
         }
         #endregion
 
-        #region TreeView functions
-        private bool IsNodeADirectory(TreeNode node)
+        #region Tools -> to put in another class
+        private bool IsADirectory(FileSystemInfo fileSystemInfo)
+        {
+            bool isADirectory = false;
+
+            FileAttributes attributes = File.GetAttributes(fileSystemInfo.FullName);
+            if ((attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                isADirectory = true;
+
+            return isADirectory;
+        }
+
+        private bool IsADirectory(TreeNode node)
         {
             bool isADirectory = false;
             if (node.ImageIndex == 0 || node.ImageIndex == 1)
@@ -95,7 +106,7 @@ namespace FTPClient
             {
                 TreeNode nodeClicked = e.Node;
 
-                if (IsNodeADirectory(nodeClicked))
+                if (IsADirectory(nodeClicked))
                 {
                     localPath = nodeClicked.FullPath;
                     listViewLocal.Items.Clear();
@@ -305,7 +316,7 @@ namespace FTPClient
         private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode nodeClicked = e.Node;
-            if (IsNodeADirectory(nodeClicked))
+            if (IsADirectory(nodeClicked))
             {
                 serverPath = nodeClicked.FullPath;
                 listViewServer.Items.Clear();
@@ -358,7 +369,7 @@ namespace FTPClient
                         new ListViewItem.ListViewSubItem(item, owner),
                         new ListViewItem.ListViewSubItem(item, group)
                     };
-                // subFile.LastAccessTime.ToShortDateString()
+
                 if (extension.Equals("Directory"))
                 {
                     item.ImageIndex = 1;
@@ -376,7 +387,7 @@ namespace FTPClient
         }
         #endregion
 
-        #region uplaod
+        #region upload
         private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
             listViewLocal.DoDragDrop(e.Item, DragDropEffects.Move);
@@ -394,10 +405,13 @@ namespace FTPClient
 
                 Point localFilePoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
                 ListViewItem localFileItem = listViewLocal.GetItemAt(localFilePoint.X, localFilePoint.Y);
-                string localPathTarget = localPath + '\\' + localFileItem.Name;
+                FileSystemInfo localFileInfo = (FileSystemInfo)localFileItem.Tag;
+                string localPathTarget = localPath;
+                if(IsADirectory(localFileInfo))
+                    localPathTarget += '\\' + localFileItem.Name;
 
-
-                Console.WriteLine(filePathToUpload + "->" + localPathTarget);
+                // UPLOAD
+                // Console.WriteLine(filePathToUpload + "->" + localPathTarget);
             }
         }
 
