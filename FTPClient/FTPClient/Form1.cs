@@ -275,6 +275,7 @@ namespace FTPClient
             }
         }
 
+        // TODO : Build in async
         private void BuildServerTreeView(string[] directories, TreeNode parentNode)
         {
             FileServer fileServer;
@@ -412,9 +413,39 @@ namespace FTPClient
 
                 // UPLOAD
                 // Console.WriteLine(filePathToUpload + "->" + localPathTarget);
+                DownloadFile(filePathToUpload, localPathTarget);
             }
         }
 
+        // TODO : faire du récursif pour les dossiers
+        // Exception se lève si on donne un dossier comme destination
+        private void DownloadFile(string filePathToUpload, string localPathTarget)
+        {
+            // Get the object used to communicate with the server.
+            string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToUpload;
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
+            request.Method = WebRequestMethods.Ftp.DownloadFile;
+
+            // This example assumes the FTP site uses anonymous logon.
+            request.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+    
+            Stream responseStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(responseStream);
+            Console.WriteLine(reader.ReadToEnd());
+            // TODO : save the file in the right place and not only print it
+            Console.WriteLine("Download Complete, status {0}", response.StatusDescription);
+    
+            reader.Close();
+            response.Close();
+        }
+
+
+
+        // --------------------------------------------------------------
+        //  TODO : upload from the server
+        // --------------------------------------------------------------
 
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
