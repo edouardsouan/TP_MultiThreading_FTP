@@ -388,7 +388,7 @@ namespace FTPClient
         }
         #endregion
 
-        #region upload
+        #region Download files/directory from the server
         private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
             listViewLocal.DoDragDrop(e.Item, DragDropEffects.Move);
@@ -399,71 +399,64 @@ namespace FTPClient
         }
         private void listViewLocal_DragDrop(object sender, DragEventArgs e)
         {
-            ListViewItem serverFileName = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-            if (serverFileName.ListView == listViewServer)
+            /* 
+             * TODO : Drag & Drop depuis le treeViewServer
+             * Traitement différents de la listView
+             * Récupérer un TreeNode et non un ListViewItem
+             */
+
+            ListViewItem fileToDownload = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+            if (fileToDownload.ListView == listViewServer)
             {
-                string filePathToUpload = serverPath + "/" + serverFileName.Name;
+                string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
 
-                Point localFilePoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
-                ListViewItem localFileItem = listViewLocal.GetItemAt(localFilePoint.X, localFilePoint.Y);
-                FileSystemInfo localFileInfo = (FileSystemInfo)localFileItem.Tag;
-                string localPathTarget = localPath;
-                if(IsADirectory(localFileInfo))
-                    localPathTarget += '\\' + localFileItem.Name ;
-                localPathTarget += "\\" + serverFileName.Name;
+                Point pointWhereFileDropped = listViewLocal.PointToClient(new Point(e.X, e.Y));
+                ListViewItem targetFile = listViewLocal.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
+                FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
+                string targetPath = localPath;
+                if(IsADirectory(targetFileInfo))
+                    targetPath += '\\' + targetFile.Name;
+                targetPath += "\\" + fileToDownload.Name;
 
-                // UPLOAD
-                // Console.WriteLine(filePathToUpload + "->" + localPathTarget);
-                DownloadFile(filePathToUpload, localPathTarget);
+                DownloadFile(fileToDownloadPath, targetPath);
             }
         }
 
-        // TODO : faire du récursif pour les dossiers
-        // Exception se lève si on donne un dossier comme destination
+        // TODO : Traitement récursif pour les dossiers
         private void DownloadFile(string filePathToUpload, string localPathTarget)
         {
-            // Get the object used to communicate with the server.
             string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToUpload;
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(serverTarget);
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-
-            // This example assumes the FTP site uses anonymous logon.
-            request.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
-
-            FileStream outputStream = new FileStream(localPathTarget, FileMode.Create);
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            /* OLD : only read the file in the console
-             * StreamReader reader = new StreamReader(responseStream);
-            Console.WriteLine(reader.ReadToEnd());
-             * reader.Close();
-             * */
+            FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+            downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            downloadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+            
+            FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
+            FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
+            Stream responseStream = downloadResponse.GetResponseStream();
             Int32 bufferSize = 2048;
             Int32 readCount;
             Byte[] buffer = new Byte[bufferSize];
-
             readCount = responseStream.Read(buffer, 0, bufferSize);
             while (readCount > 0)
             {
-                outputStream.Write(buffer, 0, readCount);
+                downloadedFileStream.Write(buffer, 0, readCount);
                 readCount = responseStream.Read(buffer, 0, bufferSize);
             }
-
             responseStream.Close();
-            outputStream.Close(); 
+            downloadedFileStream.Close();
+            downloadResponse.Close();
 
-            // TODO : save the file in the right place and not only print it
-            Console.WriteLine("Download Complete, status {0}", response.StatusDescription);
-            
-            response.Close();
+            // TODO : update treeViewLocal and listViewLocal
+            Console.WriteLine("Download Complete, status {0}", downloadResponse.StatusDescription);
         }
-
+        #endregion
 
 
         // --------------------------------------------------------------
-        //  TODO : upload from the server
+        //  TODO : upload to the server
         // --------------------------------------------------------------
 
+        #region Upload files / directories to the server
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
             listViewServer.DoDragDrop(e.Item, DragDropEffects.Move);
