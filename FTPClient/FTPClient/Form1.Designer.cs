@@ -282,7 +282,7 @@
             this.listViewLocal.TabIndex = 1;
             this.listViewLocal.UseCompatibleStateImageBehavior = false;
             this.listViewLocal.View = System.Windows.Forms.View.Details;
-            this.listViewLocal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listViewLocal_MouseDown);
+            this.listViewLocal.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
             this.listViewLocal.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
             this.listViewLocal.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
             // 
@@ -357,7 +357,7 @@
             this.listViewServer.UseCompatibleStateImageBehavior = false;
             this.listViewServer.View = System.Windows.Forms.View.Details;
             this.listViewServer.AllowDrop = true;
-            this.listViewServer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listViewServer_MouseDown);
+            this.listViewServer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
             this.listViewServer.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
             this.listViewServer.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
             // 

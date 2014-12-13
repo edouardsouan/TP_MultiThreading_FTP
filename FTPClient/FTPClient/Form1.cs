@@ -370,9 +370,9 @@ namespace FTPClient
         #endregion
 
         #region uplaod
-        private void listViewLocal_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
-            listViewLocal.DoDragDrop(listViewLocal.Text, DragDropEffects.Move);
+            listViewLocal.DoDragDrop(e.Item, DragDropEffects.Move);
         }
         private void listViewLocal_DragEnter(object sender, DragEventArgs e)
         {
@@ -380,13 +380,18 @@ namespace FTPClient
         }
         private void listViewLocal_DragDrop(object sender, DragEventArgs e)
         {
-            Console.WriteLine(e.Data.ToString());
+            Point targetPoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
+            ListViewItem targetFile = listViewLocal.GetItemAt(targetPoint.X, targetPoint.Y);
+
+            ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+
+            Console.WriteLine(draggedFile + "->" + targetFile);
         }
 
 
-        private void listViewServer_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
-            listViewServer.DoDragDrop(listViewServer.Text, DragDropEffects.Move);
+            listViewServer.DoDragDrop(e.Item, DragDropEffects.Move);
         }
         private void listViewServer_DragEnter(object sender, DragEventArgs e)
         {
@@ -394,7 +399,12 @@ namespace FTPClient
         }
         private void listViewServer_DragDrop(object sender, DragEventArgs e)
         {
-            Console.WriteLine(e.Data.ToString());
+            Point targetPoint = listViewServer.PointToClient(new Point(e.X, e.Y));
+            ListViewItem targetFile = listViewServer.GetItemAt(targetPoint.X, targetPoint.Y);
+
+            ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+
+            Console.WriteLine(draggedFile + "->" + targetFile);
         }
         #endregion
     }
