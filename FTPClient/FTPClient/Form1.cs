@@ -409,7 +409,8 @@ namespace FTPClient
                 FileSystemInfo localFileInfo = (FileSystemInfo)localFileItem.Tag;
                 string localPathTarget = localPath;
                 if(IsADirectory(localFileInfo))
-                    localPathTarget += '\\' + localFileItem.Name;
+                    localPathTarget += '\\' + localFileItem.Name ;
+                localPathTarget += "\\" + serverFileName.Name;
 
                 // UPLOAD
                 // Console.WriteLine(filePathToUpload + "->" + localPathTarget);
@@ -429,15 +430,31 @@ namespace FTPClient
             // This example assumes the FTP site uses anonymous logon.
             request.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
 
+            FileStream outputStream = new FileStream(localPathTarget, FileMode.Create);
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-    
             Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream);
+            /* OLD : only read the file in the console
+             * StreamReader reader = new StreamReader(responseStream);
             Console.WriteLine(reader.ReadToEnd());
+             * reader.Close();
+             * */
+            Int32 bufferSize = 2048;
+            Int32 readCount;
+            Byte[] buffer = new Byte[bufferSize];
+
+            readCount = responseStream.Read(buffer, 0, bufferSize);
+            while (readCount > 0)
+            {
+                outputStream.Write(buffer, 0, readCount);
+                readCount = responseStream.Read(buffer, 0, bufferSize);
+            }
+
+            responseStream.Close();
+            outputStream.Close(); 
+
             // TODO : save the file in the right place and not only print it
             Console.WriteLine("Download Complete, status {0}", response.StatusDescription);
-    
-            reader.Close();
+            
             response.Close();
         }
 
