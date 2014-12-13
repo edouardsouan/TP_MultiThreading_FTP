@@ -174,6 +174,7 @@ namespace FTPClient
             {
                 item = new ListViewItem(subFile.Name, 0);
                 item.Name = subFile.Name;
+                item.Tag = subFile;
                 extension = subFile.Extension;
                 LastAccessTime = subFile.LastAccessTime.ToShortDateString();
 
@@ -223,7 +224,6 @@ namespace FTPClient
         private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + serverPath + "/";
-            serverPath = serverTarget;
 
             if (!isSendingListCommand)
             {
@@ -307,7 +307,7 @@ namespace FTPClient
             TreeNode nodeClicked = e.Node;
             if (IsNodeADirectory(nodeClicked))
             {
-
+                serverPath = nodeClicked.FullPath;
                 listViewServer.Items.Clear();
                 if (nodeClicked.Nodes.Count == 0)
                 {
@@ -341,6 +341,7 @@ namespace FTPClient
             {
                 item = new ListViewItem(subFile.GetName(), 0);
                 item.Name = subFile.GetName();
+                item.Tag = subFile;
                 size = subFile.GetSize().ToString();
                 extension = subFile.GetDataType();
                 date = subFile.GetLastModifiedDate();
@@ -386,17 +387,17 @@ namespace FTPClient
         }
         private void listViewLocal_DragDrop(object sender, DragEventArgs e)
         {
-            Point targetPoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
-            ListViewItem targetFile = listViewLocal.GetItemAt(targetPoint.X, targetPoint.Y);
-            string localFilePath = localPath + targetFile.Name;
-
-            ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-            // Only launch upload if the file is from the listViewServer
-            if(draggedFile.ListView == listViewServer)
+            ListViewItem serverFileName = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+            if (serverFileName.ListView == listViewServer)
             {
-                string serverDirPath = serverPath + draggedFile.Name;
+                string filePathToUpload = serverPath + "/" + serverFileName.Name;
 
-                Console.WriteLine(localFilePath + "->" + serverDirPath);
+                Point localFilePoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
+                ListViewItem localFileItem = listViewLocal.GetItemAt(localFilePoint.X, localFilePoint.Y);
+                string localPathTarget = localPath + '\\' + localFileItem.Name;
+
+
+                Console.WriteLine(filePathToUpload + "->" + localPathTarget);
             }
         }
 
