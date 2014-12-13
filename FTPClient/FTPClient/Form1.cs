@@ -19,6 +19,8 @@ namespace FTPClient
     {
         #region Variables
         bool isSendingListCommand = false;
+        string localPath = "";
+        string serverPath = "";
         #endregion
 
         #region Constructor
@@ -95,6 +97,7 @@ namespace FTPClient
 
                 if (IsNodeADirectory(nodeClicked))
                 {
+                    localPath = nodeClicked.FullPath;
                     listViewLocal.Items.Clear();
 
                     if (nodeClicked.Nodes.Count == 0)
@@ -170,6 +173,7 @@ namespace FTPClient
             foreach (FileSystemInfo subFile in files)
             {
                 item = new ListViewItem(subFile.Name, 0);
+                item.Name = subFile.Name;
                 extension = subFile.Extension;
                 LastAccessTime = subFile.LastAccessTime.ToShortDateString();
 
@@ -219,6 +223,7 @@ namespace FTPClient
         private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + serverPath + "/";
+            serverPath = serverTarget;
 
             if (!isSendingListCommand)
             {
@@ -335,6 +340,7 @@ namespace FTPClient
             foreach (FileServer subFile in files)
             {
                 item = new ListViewItem(subFile.GetName(), 0);
+                item.Name = subFile.GetName();
                 size = subFile.GetSize().ToString();
                 extension = subFile.GetDataType();
                 date = subFile.GetLastModifiedDate();
@@ -382,10 +388,16 @@ namespace FTPClient
         {
             Point targetPoint = listViewLocal.PointToClient(new Point(e.X, e.Y));
             ListViewItem targetFile = listViewLocal.GetItemAt(targetPoint.X, targetPoint.Y);
+            string localFilePath = localPath + targetFile.Name;
 
             ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+            // Only launch upload if the file is from the listViewServer
+            if(draggedFile.ListView == listViewServer)
+            {
+                string serverDirPath = serverPath + draggedFile.Name;
 
-            Console.WriteLine(draggedFile + "->" + targetFile);
+                Console.WriteLine(localFilePath + "->" + serverDirPath);
+            }
         }
 
 
