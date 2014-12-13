@@ -368,5 +368,34 @@ namespace FTPClient
             listViewServer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         #endregion
+
+        #region uplaod
+        private void listViewLocal_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            listViewLocal.DoDragDrop(listViewLocal.Text, DragDropEffects.Move);
+        }
+        private void listViewLocal_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+        private void listViewLocal_DragDrop(object sender, DragEventArgs e)
+        {
+            Console.WriteLine(e.Data.ToString());
+        }
+
+
+        private void listViewServer_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            listViewServer.DoDragDrop(listViewServer.Text, DragDropEffects.Move);
+        }
+        private void listViewServer_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+        private void listViewServer_DragDrop(object sender, DragEventArgs e)
+        {
+            Console.WriteLine(e.Data.ToString());
+        }
+        #endregion
     }
 }

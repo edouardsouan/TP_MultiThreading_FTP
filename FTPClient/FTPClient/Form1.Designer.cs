@@ -200,7 +200,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Size = new System.Drawing.Size(771, 501);
-            this.splitContainer2.SplitterDistance = 92;
+            this.splitContainer2.SplitterDistance = 91;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -211,7 +211,7 @@
             this.logWindow.Margin = new System.Windows.Forms.Padding(2);
             this.logWindow.Name = "logWindow";
             this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(771, 92);
+            this.logWindow.Size = new System.Drawing.Size(771, 91);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
             // 
@@ -229,7 +229,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer3.Size = new System.Drawing.Size(771, 406);
+            this.splitContainer3.Size = new System.Drawing.Size(771, 407);
             this.splitContainer3.SplitterDistance = 375;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
@@ -248,12 +248,13 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.listViewLocal);
-            this.splitContainer4.Size = new System.Drawing.Size(375, 406);
+            this.splitContainer4.Size = new System.Drawing.Size(375, 407);
             this.splitContainer4.SplitterDistance = 216;
             this.splitContainer4.TabIndex = 0;
             // 
             // treeViewLocal
             // 
+            this.treeViewLocal.AllowDrop = true;
             this.treeViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewLocal.ImageIndex = 0;
             this.treeViewLocal.ImageList = this.imageList;
@@ -267,6 +268,7 @@
             // 
             // listViewLocal
             // 
+            this.listViewLocal.AllowDrop = true;
             this.listViewLocal.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileNameLocal,
             this.fileSizeLocal,
@@ -275,11 +277,14 @@
             this.listViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLocal.Location = new System.Drawing.Point(0, 0);
             this.listViewLocal.Name = "listViewLocal";
-            this.listViewLocal.Size = new System.Drawing.Size(375, 186);
+            this.listViewLocal.Size = new System.Drawing.Size(375, 187);
             this.listViewLocal.SmallImageList = this.imageList;
             this.listViewLocal.TabIndex = 1;
             this.listViewLocal.UseCompatibleStateImageBehavior = false;
             this.listViewLocal.View = System.Windows.Forms.View.Details;
+            this.listViewLocal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listViewLocal_MouseDown);
+            this.listViewLocal.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
+            this.listViewLocal.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
             // 
             // fileNameLocal
             // 
@@ -315,12 +320,13 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.listViewServer);
-            this.splitContainer5.Size = new System.Drawing.Size(393, 406);
+            this.splitContainer5.Size = new System.Drawing.Size(393, 407);
             this.splitContainer5.SplitterDistance = 216;
             this.splitContainer5.TabIndex = 0;
             // 
             // treeViewServer
             // 
+            this.treeViewServer.AllowDrop = true;
             this.treeViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewServer.ImageIndex = 0;
             this.treeViewServer.ImageList = this.imageList;
@@ -333,6 +339,7 @@
             // 
             // listViewServer
             // 
+            this.listViewServer.AllowDrop = true;
             this.listViewServer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileNameServer,
             this.fileSizeServer,
@@ -344,11 +351,15 @@
             this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewServer.Location = new System.Drawing.Point(0, 0);
             this.listViewServer.Name = "listViewServer";
-            this.listViewServer.Size = new System.Drawing.Size(393, 186);
+            this.listViewServer.Size = new System.Drawing.Size(393, 187);
             this.listViewServer.SmallImageList = this.imageList;
             this.listViewServer.TabIndex = 0;
             this.listViewServer.UseCompatibleStateImageBehavior = false;
             this.listViewServer.View = System.Windows.Forms.View.Details;
+            this.listViewServer.AllowDrop = true;
+            this.listViewServer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listViewServer_MouseDown);
+            this.listViewServer.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
+            this.listViewServer.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
             // 
             // fileNameServer
             // 
