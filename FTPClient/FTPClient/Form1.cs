@@ -401,6 +401,7 @@ namespace FTPClient
         {
             /* 
              * TODO : Drag & Drop depuis le treeViewServer
+             * Si targetFileInfo null alors prendre le chemin de localView
              * Traitement différents de la listView
              * Récupérer un TreeNode et non un ListViewItem
              */
@@ -409,7 +410,7 @@ namespace FTPClient
             if (fileToDownload.ListView == listViewServer)
             {
                 string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
-
+                
                 Point pointWhereFileDropped = listViewLocal.PointToClient(new Point(e.X, e.Y));
                 ListViewItem targetFile = listViewLocal.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
                 FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
