@@ -438,9 +438,9 @@ namespace FTPClient
         }
 
         // TODO : Traitement récursif pour les dossiers
-        private void DownloadFile(string filePathToUpload, string localPathTarget, FileServer fileInfo)
+        private void DownloadFile(string filePathToDownload, string localPathTarget, FileServer fileInfo)
         {
-            string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToUpload;
+            string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToDownload;
             FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
             downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
             downloadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
@@ -483,6 +483,7 @@ namespace FTPClient
             fileTransfertBar.Value = (int)actualWeigth;
         }
         #endregion
+
         #region Upload files / directories to the server
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
@@ -498,8 +499,59 @@ namespace FTPClient
             ListViewItem targetFile = listViewServer.GetItemAt(targetPoint.X, targetPoint.Y);
 
             ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+            FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
+            String filePath = this.localPath+"\\"+fileToUpload.Name;
 
+            UploadFile(filePath, serverPath.Replace("\\","//")+"//"+fileToUpload.Name, fileToUpload);
             Console.WriteLine(draggedFile + "->" + targetFile);
+        }
+        // TODO : Traitement récursif pour les dossiers
+        private void UploadFile(string filePathToUpload, string distPathTarget, FileInfo fileInfo)
+        {
+            string serverTarget = "ftp://" + this.txtServer.Text + distPathTarget;
+            FtpWebRequest uploadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            uploadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+
+
+
+            // Copy the contents of the file to the request stream.
+            /*
+            StreamReader sourceStream = new StreamReader("testfile.txt");
+            byte [] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+            sourceStream.Close();
+            request.ContentLength = fileContents.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(fileContents, 0, fileContents.Length);
+            requestStream.Close();
+
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            */
+            // ----
+
+
+            StreamReader uploadFileStream = new StreamReader(filePathToUpload);
+            byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);
+            uploadFileStream.Close();
+            uploadRequest.ContentLength = fileContents.Length;
+
+
+            Stream responseStream = uploadRequest.GetRequestStream();
+            responseStream.Write(fileContents, 0, fileContents.Length);
+            responseStream.Close();
+
+            FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
+            // ???
+            //  FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
+
+
+            responseStream.Close();
+            uploadFileStream.Close();
+            uploadResponse.Close();
+
+            // TODO : update treeViewLocal and listViewLocal
+            Console.WriteLine("Download Complete, status {0}", uploadResponse.StatusDescription);
         }
         #endregion
     }
