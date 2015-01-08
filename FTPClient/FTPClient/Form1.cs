@@ -417,6 +417,22 @@ namespace FTPClient
                     targetPath += '\\' + targetFile.Name;
                 targetPath += "\\" + fileToDownload.Name;
 
+                ListViewItem.ListViewSubItem[] subItems;
+                ListViewItem item = new ListViewItem(targetPath);
+                item.Name = targetPath;
+                string direction = "<--";
+                string distFile = fileToDownloadPath;
+                string taille = ((FileServer)fileToDownload.Tag).GetSize().ToString();
+
+                subItems = new ListViewItem.ListViewSubItem[]
+                    {
+                        new ListViewItem.ListViewSubItem(item, direction), 
+                        new ListViewItem.ListViewSubItem(item, distFile),
+                        new ListViewItem.ListViewSubItem(item, taille)
+                    };
+                item.SubItems.AddRange(subItems);
+                FileQueue.Items.Add(item);
+
                 DownloadFile(fileToDownloadPath, targetPath, (FileServer)fileToDownload.Tag);
             }
         }

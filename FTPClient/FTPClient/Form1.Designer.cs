@@ -63,15 +63,13 @@
             this.fileOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
-            this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.FileQueue = new System.Windows.Forms.ListView();
             this.ServerFileLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DistFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileSizeTransfert = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,10 +95,6 @@
             this.splitContainer6.Panel1.SuspendLayout();
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
-            this.splitContainer7.Panel1.SuspendLayout();
-            this.splitContainer7.Panel2.SuspendLayout();
-            this.splitContainer7.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -424,61 +418,30 @@
             // 
             // splitContainer6.Panel1
             // 
-            this.splitContainer6.Panel1.Controls.Add(this.splitContainer7);
+            this.splitContainer6.Panel1.Controls.Add(this.fileTransfertBar);
             // 
             // splitContainer6.Panel2
             // 
-            this.splitContainer6.Panel2.Controls.Add(this.listView1);
+            this.splitContainer6.Panel2.Controls.Add(this.FileQueue);
             this.splitContainer6.Size = new System.Drawing.Size(877, 89);
-            this.splitContainer6.SplitterDistance = 27;
+            this.splitContainer6.SplitterDistance = 28;
             this.splitContainer6.TabIndex = 0;
             // 
-            // splitContainer7
+            // FileQueue
             // 
-            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer7.Name = "splitContainer7";
-            // 
-            // splitContainer7.Panel1
-            // 
-            this.splitContainer7.Panel1.Controls.Add(this.fileTransfertBar);
-            // 
-            // splitContainer7.Panel2
-            // 
-            this.splitContainer7.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer7.Size = new System.Drawing.Size(877, 27);
-            this.splitContainer7.SplitterDistance = 710;
-            this.splitContainer7.TabIndex = 0;
-            // 
-            // fileTransfertBar
-            // 
-            this.fileTransfertBar.Location = new System.Drawing.Point(0, -1);
-            this.fileTransfertBar.Name = "fileTransfertBar";
-            this.fileTransfertBar.Size = new System.Drawing.Size(711, 23);
-            this.fileTransfertBar.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(12, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(148, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.FileQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ServerFileLocation,
             this.Direction,
             this.DistFile,
             this.FileSizeTransfert,
             this.Time});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(877, 58);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.FileQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FileQueue.Location = new System.Drawing.Point(0, 0);
+            this.FileQueue.Name = "FileQueue";
+            this.FileQueue.Size = new System.Drawing.Size(877, 57);
+            this.FileQueue.TabIndex = 0;
+            this.FileQueue.UseCompatibleStateImageBehavior = false;
+            this.FileQueue.View = System.Windows.Forms.View.Details;
             // 
             // ServerFileLocation
             // 
@@ -503,6 +466,13 @@
             // 
             this.Time.Text = "Time";
             this.Time.Width = 147;
+            // 
+            // fileTransfertBar
+            // 
+            this.fileTransfertBar.Location = new System.Drawing.Point(3, 3);
+            this.fileTransfertBar.Name = "fileTransfertBar";
+            this.fileTransfertBar.Size = new System.Drawing.Size(871, 23);
+            this.fileTransfertBar.TabIndex = 0;
             // 
             // Form1
             // 
@@ -540,11 +510,6 @@
             this.splitContainer6.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
             this.splitContainer6.ResumeLayout(false);
-            this.splitContainer7.Panel1.ResumeLayout(false);
-            this.splitContainer7.Panel2.ResumeLayout(false);
-            this.splitContainer7.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
-            this.splitContainer7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,15 +550,13 @@
         private System.Windows.Forms.ColumnHeader fileOwner;
         private System.Windows.Forms.ColumnHeader fileGroup;
         private System.Windows.Forms.SplitContainer splitContainer6;
-        private System.Windows.Forms.SplitContainer splitContainer7;
-        private System.Windows.Forms.ProgressBar fileTransfertBar;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView FileQueue;
         private System.Windows.Forms.ColumnHeader ServerFileLocation;
         private System.Windows.Forms.ColumnHeader Direction;
         private System.Windows.Forms.ColumnHeader DistFile;
         private System.Windows.Forms.ColumnHeader FileSizeTransfert;
         private System.Windows.Forms.ColumnHeader Time;
+        private System.Windows.Forms.ProgressBar fileTransfertBar;
     }
 }
 
