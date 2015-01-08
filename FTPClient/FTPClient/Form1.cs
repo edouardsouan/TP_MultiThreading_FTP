@@ -6,11 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FTPClient
@@ -72,6 +69,7 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             PopulateLocalTreeViewWithLogicalDrives();
         }
 
@@ -419,12 +417,12 @@ namespace FTPClient
                     targetPath += '\\' + targetFile.Name;
                 targetPath += "\\" + fileToDownload.Name;
 
-                DownloadFile(fileToDownloadPath, targetPath);
+                DownloadFile(fileToDownloadPath, targetPath, (FileServer)fileToDownload.Tag);
             }
         }
 
         // TODO : Traitement récursif pour les dossiers
-        private void DownloadFile(string filePathToUpload, string localPathTarget)
+        private void DownloadFile(string filePathToUpload, string localPathTarget, FileServer fileInfo)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToUpload;
             FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
@@ -437,11 +435,16 @@ namespace FTPClient
             Int32 bufferSize = 2048;
             Int32 readCount;
             Byte[] buffer = new Byte[bufferSize];
+            FileServer fileSize = (FileServer)fileInfo;
+            double totalWeight = (double)fileSize.GetSize();
+            double actualWeigth = 0;
             readCount = responseStream.Read(buffer, 0, bufferSize);
             while (readCount > 0)
             {
+                actualWeigth += readCount/1024;
                 downloadedFileStream.Write(buffer, 0, readCount);
                 readCount = responseStream.Read(buffer, 0, bufferSize);
+                fileTransfertBar.Invoke(new Action(()=>TransfertGauge(totalWeight ,actualWeigth)));
             }
             responseStream.Close();
             downloadedFileStream.Close();
@@ -456,7 +459,14 @@ namespace FTPClient
         // --------------------------------------------------------------
         //  TODO : upload to the server
         // --------------------------------------------------------------
+        #region File Transfert
+        private void TransfertGauge(double totalWeigth, double actualWeigth){
+            fileTransfertBar.Minimum = 0;
+            fileTransfertBar.Maximum = (int)totalWeigth;
 
+            fileTransfertBar.Value = (int)actualWeigth;
+        }
+        #endregion
         #region Upload files / directories to the server
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {

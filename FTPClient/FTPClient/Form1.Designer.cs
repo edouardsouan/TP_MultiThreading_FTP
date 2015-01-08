@@ -62,9 +62,20 @@
             this.fileRights = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.ServerFileLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DistFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FileSizeTransfert = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -82,6 +93,14 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
+            this.splitContainer7.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -106,7 +125,7 @@
             this.btnConnection});
             this.toolStripConnection.Location = new System.Drawing.Point(0, 0);
             this.toolStripConnection.Name = "toolStripConnection";
-            this.toolStripConnection.Size = new System.Drawing.Size(771, 25);
+            this.toolStripConnection.Size = new System.Drawing.Size(877, 25);
             this.toolStripConnection.TabIndex = 0;
             this.toolStripConnection.Text = "toolStrip1";
             // 
@@ -179,8 +198,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(771, 584);
-            this.splitContainer1.SplitterDistance = 501;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer6);
+            this.splitContainer1.Size = new System.Drawing.Size(877, 643);
+            this.splitContainer1.SplitterDistance = 551;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -199,8 +222,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(771, 501);
-            this.splitContainer2.SplitterDistance = 91;
+            this.splitContainer2.Size = new System.Drawing.Size(877, 551);
+            this.splitContainer2.SplitterDistance = 100;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -211,7 +234,7 @@
             this.logWindow.Margin = new System.Windows.Forms.Padding(2);
             this.logWindow.Name = "logWindow";
             this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(771, 91);
+            this.logWindow.Size = new System.Drawing.Size(877, 100);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
             // 
@@ -229,8 +252,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer3.Size = new System.Drawing.Size(771, 407);
-            this.splitContainer3.SplitterDistance = 375;
+            this.splitContainer3.Size = new System.Drawing.Size(877, 448);
+            this.splitContainer3.SplitterDistance = 426;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -248,8 +271,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.listViewLocal);
-            this.splitContainer4.Size = new System.Drawing.Size(375, 407);
-            this.splitContainer4.SplitterDistance = 216;
+            this.splitContainer4.Size = new System.Drawing.Size(426, 448);
+            this.splitContainer4.SplitterDistance = 237;
             this.splitContainer4.TabIndex = 0;
             // 
             // treeViewLocal
@@ -262,7 +285,7 @@
             this.treeViewLocal.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewLocal.Name = "treeViewLocal";
             this.treeViewLocal.SelectedImageIndex = 0;
-            this.treeViewLocal.Size = new System.Drawing.Size(375, 216);
+            this.treeViewLocal.Size = new System.Drawing.Size(426, 237);
             this.treeViewLocal.TabIndex = 0;
             this.treeViewLocal.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseDoubleClick);
             // 
@@ -277,7 +300,7 @@
             this.listViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLocal.Location = new System.Drawing.Point(0, 0);
             this.listViewLocal.Name = "listViewLocal";
-            this.listViewLocal.Size = new System.Drawing.Size(375, 187);
+            this.listViewLocal.Size = new System.Drawing.Size(426, 207);
             this.listViewLocal.SmallImageList = this.imageList;
             this.listViewLocal.TabIndex = 1;
             this.listViewLocal.UseCompatibleStateImageBehavior = false;
@@ -320,8 +343,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.listViewServer);
-            this.splitContainer5.Size = new System.Drawing.Size(393, 407);
-            this.splitContainer5.SplitterDistance = 216;
+            this.splitContainer5.Size = new System.Drawing.Size(448, 448);
+            this.splitContainer5.SplitterDistance = 237;
             this.splitContainer5.TabIndex = 0;
             // 
             // treeViewServer
@@ -333,7 +356,7 @@
             this.treeViewServer.Location = new System.Drawing.Point(0, 0);
             this.treeViewServer.Name = "treeViewServer";
             this.treeViewServer.SelectedImageIndex = 0;
-            this.treeViewServer.Size = new System.Drawing.Size(393, 216);
+            this.treeViewServer.Size = new System.Drawing.Size(448, 237);
             this.treeViewServer.TabIndex = 0;
             this.treeViewServer.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseDoubleClick);
             // 
@@ -351,12 +374,11 @@
             this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewServer.Location = new System.Drawing.Point(0, 0);
             this.listViewServer.Name = "listViewServer";
-            this.listViewServer.Size = new System.Drawing.Size(393, 187);
+            this.listViewServer.Size = new System.Drawing.Size(448, 207);
             this.listViewServer.SmallImageList = this.imageList;
             this.listViewServer.TabIndex = 0;
             this.listViewServer.UseCompatibleStateImageBehavior = false;
             this.listViewServer.View = System.Windows.Forms.View.Details;
-            this.listViewServer.AllowDrop = true;
             this.listViewServer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
             this.listViewServer.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
             this.listViewServer.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
@@ -393,11 +415,100 @@
             // 
             this.fileGroup.Text = "Group";
             // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer6.Name = "splitContainer6";
+            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.splitContainer7);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.listView1);
+            this.splitContainer6.Size = new System.Drawing.Size(877, 89);
+            this.splitContainer6.SplitterDistance = 27;
+            this.splitContainer6.TabIndex = 0;
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer7.Name = "splitContainer7";
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.fileTransfertBar);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer7.Size = new System.Drawing.Size(877, 27);
+            this.splitContainer7.SplitterDistance = 710;
+            this.splitContainer7.TabIndex = 0;
+            // 
+            // fileTransfertBar
+            // 
+            this.fileTransfertBar.Location = new System.Drawing.Point(0, -1);
+            this.fileTransfertBar.Name = "fileTransfertBar";
+            this.fileTransfertBar.Size = new System.Drawing.Size(711, 23);
+            this.fileTransfertBar.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(148, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ServerFileLocation,
+            this.Direction,
+            this.DistFile,
+            this.FileSizeTransfert,
+            this.Time});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(877, 58);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // ServerFileLocation
+            // 
+            this.ServerFileLocation.Text = "Server / File Location";
+            this.ServerFileLocation.Width = 275;
+            // 
+            // Direction
+            // 
+            this.Direction.Text = "Direction";
+            // 
+            // DistFile
+            // 
+            this.DistFile.Text = "Dist File";
+            this.DistFile.Width = 281;
+            // 
+            // FileSizeTransfert
+            // 
+            this.FileSizeTransfert.Text = "Size";
+            this.FileSizeTransfert.Width = 110;
+            // 
+            // Time
+            // 
+            this.Time.Text = "Time";
+            this.Time.Width = 147;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 609);
+            this.ClientSize = new System.Drawing.Size(877, 668);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStripConnection);
             this.Name = "Form1";
@@ -406,6 +517,7 @@
             this.toolStripConnection.ResumeLayout(false);
             this.toolStripConnection.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -424,6 +536,15 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            this.splitContainer7.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
+            this.splitContainer7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,6 +584,16 @@
         private System.Windows.Forms.ColumnHeader fileRights;
         private System.Windows.Forms.ColumnHeader fileOwner;
         private System.Windows.Forms.ColumnHeader fileGroup;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.SplitContainer splitContainer7;
+        private System.Windows.Forms.ProgressBar fileTransfertBar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader ServerFileLocation;
+        private System.Windows.Forms.ColumnHeader Direction;
+        private System.Windows.Forms.ColumnHeader DistFile;
+        private System.Windows.Forms.ColumnHeader FileSizeTransfert;
+        private System.Windows.Forms.ColumnHeader Time;
     }
 }
 

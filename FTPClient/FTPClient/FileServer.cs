@@ -56,7 +56,7 @@ namespace FTPClient
             this.linkNumnber = cleanedFields.ElementAt(1);
             this.owner = cleanedFields.ElementAt(2);
             this.group = cleanedFields.ElementAt(3);
-            this.size = Convert.ToInt64(cleanedFields.ElementAt(4)) % 1024;
+            this.size = long.Parse(cleanedFields.ElementAt(4)) / 1024;
             this.lastModifiedDate = cleanedFields.ElementAt(5) + ":" + cleanedFields.ElementAt(6) + ":" + cleanedFields.ElementAt(7);
             this.name = cleanedFields.ElementAt(8);
             SetDataType(cleanedFields.ElementAt(0));
