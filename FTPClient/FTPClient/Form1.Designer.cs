@@ -310,7 +310,7 @@
             // 
             // fileSizeLocal
             // 
-            this.fileSizeLocal.Text = "File Size (Ko)";
+            this.fileSizeLocal.Text = "File Size";
             this.fileSizeLocal.Width = 85;
             // 
             // fileTypeLocal
@@ -384,7 +384,7 @@
             // 
             // fileSizeServer
             // 
-            this.fileSizeServer.Text = "File Size (Ko)";
+            this.fileSizeServer.Text = "File Size";
             this.fileSizeServer.Width = 85;
             // 
             // fileTypeServer

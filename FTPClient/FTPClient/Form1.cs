@@ -190,7 +190,7 @@ namespace FTPClient
                 try
                 {
                     FileInfo fileInfo = (FileInfo)subFile;
-                    size = (fileInfo.Length / 1000).ToString();
+                    size = fileInfo.Length.ToString();
                 }
                 catch
                 {
@@ -457,7 +457,7 @@ namespace FTPClient
             readCount = responseStream.Read(buffer, 0, bufferSize);
             while (readCount > 0)
             {
-                actualWeigth += readCount/1024;
+                actualWeigth += readCount;
                 downloadedFileStream.Write(buffer, 0, readCount);
                 readCount = responseStream.Read(buffer, 0, bufferSize);
                 fileTransfertBar.Invoke(new Action(()=>TransfertGauge(totalWeight ,actualWeigth)));
