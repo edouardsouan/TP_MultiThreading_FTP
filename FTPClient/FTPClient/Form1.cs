@@ -451,36 +451,85 @@ namespace FTPClient
         }
 
         // TODO : Traitement récursif pour les dossiers
-        private void DownloadFile(string filePathToDownload, string localPathTarget, FileServer fileInfo)
+        private async void DownloadFile(string filePathToDownload, string localPathTarget, FileServer fileInfo)
         {
             string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToDownload;
-            FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-            downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-            downloadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
-            
-            FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
-            FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
-            Stream responseStream = downloadResponse.GetResponseStream();
-            Int32 bufferSize = 2048;
-            Int32 readCount;
-            Byte[] buffer = new Byte[bufferSize];
-            FileServer fileSize = (FileServer)fileInfo;
-            double totalWeight = (double)fileSize.GetSize();
-            double actualWeigth = 0;
-            readCount = responseStream.Read(buffer, 0, bufferSize);
-            while (readCount > 0)
+            string fileName = fileInfo.GetName();
+            if (fileInfo.IsADirectory())
             {
-                actualWeigth += readCount;
-                downloadedFileStream.Write(buffer, 0, readCount);
-                readCount = responseStream.Read(buffer, 0, bufferSize);
-                fileTransfertBar.Invoke(new Action(()=>TransfertGauge(totalWeight ,actualWeigth)));
+                string localPathTempo = localPathTarget;
+
+                try
+                {
+                    Directory.CreateDirectory(localPathTarget);
+                }
+                catch(System.IO.IOException exception)
+                {
+                    Console.WriteLine("File name already exist : "+exception.ToString());
+                    localPathTempo += "1";
+                    /*
+                     * 3 options possibles :
+                     * - ignorer : arrêter
+                     * - remplacer : on suppose que mettre à jour un fichier devrait mettre à jour 
+                     * la date du dernier accès du dossier
+                     * - copier : rajouter 1
+                     * */
+                }
+
+                // Get file and directory list
+                FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+                ftpRequest.KeepAlive = false;
+                ftpRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+                FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+                Stream responseStream = ftpResponse.GetResponseStream();
+                StreamReader streamReader = new StreamReader(responseStream);
+
+                string rawResult = streamReader.ReadToEnd();
+                string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+                string[] serverData = data.Split('\n');
+
+                foreach(String rawData in serverData)
+                {
+                    FileServer fileServer = new FileServer(rawData);
+                    if (!(fileServer.GetName().Equals(".") || fileServer.GetName().Equals("..")))
+                    {
+                        DownloadFile(filePathToDownload + "\\" + fileName, localPathTempo, fileServer);
+                    }
+                }
             }
-            responseStream.Close();
-            downloadedFileStream.Close();
-            downloadResponse.Close();
+            else
+            {
+                string localPathTempo = localPathTarget + "\\" + fileName;
+
+                FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
+                downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+                downloadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
+
+                FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
+                FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
+                Stream responseStream = downloadResponse.GetResponseStream();
+                Int32 bufferSize = 2048;
+                Int32 readCount;
+                Byte[] buffer = new Byte[bufferSize];
+                FileServer fileSize = (FileServer)fileInfo;
+                double totalWeight = (double)fileSize.GetSize();
+                double actualWeigth = 0;
+                readCount = responseStream.Read(buffer, 0, bufferSize);
+                while (readCount > 0)
+                {
+                    actualWeigth += readCount;
+                    downloadedFileStream.Write(buffer, 0, readCount);
+                    readCount = responseStream.Read(buffer, 0, bufferSize);
+                    fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
+                }
+                responseStream.Close();
+                downloadedFileStream.Close();
+                downloadResponse.Close();
+            }
 
             // TODO : update treeViewLocal and listViewLocal
-            Console.WriteLine("Download Complete, status {0}", downloadResponse.StatusDescription);
         }
         #endregion
 

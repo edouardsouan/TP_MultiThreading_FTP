@@ -93,6 +93,14 @@ namespace FTPClient
         public long GetSize() { return this.size; }
         public string GetLastModifiedDate() { return this.lastModifiedDate; }
         public string GetName() { return this.name; }
+
+        public bool IsADirectory()
+        {
+            bool isDirectory = false;
+            if (this.dataType.Equals("Directory")) { isDirectory = true; }
+            return isDirectory;
+        }
+
         #endregion
     }
 }
