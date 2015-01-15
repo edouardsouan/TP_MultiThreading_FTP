@@ -16,3 +16,12 @@ X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPCl
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.pdb
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Form1.resources
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Properties.Resources.resources
+\\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache

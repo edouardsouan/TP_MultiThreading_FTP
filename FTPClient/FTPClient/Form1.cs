@@ -408,32 +408,45 @@ namespace FTPClient
             if (fileToDownload.ListView == listViewServer)
             {
                 string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
-                
-                Point pointWhereFileDropped = listViewLocal.PointToClient(new Point(e.X, e.Y));
-                ListViewItem targetFile = listViewLocal.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
-                FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
                 string targetPath = localPath;
-                if(IsADirectory(targetFileInfo))
-                    targetPath += '\\' + targetFile.Name;
-                targetPath += "\\" + fileToDownload.Name;
 
-                ListViewItem.ListViewSubItem[] subItems;
-                ListViewItem item = new ListViewItem(targetPath);
-                item.Name = targetPath;
-                string direction = "<--";
-                string distFile = fileToDownloadPath;
-                string taille = ((FileServer)fileToDownload.Tag).GetSize().ToString();
-
-                subItems = new ListViewItem.ListViewSubItem[]
+                try
+                {
+                    Point pointWhereFileDropped = listViewLocal.PointToClient(new Point(e.X, e.Y));
+                    ListViewItem targetFile = listViewLocal.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
+                    FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
+                    if (IsADirectory(targetFileInfo))
                     {
-                        new ListViewItem.ListViewSubItem(item, direction), 
-                        new ListViewItem.ListViewSubItem(item, distFile),
-                        new ListViewItem.ListViewSubItem(item, taille)
-                    };
-                item.SubItems.AddRange(subItems);
-                FileQueue.Items.Add(item);
+                        targetPath += '\\' + targetFile.Name;
+                    }
+                }
+                catch (NullReferenceException exception)
+                {
+                    Console.WriteLine("Exception "+exception.ToString()+" was thrown because no Patrice was found !!");
+                    Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
+                }
+                finally
+                {
+                    targetPath += "\\" + fileToDownload.Name;
+                    ListViewItem.ListViewSubItem[] subItems;
+                    ListViewItem item = new ListViewItem(targetPath);
+                    item.Name = targetPath;
+                    string direction = "<--";
+                    string distFile = fileToDownloadPath;
+                    string taille = ((FileServer)fileToDownload.Tag).GetSize().ToString();
 
-                DownloadFile(fileToDownloadPath, targetPath, (FileServer)fileToDownload.Tag);
+                    subItems = new ListViewItem.ListViewSubItem[]
+                        {
+                            new ListViewItem.ListViewSubItem(item, direction), 
+                            new ListViewItem.ListViewSubItem(item, distFile),
+                            new ListViewItem.ListViewSubItem(item, taille)
+                        };
+                    item.SubItems.AddRange(subItems);
+                    FileQueue.Items.Add(item);
+
+                    DownloadFile(fileToDownloadPath, targetPath, (FileServer)fileToDownload.Tag);
+                }
+
             }
         }
 
@@ -495,15 +508,27 @@ namespace FTPClient
         }
         private void listViewServer_DragDrop(object sender, DragEventArgs e)
         {
-            Point targetPoint = listViewServer.PointToClient(new Point(e.X, e.Y));
-            ListViewItem targetFile = listViewServer.GetItemAt(targetPoint.X, targetPoint.Y);
-
+            String filePath = this.localPath;
             ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-            FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
-            String filePath = this.localPath+"\\"+fileToUpload.Name;
-
-            UploadFile(filePath, serverPath.Replace("\\","//")+"//"+fileToUpload.Name, fileToUpload);
-            Console.WriteLine(draggedFile + "->" + targetFile);
+            try
+            {
+                Point targetPoint = listViewServer.PointToClient(new Point(e.X, e.Y));
+                ListViewItem targetFile = listViewServer.GetItemAt(targetPoint.X, targetPoint.Y);
+                if (IsADirectory((FileInfo)targetFile.Tag))
+                {
+                    filePath += '\\' + targetFile.Name;
+                }
+            }
+            catch(NullReferenceException exception)
+            { 
+                Console.WriteLine("Exception "+exception.ToString()+" no file directory pointed.");
+            }
+            finally
+            {
+                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
+                filePath += "\\"+fileToUpload.Name;
+                UploadFile(filePath, serverPath.Replace("\\", "//") + "//" + fileToUpload.Name, fileToUpload);
+            }
         }
         // TODO : Traitement récursif pour les dossiers
         private void UploadFile(string filePathToUpload, string distPathTarget, FileInfo fileInfo)
