@@ -69,7 +69,7 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
             PopulateLocalTreeViewWithLogicalDrives();
         }
 
@@ -77,14 +77,14 @@ namespace FTPClient
         {
             TreeNode rootNode;
             List<DirectoryInfo> directories = new List<DirectoryInfo>();
-
+            
             string[] drives = Environment.GetLogicalDrives();
             foreach (string drive in drives)
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(drive);
                 if (directoryInfo.Exists)
                 {
-
+                    
                     rootNode = new TreeNode(directoryInfo.Name);
                     rootNode.Tag = directoryInfo;
                     rootNode.ImageIndex = 0;
@@ -128,9 +128,9 @@ namespace FTPClient
                     nodeClicked.Expand();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                WriteLog("ERROR : " + ex.Message, Color.Red);
+                WriteLog("ERROR : "+ex.Message, Color.Red);
             }
         }
 
@@ -216,7 +216,7 @@ namespace FTPClient
             listViewLocal.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         #endregion
-
+        
         #region Treeview with server directories and local files
         private void btnConnection_Click(object sender, EventArgs e)
         {
@@ -422,7 +422,7 @@ namespace FTPClient
                 }
                 catch (NullReferenceException exception)
                 {
-                    Console.WriteLine("Exception " + exception.ToString() + " was thrown because no Patrice was found !!");
+                    Console.WriteLine("Exception "+exception.ToString()+" was thrown because no Patrice was found !!");
                     Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
                 }
                 finally
@@ -455,16 +455,18 @@ namespace FTPClient
         {
             string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToDownload;
             string fileName = fileInfo.GetName();
-
             if (fileInfo.IsADirectory())
             {
+                string localPathTempo = localPathTarget;
+
                 try
                 {
                     Directory.CreateDirectory(localPathTarget);
                 }
-                catch (System.IO.IOException exception)
+                catch(System.IO.IOException exception)
                 {
-                    Console.WriteLine("File name already exist : " + exception.ToString());
+                    Console.WriteLine("File name already exist : "+exception.ToString());
+                    localPathTempo += "1";
                     /*
                      * 3 options possibles :
                      * - ignorer : arrêter
@@ -488,17 +490,19 @@ namespace FTPClient
                 string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
                 string[] serverData = data.Split('\n');
 
-                foreach (String rawData in serverData)
+                foreach(String rawData in serverData)
                 {
                     FileServer fileServer = new FileServer(rawData);
                     if (!(fileServer.GetName().Equals(".") || fileServer.GetName().Equals("..")))
                     {
-                        DownloadFile(filePathToDownload + "/" + fileServer.GetName(), localPathTarget + "\\" + fileServer.GetName(), fileServer);
+                        DownloadFile(filePathToDownload + "\\" + fileName, localPathTempo, fileServer);
                     }
                 }
             }
             else
             {
+                string localPathTempo = localPathTarget + "\\" + fileName;
+
                 FtpWebRequest downloadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
                 downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
                 downloadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
@@ -534,8 +538,7 @@ namespace FTPClient
         //  TODO : upload to the server
         // --------------------------------------------------------------
         #region File Transfert
-        private void TransfertGauge(double totalWeigth, double actualWeigth)
-        {
+        private void TransfertGauge(double totalWeigth, double actualWeigth){
             fileTransfertBar.Minimum = 0;
             fileTransfertBar.Maximum = (int)totalWeigth;
 
@@ -565,14 +568,14 @@ namespace FTPClient
                     filePath += '\\' + targetFile.Name;
                 }
             }
-            catch (NullReferenceException exception)
-            {
-                Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
+            catch(NullReferenceException exception)
+            { 
+                Console.WriteLine("Exception "+exception.ToString()+" no file directory pointed.");
             }
             finally
             {
                 FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
-                filePath += "\\" + fileToUpload.Name;
+                filePath += "\\"+fileToUpload.Name;
                 UploadFile(filePath, serverPath.Replace("\\", "//") + "//" + fileToUpload.Name, fileToUpload);
             }
         }

@@ -1,0 +1,3 @@
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
