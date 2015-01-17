@@ -19,6 +19,7 @@ namespace FTPClient
         string localPath = "";
         string serverPath = "";
         #endregion
+        // REFACTO
 
         #region Constructor
         public Form1()
