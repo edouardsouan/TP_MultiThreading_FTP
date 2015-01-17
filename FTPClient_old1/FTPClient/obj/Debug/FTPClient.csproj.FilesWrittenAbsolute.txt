@@ -1,8 +1,0 @@
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/obj/Debug/FTPClient.Form1.resources
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/obj/Debug/FTPClient.Properties.Resources.resources
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/obj/Debug/FTPClient.exe
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/bin/Debug/FTPClient.exe.config
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/bin/Debug/FTPClient.exe.mdb
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/bin/Debug/FTPClient.exe
-/Users/edouard/Projects/TP_MultiThreading_FTP/FTPClient/FTPClient/obj/Debug/FTPClient.exe.mdb
