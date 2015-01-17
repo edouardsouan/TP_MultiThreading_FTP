@@ -10,6 +10,8 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
 
+using FTPLibrary;
+
 namespace FTPClient
 {
     public partial class Form1 : Form
