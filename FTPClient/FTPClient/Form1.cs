@@ -63,7 +63,6 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
-
             PopulateLocalTreeViewWithLogicalDrives();
         }
 

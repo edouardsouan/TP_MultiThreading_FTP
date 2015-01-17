@@ -1,4 +1,4 @@
-﻿namespace FTPClient
+﻿namespace FTPClient.FormEntites
 {
     partial class LogFTPWindow
     {

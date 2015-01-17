@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FTPClient
+namespace FTPClient.FormEntites
 {
     public partial class LogFTPWindow : RichTextBox
     {

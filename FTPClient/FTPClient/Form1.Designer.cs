@@ -1,4 +1,6 @@
-﻿namespace FTPClient
+﻿using FTPClient.FormEntites;
+
+namespace FTPClient
 {
     partial class Form1
     {

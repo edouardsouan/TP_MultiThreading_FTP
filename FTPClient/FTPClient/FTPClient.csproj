@@ -68,7 +68,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEntites\LocalTreeView.cs" />
+    <Compile Include="FormEntites\LocalTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormEntites\LocalTreeView.Designer.cs">
       <DependentUpon>LocalTreeView.cs</DependentUpon>
     </Compile>
