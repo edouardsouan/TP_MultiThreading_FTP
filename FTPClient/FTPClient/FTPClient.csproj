@@ -69,6 +69,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogFTPWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFTPWindow.Designer.cs">
+      <DependentUpon>LogFTPWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

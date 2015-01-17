@@ -43,7 +43,6 @@
             this.btnConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.logWindow = new System.Windows.Forms.RichTextBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.treeViewLocal = new System.Windows.Forms.TreeView();
@@ -63,13 +62,14 @@
             this.fileOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
             this.FileQueue = new System.Windows.Forms.ListView();
             this.ServerFileLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DistFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileSizeTransfert = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
+            this.logWindow = new LogFTPWindow();
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -220,17 +220,6 @@
             this.splitContainer2.SplitterDistance = 100;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // logWindow
-            // 
-            this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logWindow.Location = new System.Drawing.Point(0, 0);
-            this.logWindow.Margin = new System.Windows.Forms.Padding(2);
-            this.logWindow.Name = "logWindow";
-            this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(877, 100);
-            this.logWindow.TabIndex = 0;
-            this.logWindow.Text = "";
             // 
             // splitContainer3
             // 
@@ -427,6 +416,13 @@
             this.splitContainer6.SplitterDistance = 28;
             this.splitContainer6.TabIndex = 0;
             // 
+            // fileTransfertBar
+            // 
+            this.fileTransfertBar.Location = new System.Drawing.Point(3, 3);
+            this.fileTransfertBar.Name = "fileTransfertBar";
+            this.fileTransfertBar.Size = new System.Drawing.Size(871, 23);
+            this.fileTransfertBar.TabIndex = 0;
+            // 
             // FileQueue
             // 
             this.FileQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -467,12 +463,16 @@
             this.Time.Text = "Time";
             this.Time.Width = 147;
             // 
-            // fileTransfertBar
+            // logWindow
             // 
-            this.fileTransfertBar.Location = new System.Drawing.Point(3, 3);
-            this.fileTransfertBar.Name = "fileTransfertBar";
-            this.fileTransfertBar.Size = new System.Drawing.Size(871, 23);
-            this.fileTransfertBar.TabIndex = 0;
+            this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logWindow.Location = new System.Drawing.Point(0, 0);
+            this.logWindow.Margin = new System.Windows.Forms.Padding(2);
+            this.logWindow.Name = "logWindow";
+            this.logWindow.ReadOnly = true;
+            this.logWindow.Size = new System.Drawing.Size(877, 100);
+            this.logWindow.TabIndex = 0;
+            this.logWindow.Text = "";
             // 
             // Form1
             // 
@@ -522,7 +522,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.RichTextBox logWindow;
         private System.Windows.Forms.TreeView treeViewLocal;
         private System.Windows.Forms.ToolStripLabel toolStripLabelServer;
         private System.Windows.Forms.ToolStripTextBox txtServer;
@@ -557,6 +556,7 @@
         private System.Windows.Forms.ColumnHeader FileSizeTransfert;
         private System.Windows.Forms.ColumnHeader Time;
         private System.Windows.Forms.ProgressBar fileTransfertBar;
+        private LogFTPWindow logWindow;
     }
 }
 
