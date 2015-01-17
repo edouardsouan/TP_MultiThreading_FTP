@@ -45,9 +45,10 @@ namespace FTPClient
             this.btnConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.logWindow = new FTPClient.FormEntites.LogFTPWindow(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.treeViewLocal = new System.Windows.Forms.TreeView();
+            this.localTreeView = new FTPClient.FormEntites.LocalTreeView(this.components);
             this.listViewLocal = new System.Windows.Forms.ListView();
             this.fileNameLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSizeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -71,7 +72,6 @@ namespace FTPClient
             this.DistFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileSizeTransfert = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.logWindow = new LogFTPWindow();
             this.toolStripConnection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -223,6 +223,17 @@ namespace FTPClient
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
+            // logWindow
+            // 
+            this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logWindow.Location = new System.Drawing.Point(0, 0);
+            this.logWindow.Margin = new System.Windows.Forms.Padding(2);
+            this.logWindow.Name = "logWindow";
+            this.logWindow.ReadOnly = true;
+            this.logWindow.Size = new System.Drawing.Size(877, 100);
+            this.logWindow.TabIndex = 0;
+            this.logWindow.Text = "";
+            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -251,7 +262,7 @@ namespace FTPClient
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.treeViewLocal);
+            this.splitContainer4.Panel1.Controls.Add(this.localTreeView);
             // 
             // splitContainer4.Panel2
             // 
@@ -260,19 +271,19 @@ namespace FTPClient
             this.splitContainer4.SplitterDistance = 237;
             this.splitContainer4.TabIndex = 0;
             // 
-            // treeViewLocal
+            // localTreeView
             // 
-            this.treeViewLocal.AllowDrop = true;
-            this.treeViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewLocal.ImageIndex = 0;
-            this.treeViewLocal.ImageList = this.imageList;
-            this.treeViewLocal.Location = new System.Drawing.Point(0, 0);
-            this.treeViewLocal.Margin = new System.Windows.Forms.Padding(2);
-            this.treeViewLocal.Name = "treeViewLocal";
-            this.treeViewLocal.SelectedImageIndex = 0;
-            this.treeViewLocal.Size = new System.Drawing.Size(426, 237);
-            this.treeViewLocal.TabIndex = 0;
-            this.treeViewLocal.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseDoubleClick);
+            this.localTreeView.AllowDrop = true;
+            this.localTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.localTreeView.ImageIndex = 0;
+            this.localTreeView.ImageList = this.imageList;
+            this.localTreeView.Location = new System.Drawing.Point(0, 0);
+            this.localTreeView.Margin = new System.Windows.Forms.Padding(2);
+            this.localTreeView.Name = "localTreeView";
+            this.localTreeView.SelectedImageIndex = 0;
+            this.localTreeView.Size = new System.Drawing.Size(426, 237);
+            this.localTreeView.TabIndex = 0;
+            this.localTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewLocal_NodeMouseDoubleClick);
             // 
             // listViewLocal
             // 
@@ -465,17 +476,6 @@ namespace FTPClient
             this.Time.Text = "Time";
             this.Time.Width = 147;
             // 
-            // logWindow
-            // 
-            this.logWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logWindow.Location = new System.Drawing.Point(0, 0);
-            this.logWindow.Margin = new System.Windows.Forms.Padding(2);
-            this.logWindow.Name = "logWindow";
-            this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(877, 100);
-            this.logWindow.TabIndex = 0;
-            this.logWindow.Text = "";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,7 +524,7 @@ namespace FTPClient
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.TreeView treeViewLocal;
+        private LocalTreeView localTreeView;
         private System.Windows.Forms.ToolStripLabel toolStripLabelServer;
         private System.Windows.Forms.ToolStripTextBox txtServer;
         private System.Windows.Forms.ToolStripLabel toolStripLabelUserName;

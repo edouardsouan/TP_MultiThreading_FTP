@@ -63,28 +63,20 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
-            PopulateLocalTreeViewWithLogicalDrives();
+            PopulateLocalTreeViewWithLogicalDrives();    
         }
 
         private void PopulateLocalTreeViewWithLogicalDrives()
         {
-            TreeNode rootNode;
             List<DirectoryInfo> directories = new List<DirectoryInfo>();
-
             string[] drives = Environment.GetLogicalDrives();
+
             foreach (string drive in drives)
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(drive);
-                if (directoryInfo.Exists)
+                DirectoryInfo logicalDrive = new DirectoryInfo(drive);
+                if (logicalDrive.Exists)
                 {
-
-                    rootNode = new TreeNode(directoryInfo.Name);
-                    rootNode.Tag = directoryInfo;
-                    rootNode.ImageIndex = 0;
-                    rootNode.SelectedImageIndex = 0;
-                    treeViewLocal.Nodes.Add(rootNode);
-
-                    directories.Add(directoryInfo);
+                    localTreeView.AddRootNodes(logicalDrive);
                 }
             }
 
