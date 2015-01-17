@@ -62,17 +62,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileServer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogFTPWindow.cs">
+    <Compile Include="FormEntites\LocalTreeView.cs" />
+    <Compile Include="FormEntites\LocalTreeView.Designer.cs">
+      <DependentUpon>LocalTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEntites\LogFTPWindow.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="LogFTPWindow.Designer.cs">
+    <Compile Include="FormEntites\LogFTPWindow.Designer.cs">
       <DependentUpon>LogFTPWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -122,6 +125,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FTPLibrary\FTPLibrary.csproj">
+      <Project>{ffe28209-14bf-454e-8b4e-6b4fd87aec5f}</Project>
+      <Name>FTPLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
