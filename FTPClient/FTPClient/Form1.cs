@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace FTPClient
 {
@@ -32,14 +32,6 @@ namespace FTPClient
         ~Form1()
         {
             // LogOut(); Mesure de sécurité, à refaire ???
-        }
-        #endregion
-
-        #region Log Window
-        private void WriteLog(string text, Color color)
-        {
-            logWindow.SelectionColor = color;
-            logWindow.AppendText(DateTime.Now + " - " + text + "\n");
         }
         #endregion
 
@@ -130,7 +122,7 @@ namespace FTPClient
             }
             catch (Exception ex)
             {
-                WriteLog("ERROR : " + ex.Message, Color.Red);
+                logWindow.WriteLog("ERROR : " + ex.Message, Color.Red);
             }
         }
 
@@ -245,11 +237,11 @@ namespace FTPClient
                     ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
-                    WriteLog(ftpResponse.BannerMessage, Color.Green);
-                    WriteLog(ftpResponse.WelcomeMessage, Color.Green);
-                    WriteLog(ftpResponse.StatusDescription, Color.Blue);
-                    WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
-                    WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
+                    logWindow.WriteLog(ftpResponse.BannerMessage, Color.Green);
+                    logWindow.WriteLog(ftpResponse.WelcomeMessage, Color.Green);
+                    logWindow.WriteLog(ftpResponse.StatusDescription, Color.Blue);
+                    logWindow.WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
+                    logWindow.WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
 
                     Stream responseStream = ftpResponse.GetResponseStream();
                     StreamReader streamReader = new StreamReader(responseStream);
@@ -263,7 +255,7 @@ namespace FTPClient
                 }
                 catch (WebException ex)
                 {
-                    WriteLog(ex.Message, Color.Red);
+                    logWindow.WriteLog(ex.Message, Color.Red);
                     isSendingListCommand = false;
                 }
                 finally

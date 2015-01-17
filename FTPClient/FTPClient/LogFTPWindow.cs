@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace FTPClient
 {
@@ -21,6 +22,12 @@ namespace FTPClient
             container.Add(this);
 
             InitializeComponent();
+        }
+
+        public void WriteLog(string text, Color color)
+        {
+            this.SelectionColor = color;
+            this.AppendText(DateTime.Now + " - " + text + "\n");
         }
     }
 }
