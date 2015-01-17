@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FTPLibrary
 {
-    class FileServer
+    public class FileServer
     {
         #region properties
         private string dataType;
