@@ -1,5 +1,6 @@
 ﻿using FTPClient.LogEntities;
 using FTPClient.LocalEntities;
+using FTPClient.ServerEntities;
 
 namespace FTPClient
 {
@@ -56,8 +57,8 @@ namespace FTPClient
             this.fileTypeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lastModifiedLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.treeViewServer = new System.Windows.Forms.TreeView();
-            this.listViewServer = new System.Windows.Forms.ListView();
+            this.serverTreeView = new ServerTreeView();
+            this.serverListView = new ServerListView();
             this.fileNameServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSizeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileTypeServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -335,32 +336,32 @@ namespace FTPClient
             // 
             // splitContainer5.Panel1
             // 
-            this.splitContainer5.Panel1.Controls.Add(this.treeViewServer);
+            this.splitContainer5.Panel1.Controls.Add(this.serverTreeView);
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.listViewServer);
+            this.splitContainer5.Panel2.Controls.Add(this.serverListView);
             this.splitContainer5.Size = new System.Drawing.Size(448, 448);
             this.splitContainer5.SplitterDistance = 237;
             this.splitContainer5.TabIndex = 0;
             // 
             // treeViewServer
             // 
-            this.treeViewServer.AllowDrop = true;
-            this.treeViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewServer.ImageIndex = 0;
-            this.treeViewServer.ImageList = this.imageList;
-            this.treeViewServer.Location = new System.Drawing.Point(0, 0);
-            this.treeViewServer.Name = "treeViewServer";
-            this.treeViewServer.SelectedImageIndex = 0;
-            this.treeViewServer.Size = new System.Drawing.Size(448, 237);
-            this.treeViewServer.TabIndex = 0;
-            this.treeViewServer.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseDoubleClick);
+            this.serverTreeView.AllowDrop = true;
+            this.serverTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.serverTreeView.ImageIndex = 0;
+            this.serverTreeView.ImageList = this.imageList;
+            this.serverTreeView.Location = new System.Drawing.Point(0, 0);
+            this.serverTreeView.Name = "treeViewServer";
+            this.serverTreeView.SelectedImageIndex = 0;
+            this.serverTreeView.Size = new System.Drawing.Size(448, 237);
+            this.serverTreeView.TabIndex = 0;
+            this.serverTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewServer_NodeMouseDoubleClick);
             // 
             // listViewServer
             // 
-            this.listViewServer.AllowDrop = true;
-            this.listViewServer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.serverListView.AllowDrop = true;
+            this.serverListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileNameServer,
             this.fileSizeServer,
             this.fileTypeServer,
@@ -368,17 +369,17 @@ namespace FTPClient
             this.fileRights,
             this.fileOwner,
             this.fileGroup});
-            this.listViewServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewServer.Location = new System.Drawing.Point(0, 0);
-            this.listViewServer.Name = "listViewServer";
-            this.listViewServer.Size = new System.Drawing.Size(448, 207);
-            this.listViewServer.SmallImageList = this.imageList;
-            this.listViewServer.TabIndex = 0;
-            this.listViewServer.UseCompatibleStateImageBehavior = false;
-            this.listViewServer.View = System.Windows.Forms.View.Details;
-            this.listViewServer.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
-            this.listViewServer.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
-            this.listViewServer.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
+            this.serverListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.serverListView.Location = new System.Drawing.Point(0, 0);
+            this.serverListView.Name = "listViewServer";
+            this.serverListView.Size = new System.Drawing.Size(448, 207);
+            this.serverListView.SmallImageList = this.imageList;
+            this.serverListView.TabIndex = 0;
+            this.serverListView.UseCompatibleStateImageBehavior = false;
+            this.serverListView.View = System.Windows.Forms.View.Details;
+            this.serverListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
+            this.serverListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
+            this.serverListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
             // 
             // fileNameServer
             // 
@@ -535,10 +536,10 @@ namespace FTPClient
         private System.Windows.Forms.ToolStripLabel toolStripLabelPort;
         private System.Windows.Forms.ToolStripTextBox txtPort;
         private System.Windows.Forms.ToolStripButton btnConnection;
-        private System.Windows.Forms.TreeView treeViewServer;
+        private ServerTreeView serverTreeView;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.SplitContainer splitContainer5;
-        private System.Windows.Forms.ListView listViewServer;
+        private ServerListView serverListView;
         private System.Windows.Forms.ColumnHeader fileNameServer;
         private System.Windows.Forms.ColumnHeader fileSizeServer;
         private System.Windows.Forms.ColumnHeader fileTypeServer;

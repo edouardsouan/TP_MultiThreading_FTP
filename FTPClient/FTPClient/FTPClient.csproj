@@ -91,6 +91,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerEntities\ServerForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerEntities\ServerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServerEntities\ServerListView.Designer.cs">
+      <DependentUpon>ServerListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerEntities\ServerTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServerEntities\ServerTreeView.Designer.cs">
+      <DependentUpon>ServerTreeView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

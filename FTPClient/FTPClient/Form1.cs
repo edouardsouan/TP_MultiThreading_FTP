@@ -60,175 +60,7 @@ namespace FTPClient
         }
         #endregion
 
-        #region Treeview with server directories and local files
-        private void btnConnection_Click(object sender, EventArgs e)
-        {
-            TreeNode serverNode = new TreeNode();
-            serverNode = new TreeNode("/");
-            serverNode.Tag = "/";
-            serverNode.ImageIndex = 0;
-            serverNode.SelectedImageIndex = 0;
-            treeViewServer.Nodes.Add(serverNode);
-
-            GetTreeViewFromServer("", treeViewServer.Nodes[0]);
-        }
-
-        private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
-        {
-            string serverTarget = "ftp://" + this.txtServer.Text + serverPath + "/";
-
-            if (!isSendingListCommand)
-            {
-                try
-                {
-                    isSendingListCommand = true;
-                    FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-                    ftpRequest.KeepAlive = false;
-                    ftpRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
-                    ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-                    FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
-                    logWindow.WriteLog(ftpResponse.BannerMessage, Color.Green);
-                    logWindow.WriteLog(ftpResponse.WelcomeMessage, Color.Green);
-                    logWindow.WriteLog(ftpResponse.StatusDescription, Color.Blue);
-                    logWindow.WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
-                    logWindow.WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
-
-                    Stream responseStream = ftpResponse.GetResponseStream();
-                    StreamReader streamReader = new StreamReader(responseStream);
-
-                    string rawResult = streamReader.ReadToEnd();
-                    string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
-                    BuildServerTreeView(data.Split('\n'), parentNode);
-
-                    streamReader.Close();
-                    ftpResponse.Close();
-                }
-                catch (WebException ex)
-                {
-                    logWindow.WriteLog(ex.Message, Color.Red);
-                    isSendingListCommand = false;
-                }
-                finally
-                {
-                    isSendingListCommand = false;
-                }
-            }
-        }
-
-        // TODO : Build in async
-        private void BuildServerTreeView(string[] directories, TreeNode parentNode)
-        {
-            FileServer fileServer;
-            List<FileServer> fileSystInfos = new List<FileServer>();
-
-            foreach (string rawDirectory in directories)
-            {
-                fileServer = new FileServer(rawDirectory);
-                if (!(fileServer.GetName().Equals(".") || fileServer.GetName().Equals("..")))
-                {
-                    AddNodeServerTreeView(fileServer, parentNode);
-                    fileSystInfos.Add(fileServer);
-                }
-            }
-
-            PopulateServerListView(fileSystInfos.ToArray());
-            parentNode.Expand();
-        }
-
-        private void AddNodeServerTreeView(FileServer fileServer, TreeNode parentNode)
-        {
-            TreeNode serverNode = new TreeNode(fileServer.GetName());
-            serverNode.Tag = fileServer;
-
-            if (fileServer.GetDataType().Equals("Directory"))
-            {
-                serverNode.ImageIndex = 1;
-                serverNode.SelectedImageIndex = 1;
-            }
-            else
-            {
-                serverNode.ImageIndex = 2;
-                serverNode.SelectedImageIndex = 2;
-            }
-
-            parentNode.Nodes.Add(serverNode);
-        }
-
-        private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode nodeClicked = e.Node;
-            if (IsADirectory(nodeClicked))
-            {
-                serverPath = nodeClicked.FullPath;
-                listViewServer.Items.Clear();
-                if (nodeClicked.Nodes.Count == 0)
-                {
-                    GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
-                }
-                else
-                {
-                    List<FileServer> fileSystInfos = new List<FileServer>();
-                    TreeNodeCollection nodes = nodeClicked.Nodes;
-                    foreach (TreeNode node in nodes)
-                    {
-                        fileSystInfos.Add((FileServer)node.Tag);
-                    }
-                    PopulateServerListView(fileSystInfos.ToArray());
-                }
-            }
-        }
-
-        private void PopulateServerListView(FileServer[] files)
-        {
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-            string extension = "";
-            string size = "";
-            string date = "";
-            string rights = "";
-            string owner = "";
-            string group = "";
-
-            foreach (FileServer subFile in files)
-            {
-                item = new ListViewItem(subFile.GetName(), 0);
-                item.Name = subFile.GetName();
-                item.Tag = subFile;
-                size = subFile.GetSize().ToString();
-                extension = subFile.GetDataType();
-                date = subFile.GetLastModifiedDate();
-                rights = subFile.GetRights();
-                owner = subFile.GetOwner();
-                group = subFile.GetGroup();
-
-                subItems = new ListViewItem.ListViewSubItem[]
-                    {
-                        new ListViewItem.ListViewSubItem(item, size),
-                        new ListViewItem.ListViewSubItem(item, extension), 
-                        new ListViewItem.ListViewSubItem(item, date),
-                        new ListViewItem.ListViewSubItem(item, rights),
-                        new ListViewItem.ListViewSubItem(item, owner),
-                        new ListViewItem.ListViewSubItem(item, group)
-                    };
-
-                if (extension.Equals("Directory"))
-                {
-                    item.ImageIndex = 1;
-                }
-                else
-                {
-                    item.ImageIndex = 2;
-                }
-
-                item.SubItems.AddRange(subItems);
-                listViewServer.Items.Add(item);
-            }
-
-            listViewServer.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-        #endregion
-
+       
         #region Download files/directory from the server
         private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
@@ -248,7 +80,7 @@ namespace FTPClient
              */
 
             ListViewItem fileToDownload = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-            if (fileToDownload.ListView == listViewServer)
+            if (fileToDownload.ListView == serverListView)
             {
                 string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
                 string targetPath = localPath;
@@ -389,7 +221,7 @@ namespace FTPClient
         #region Upload files / directories to the server
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
-            listViewServer.DoDragDrop(e.Item, DragDropEffects.Move);
+            serverListView.DoDragDrop(e.Item, DragDropEffects.Move);
         }
         private void listViewServer_DragEnter(object sender, DragEventArgs e)
         {
@@ -401,8 +233,8 @@ namespace FTPClient
             ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
             try
             {
-                Point targetPoint = listViewServer.PointToClient(new Point(e.X, e.Y));
-                ListViewItem targetFile = listViewServer.GetItemAt(targetPoint.X, targetPoint.Y);
+                Point targetPoint = serverListView.PointToClient(new Point(e.X, e.Y));
+                ListViewItem targetFile = serverListView.GetItemAt(targetPoint.X, targetPoint.Y);
                 if (IsADirectory((FileInfo)targetFile.Tag))
                 {
                     filePath += '\\' + targetFile.Name;
