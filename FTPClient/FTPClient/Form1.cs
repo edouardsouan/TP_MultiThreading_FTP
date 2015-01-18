@@ -73,7 +73,7 @@ namespace FTPClient
             foreach (string drive in drives)
             {
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
-                localTreeView.AddNode(logicalDrive, 0);
+                localTreeView.AddRootNode(logicalDrive, 0);
                 listViewLocal.AddItem(logicalDrive);
             }
         }
@@ -126,37 +126,24 @@ namespace FTPClient
             return subFiles;
         }
 
-        private void Local_ShowLinkedDirectories(TreeNode nodeClicked, List<DirectoryInfo> subDirectories)
-        {
-            foreach (DirectoryInfo subDirectory in subDirectories)
-            {
-                localTreeView.AddNode(subDirectory, 1, nodeClicked);
-                listViewLocal.AddItem(subDirectory);
-            }
-        }
-
-        private void Local_ShowLinkedFiles(TreeNode nodeSelected,List<FileInfo> subFiles)
-        {
-            foreach (FileInfo subFile in subFiles)
-            {
-                localTreeView.AddNode(subFile, 2, nodeSelected);
-                listViewLocal.AddItem(subFile);
-            }
-        }
-
         private void Local_ShowLinkedElements(TreeNode nodeSelected)
         {
             listViewLocal.ClearItems();
 
             List<DirectoryInfo> sudDirectories = Local_GetLocalDirectories(nodeSelected);
             List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
-
             if (nodeSelected.Nodes.Count == 0)
             {
-                Local_ShowLinkedDirectories(nodeSelected, sudDirectories);
+                localTreeView.AddNodes(sudDirectories, 1, nodeSelected);
+                // Local_AddLinkedFiles(nodeSelected, subFiles);
             }
+            else
+            {
+                // Juste ajouter dans la ListView 
+            }
+                
             nodeSelected.Expand();
-            Local_ShowLinkedFiles(nodeSelected, subFiles);
+
         }
 
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

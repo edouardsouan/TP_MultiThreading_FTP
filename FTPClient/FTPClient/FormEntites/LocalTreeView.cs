@@ -24,7 +24,7 @@ namespace FTPClient.FormEntites
             InitializeComponent();
         }
 
-        public void AddNode(FileSystemInfo fileInfo, int imageIndex)
+        public void AddRootNode(FileSystemInfo fileInfo, int imageIndex)
         {
             TreeNode rootNode = new TreeNode(fileInfo.Name);
             rootNode.Tag = fileInfo;
@@ -41,5 +41,15 @@ namespace FTPClient.FormEntites
             childNode.SelectedImageIndex = imageIndex;
             parentNode.Nodes.Add(childNode);
         }
+
+        public void AddNodes(List<FileSystemInfo> filesToAdd, int imageIndex, TreeNode parentNode)
+        {
+            foreach (FileSystemInfo fileInfo in filesToAdd)
+            {
+                AddNode(fileInfo, imageIndex, parentNode);
+            }
+        }
+
+
     }
 }
