@@ -151,7 +151,10 @@ namespace FTPClient
             List<DirectoryInfo> sudDirectories = Local_GetLocalDirectories(nodeSelected);
             List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
 
-            Local_ShowLinkedDirectories(nodeSelected, sudDirectories);
+            if (nodeSelected.Nodes.Count == 0)
+            {
+                Local_ShowLinkedDirectories(nodeSelected, sudDirectories);
+            }
             nodeSelected.Expand();
             Local_ShowLinkedFiles(nodeSelected, subFiles);
         }

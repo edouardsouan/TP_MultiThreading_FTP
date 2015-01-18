@@ -57,9 +57,9 @@ namespace FTPClient.FormEntites
                 FileInfo fileDetails = (FileInfo)fileInfo;
                 size = fileDetails.Length.ToString();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
-                Console.WriteLine(exception+" : The file is a directory so its size is not displayed");
+                Console.WriteLine(exception + " : The file is a directory so its size is not displayed");
             }
 
             return size;
