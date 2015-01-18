@@ -42,11 +42,19 @@ namespace FTPClient.FormEntites
             parentNode.Nodes.Add(childNode);
         }
 
-        public void AddNodes(List<FileSystemInfo> filesToAdd, int imageIndex, TreeNode parentNode)
+        public void AddNodes(List<DirectoryInfo> directoryToAdd, TreeNode parentNode)
         {
-            foreach (FileSystemInfo fileInfo in filesToAdd)
+            foreach (DirectoryInfo directoryInfo in directoryToAdd)
             {
-                AddNode(fileInfo, imageIndex, parentNode);
+                AddNode(directoryInfo, 1, parentNode);
+            }
+        }
+
+        public void AddNodes(List<FileInfo> filesToAdd, TreeNode parentNode)
+        {
+            foreach (FileInfo fileInfo in filesToAdd)
+            {
+                AddNode(fileInfo, 2, parentNode);
             }
         }
 

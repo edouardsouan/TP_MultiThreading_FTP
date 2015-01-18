@@ -128,22 +128,18 @@ namespace FTPClient
 
         private void Local_ShowLinkedElements(TreeNode nodeSelected)
         {
-            listViewLocal.ClearItems();
-
-            List<DirectoryInfo> sudDirectories = Local_GetLocalDirectories(nodeSelected);
+            List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
             List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
             if (nodeSelected.Nodes.Count == 0)
             {
-                localTreeView.AddNodes(sudDirectories, 1, nodeSelected);
-                // Local_AddLinkedFiles(nodeSelected, subFiles);
+                localTreeView.AddNodes(subDirectories, nodeSelected);
+                localTreeView.AddNodes(subFiles, nodeSelected);
             }
-            else
-            {
-                // Juste ajouter dans la ListView 
-            }
-                
             nodeSelected.Expand();
 
+            listViewLocal.ClearItems();
+            listViewLocal.AddItems(subDirectories);
+            listViewLocal.AddItems(subFiles);
         }
 
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

@@ -30,6 +30,22 @@ namespace FTPClient.FormEntites
             this.Items.Add(newItem);
         }
 
+        public void AddItems(List<DirectoryInfo> directoriesToAdd)
+        {
+            foreach (DirectoryInfo directory in directoriesToAdd)
+            {
+                AddItem(directory);
+            }
+        }
+
+        public void AddItems(List<FileInfo> filesToAdd)
+        {
+            foreach (FileInfo file in filesToAdd)
+            {
+                AddItem(file);
+            }
+        }
+
         private ListViewItem GenerateItem(FileSystemInfo fileInfo)
         {
             ListViewItem newItem = new ListViewItem(fileInfo.Name, 0);
