@@ -41,10 +41,18 @@ namespace FTPClient
         private bool IsADirectory(FileSystemInfo fileSystemInfo)
         {
             bool isADirectory = false;
-
-            FileAttributes attributes = File.GetAttributes(fileSystemInfo.FullName);
-            if ((attributes & FileAttributes.Directory) == FileAttributes.Directory)
-                isADirectory = true;
+            
+            try
+            {
+                FileAttributes attributes = File.GetAttributes(fileSystemInfo.FullName);
+                if ((attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                    isADirectory = true;
+            }
+            catch(IOException exception)
+            {
+                logWindow.WriteLog("Acces denied : " + fileSystemInfo.FullName, Color.Red);
+                Console.WriteLine(exception.ToString());
+            }
 
             return isADirectory;
         }

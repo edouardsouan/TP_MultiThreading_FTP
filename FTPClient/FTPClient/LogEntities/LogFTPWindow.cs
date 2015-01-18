@@ -28,6 +28,13 @@ namespace FTPClient.LogEntities
         {
             this.SelectionColor = color;
             this.AppendText(DateTime.Now + " - " + text + "\n");
+            ScrollToEnd();
+        }
+
+        private void ScrollToEnd()
+        {
+            this.SelectionStart = this.Text.Length;
+            this.ScrollToCaret();
         }
     }
 }
