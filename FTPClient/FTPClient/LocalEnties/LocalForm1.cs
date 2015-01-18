@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 // Complete Form1.cs and manage the local aspect 
@@ -25,7 +26,7 @@ namespace FTPClient
             {
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
                 localTreeView.AddRootNode(logicalDrive, 0);
-                listViewLocal.AddItem(logicalDrive);
+                localListView.AddItem(logicalDrive);
             }
         }
 
@@ -36,7 +37,15 @@ namespace FTPClient
 
             if (nodeClicked.Nodes.Count == 0)
             {
-                subDirectories = nodeClickedInfo.GetDirectories().ToList();
+                try
+                {
+                    subDirectories = nodeClickedInfo.GetDirectories().ToList();
+                }
+                catch (UnauthorizedAccessException exception)
+                {
+                    logWindow.WriteLog("Access Denied : "+nodeClickedInfo.Name, Color.Red);
+                    Console.WriteLine(exception.ToString());
+                }
             }
             else
             {
@@ -60,7 +69,15 @@ namespace FTPClient
 
             if (nodeClicked.Nodes.Count == 0)
             {
-                subFiles = nodeClickedInfo.GetFiles().ToList();
+                try
+                {
+                    subFiles = nodeClickedInfo.GetFiles().ToList();
+                }
+                catch (UnauthorizedAccessException exception)
+                {
+                    logWindow.WriteLog("Access Denied : "+nodeClickedInfo.Name, Color.Red);
+                    Console.WriteLine(exception.ToString());
+                }
             }
             else
             {
@@ -79,18 +96,22 @@ namespace FTPClient
 
         private void Local_ShowLinkedElements(TreeNode nodeSelected)
         {
-            List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
-            List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
-            if (nodeSelected.Nodes.Count == 0)
+            if(IsADirectory((FileSystemInfo)nodeSelected.Tag))
             {
-                localTreeView.AddNodes(subDirectories, nodeSelected);
-                localTreeView.AddNodes(subFiles, nodeSelected);
-            }
-            nodeSelected.Expand();
+                List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
+                List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
 
-            listViewLocal.ClearItems();
-            listViewLocal.AddItems(subDirectories);
-            listViewLocal.AddItems(subFiles);
+                if (nodeSelected.Nodes.Count == 0)
+                {
+                    localTreeView.AddNodes(subDirectories, nodeSelected);
+                    localTreeView.AddNodes(subFiles, nodeSelected);
+                }
+                nodeSelected.Expand();
+
+                localListView.ClearItems();
+                localListView.AddItems(subDirectories);
+                localListView.AddItems(subFiles);
+            }
         }
 
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

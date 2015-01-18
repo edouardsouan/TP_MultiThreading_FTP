@@ -37,7 +37,7 @@ namespace FTPClient
         }
         #endregion
 
-        #region Tools -> to put in another class
+        #region IsADirectory => Put in each Tree (local and server) ?
         private bool IsADirectory(FileSystemInfo fileSystemInfo)
         {
             bool isADirectory = false;
@@ -232,7 +232,7 @@ namespace FTPClient
         #region Download files/directory from the server
         private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
-            listViewLocal.DoDragDrop(e.Item, DragDropEffects.Move);
+            localListView.DoDragDrop(e.Item, DragDropEffects.Move);
         }
         private void listViewLocal_DragEnter(object sender, DragEventArgs e)
         {
@@ -255,8 +255,8 @@ namespace FTPClient
 
                 try
                 {
-                    Point pointWhereFileDropped = listViewLocal.PointToClient(new Point(e.X, e.Y));
-                    ListViewItem targetFile = listViewLocal.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
+                    Point pointWhereFileDropped = localListView.PointToClient(new Point(e.X, e.Y));
+                    ListViewItem targetFile = localListView.GetItemAt(pointWhereFileDropped.X, pointWhereFileDropped.Y);
                     FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
                     if (IsADirectory(targetFileInfo))
                     {

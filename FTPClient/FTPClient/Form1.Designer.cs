@@ -50,7 +50,7 @@ namespace FTPClient
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.localTreeView = new FTPClient.LocalEntities.LocalTreeView(this.components);
-            this.listViewLocal = new LocalListView();
+            this.localListView = new LocalListView();
             this.fileNameLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSizeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileTypeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -267,7 +267,7 @@ namespace FTPClient
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.listViewLocal);
+            this.splitContainer4.Panel2.Controls.Add(this.localListView);
             this.splitContainer4.Size = new System.Drawing.Size(426, 448);
             this.splitContainer4.SplitterDistance = 237;
             this.splitContainer4.TabIndex = 0;
@@ -288,23 +288,23 @@ namespace FTPClient
             // 
             // listViewLocal
             // 
-            this.listViewLocal.AllowDrop = true;
-            this.listViewLocal.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.localListView.AllowDrop = true;
+            this.localListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fileNameLocal,
             this.fileSizeLocal,
             this.fileTypeLocal,
             this.lastModifiedLocal});
-            this.listViewLocal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewLocal.Location = new System.Drawing.Point(0, 0);
-            this.listViewLocal.Name = "listViewLocal";
-            this.listViewLocal.Size = new System.Drawing.Size(426, 207);
-            this.listViewLocal.SmallImageList = this.imageList;
-            this.listViewLocal.TabIndex = 1;
-            this.listViewLocal.UseCompatibleStateImageBehavior = false;
-            this.listViewLocal.View = System.Windows.Forms.View.Details;
-            this.listViewLocal.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
-            this.listViewLocal.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
-            this.listViewLocal.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
+            this.localListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.localListView.Location = new System.Drawing.Point(0, 0);
+            this.localListView.Name = "listViewLocal";
+            this.localListView.Size = new System.Drawing.Size(426, 207);
+            this.localListView.SmallImageList = this.imageList;
+            this.localListView.TabIndex = 1;
+            this.localListView.UseCompatibleStateImageBehavior = false;
+            this.localListView.View = System.Windows.Forms.View.Details;
+            this.localListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
+            this.localListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
+            this.localListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
             // 
             // fileNameLocal
             // 
@@ -543,7 +543,7 @@ namespace FTPClient
         private System.Windows.Forms.ColumnHeader fileSizeServer;
         private System.Windows.Forms.ColumnHeader fileTypeServer;
         private System.Windows.Forms.ColumnHeader lastModifiedServer;
-        private LocalListView listViewLocal;
+        private LocalListView localListView;
         private System.Windows.Forms.ColumnHeader fileNameLocal;
         private System.Windows.Forms.ColumnHeader fileSizeLocal;
         private System.Windows.Forms.ColumnHeader fileTypeLocal;

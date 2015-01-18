@@ -57,7 +57,5 @@ namespace FTPClient.LocalEntities
                 AddNode(fileInfo, 2, parentNode);
             }
         }
-
-
     }
 }
