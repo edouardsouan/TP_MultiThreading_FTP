@@ -2,3 +2,7 @@ X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\bin\Debug\FTPL
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\bin\Debug\FTPLibrary.pdb
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\obj\Debug\FTPLibrary.dll
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\obj\Debug\FTPLibrary.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\bin\Debug\FTPLibrary.dll
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\bin\Debug\FTPLibrary.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\obj\Debug\FTPLibrary.dll
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPLibrary\obj\Debug\FTPLibrary.pdb

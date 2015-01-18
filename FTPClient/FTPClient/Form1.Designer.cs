@@ -303,9 +303,9 @@ namespace FTPClient
             this.localListView.TabIndex = 1;
             this.localListView.UseCompatibleStateImageBehavior = false;
             this.localListView.View = System.Windows.Forms.View.Details;
-            this.localListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
-            this.localListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
-            this.localListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
+            // this.localListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
+            // this.localListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragDrop);
+            // this.localListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewLocal_DragEnter);
             // 
             // fileNameLocal
             // 
@@ -377,9 +377,9 @@ namespace FTPClient
             this.serverListView.TabIndex = 0;
             this.serverListView.UseCompatibleStateImageBehavior = false;
             this.serverListView.View = System.Windows.Forms.View.Details;
-            this.serverListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
-            this.serverListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
-            this.serverListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
+            // this.serverListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
+            // this.serverListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
+            // this.serverListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
             // 
             // fileNameServer
             // 

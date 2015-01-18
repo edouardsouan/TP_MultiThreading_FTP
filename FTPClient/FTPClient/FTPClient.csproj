@@ -91,6 +91,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerEntities\FileServer.cs" />
+    <Compile Include="ServerEntities\FTPManager.cs" />
     <Compile Include="ServerEntities\ServerForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,12 +153,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FTPLibrary\FTPLibrary.csproj">
-      <Project>{ffe28209-14bf-454e-8b4e-6b4fd87aec5f}</Project>
-      <Name>FTPLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

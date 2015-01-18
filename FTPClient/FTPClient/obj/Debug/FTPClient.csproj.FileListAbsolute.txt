@@ -1,12 +1,3 @@
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.pdb
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Form1.resources
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Properties.Resources.resources
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
-C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
 \\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
 \\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 \\vmware-host\Shared Folders\Bureau\Projet-FTP\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
@@ -36,3 +27,12 @@ X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPCl
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Form1.resources
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Properties.Resources.resources
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.pdb
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
+C:\Users\kimsavinfo\Dropbox\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb

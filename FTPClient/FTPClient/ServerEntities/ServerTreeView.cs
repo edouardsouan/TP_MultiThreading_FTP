@@ -32,5 +32,24 @@ namespace FTPClient.ServerEntities
             serverNode.SelectedImageIndex = 0;
             this.Nodes.Add(serverNode);
         }
+
+        public void AddNode(FileServer fileServer, TreeNode parentNode)
+        {
+            TreeNode serverNode = new TreeNode(fileServer.GetName());
+            serverNode.Tag = fileServer;
+
+            if (fileServer.GetDataType().Equals("Directory"))
+            {
+                serverNode.ImageIndex = 1;
+                serverNode.SelectedImageIndex = 1;
+            }
+            else
+            {
+                serverNode.ImageIndex = 2;
+                serverNode.SelectedImageIndex = 2;
+            }
+
+            parentNode.Nodes.Add(serverNode);
+        }
     }
 }

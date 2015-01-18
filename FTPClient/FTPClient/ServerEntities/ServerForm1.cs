@@ -8,56 +8,54 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
-// Complete Form1.cs and manage the FTP server aspect 
+using FTPClient.ServerEntities;
 
-using FTPLibrary;
+// Complete Form1.cs and manage the FTP server aspect 
 
 namespace FTPClient
 {
     public partial class Form1 : Form
     {
+        FTPManager ftpManager;
+        bool isSendingListCommand = false;
+
+        private bool Server_IsNameOKToDisplay(string fileName)
+        {
+            bool canDisplay = false;
+
+            if (!(fileName.Equals(".") || fileName.Equals("..")))
+            {
+                canDisplay = true;
+            }
+
+            return canDisplay;
+        }
+
         private void btnConnection_Click(object sender, EventArgs e)
         {
             serverTreeView.InitRoot();
-            GetTreeViewFromServer("", serverTreeView.Nodes[0]);
+
+            ftpManager = new FTPManager(this.txtUserName.Text, this.txtPassword.Text, this.txtServer.Text, this.txtPort.Text);
+            Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
         }
 
-
-        private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
+        private async void Server_ShowLinkedFTPElements(string serverPath, TreeNode parentNode)
         {
-            string serverTarget = "ftp://" + this.txtServer.Text + serverPath + "/";
-
             if (!isSendingListCommand)
             {
                 try
                 {
                     isSendingListCommand = true;
-                    FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-                    ftpRequest.KeepAlive = false;
-                    ftpRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
-                    ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
+                    FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
-                    logWindow.WriteLog(ftpResponse.BannerMessage, Color.Green);
-                    logWindow.WriteLog(ftpResponse.WelcomeMessage, Color.Green);
-                    logWindow.WriteLog(ftpResponse.StatusDescription, Color.Blue);
-                    logWindow.WriteLog(ftpResponse.StatusCode.ToString(), Color.Blue);
-                    logWindow.WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
-
-                    Stream responseStream = ftpResponse.GetResponseStream();
-                    StreamReader streamReader = new StreamReader(responseStream);
-
-                    string rawResult = streamReader.ReadToEnd();
-                    string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
-                    BuildServerTreeView(data.Split('\n'), parentNode);
-
-                    streamReader.Close();
-                    ftpResponse.Close();
+                    logWindow.WriteLog(ftpResponse);
+                    string[] serverData = ftpManager.ParseRawData(ftpResponse);
+                    Server_ShowFiles(serverData, parentNode);
                 }
                 catch (WebException ex)
                 {
                     logWindow.WriteLog(ex.Message, Color.Red);
-                    isSendingListCommand = false;
                 }
                 finally
                 {
@@ -66,43 +64,19 @@ namespace FTPClient
             }
         }
 
-        // TODO : Build in async
-        private void BuildServerTreeView(string[] directories, TreeNode parentNode)
+        private void Server_ShowFiles(string[] serverData, TreeNode parentNode)
         {
-            FileServer fileServer;
-            List<FileServer> fileSystInfos = new List<FileServer>();
-
-            foreach (string rawDirectory in directories)
+            foreach (string aData in serverData)
             {
-                fileServer = new FileServer(rawDirectory);
-                if (!(fileServer.GetName().Equals(".") || fileServer.GetName().Equals("..")))
+                FileServer fileServer = new FileServer(aData);
+                if (Server_IsNameOKToDisplay(fileServer.GetName()))
                 {
-                    AddNodeServerTreeView(fileServer, parentNode);
-                    fileSystInfos.Add(fileServer);
+                    serverTreeView.AddNode(fileServer, parentNode);
+                    serverListView.AddItem(fileServer);
                 }
             }
 
-            PopulateServerListView(fileSystInfos.ToArray());
             parentNode.Expand();
-        }
-
-        private void AddNodeServerTreeView(FileServer fileServer, TreeNode parentNode)
-        {
-            TreeNode serverNode = new TreeNode(fileServer.GetName());
-            serverNode.Tag = fileServer;
-
-            if (fileServer.GetDataType().Equals("Directory"))
-            {
-                serverNode.ImageIndex = 1;
-                serverNode.SelectedImageIndex = 1;
-            }
-            else
-            {
-                serverNode.ImageIndex = 2;
-                serverNode.SelectedImageIndex = 2;
-            }
-
-            parentNode.Nodes.Add(serverNode);
         }
 
         private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -111,71 +85,28 @@ namespace FTPClient
             if (IsADirectory(nodeClicked))
             {
                 serverPath = nodeClicked.FullPath;
-                serverListView.Items.Clear();
+                serverListView.ClearItems();
+
                 if (nodeClicked.Nodes.Count == 0)
                 {
-                    GetTreeViewFromServer(nodeClicked.FullPath, nodeClicked);
+                    Server_ShowLinkedFTPElements(nodeClicked.FullPath, nodeClicked);
                 }
                 else
                 {
-                    List<FileServer> fileSystInfos = new List<FileServer>();
-                    TreeNodeCollection nodes = nodeClicked.Nodes;
-                    foreach (TreeNode node in nodes)
-                    {
-                        fileSystInfos.Add((FileServer)node.Tag);
-                    }
-                    PopulateServerListView(fileSystInfos.ToArray());
+                    Server_ShowSubItems(nodeClicked);
                 }
+
+                nodeClicked.Expand();
             }
         }
 
-        private void PopulateServerListView(FileServer[] files)
+        private void Server_ShowSubItems(TreeNode parentNode)
         {
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-            string extension = "";
-            string size = "";
-            string date = "";
-            string rights = "";
-            string owner = "";
-            string group = "";
-
-            foreach (FileServer subFile in files)
+            TreeNodeCollection subNodes = parentNode.Nodes;
+            foreach (TreeNode subNode in subNodes)
             {
-                item = new ListViewItem(subFile.GetName(), 0);
-                item.Name = subFile.GetName();
-                item.Tag = subFile;
-                size = subFile.GetSize().ToString();
-                extension = subFile.GetDataType();
-                date = subFile.GetLastModifiedDate();
-                rights = subFile.GetRights();
-                owner = subFile.GetOwner();
-                group = subFile.GetGroup();
-
-                subItems = new ListViewItem.ListViewSubItem[]
-                    {
-                        new ListViewItem.ListViewSubItem(item, size),
-                        new ListViewItem.ListViewSubItem(item, extension), 
-                        new ListViewItem.ListViewSubItem(item, date),
-                        new ListViewItem.ListViewSubItem(item, rights),
-                        new ListViewItem.ListViewSubItem(item, owner),
-                        new ListViewItem.ListViewSubItem(item, group)
-                    };
-
-                if (extension.Equals("Directory"))
-                {
-                    item.ImageIndex = 1;
-                }
-                else
-                {
-                    item.ImageIndex = 2;
-                }
-
-                item.SubItems.AddRange(subItems);
-                serverListView.Items.Add(item);
+                serverListView.AddItem((FileServer)subNode.Tag);
             }
-
-            serverListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -35,12 +36,16 @@ namespace FTPClient.ServerEntities
             return ftpRequest;
         }
 
-        public string[] ListDirectoryDetails(string complementPath)
+        public FtpWebRequest CreatRequestListDirectoriesAndFiles(string complementPath)
         {
             FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
             ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-            FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+            return ftpRequest;
+        }
+
+        public string[] ParseRawData(FtpWebResponse ftpResponse)
+        {
             Stream responseStream = ftpResponse.GetResponseStream();
             StreamReader streamReader = new StreamReader(responseStream);
 
@@ -52,7 +57,6 @@ namespace FTPClient.ServerEntities
 
             return data.Split('\n');
         }
-
 
 
 

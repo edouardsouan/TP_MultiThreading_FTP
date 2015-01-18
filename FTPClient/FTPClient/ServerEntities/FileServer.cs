@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FTPLibrary
+namespace FTPClient.ServerEntities
 {
     public class FileServer
     {
@@ -20,11 +20,11 @@ namespace FTPLibrary
         #endregion
 
         #region constructor
-        public FileServer(string rawFileServer) 
+        public FileServer(string rawFileServer)
         {
             string rawFileToClean = rawFileServer.Remove(rawFileServer.LastIndexOf("\r"), 1);
             Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileToClean);
-            
+
             bool isSpaceBefore = false;
             int iCleanField = 0;
             List<string> cleanedFields = new List<string>();
@@ -52,7 +52,7 @@ namespace FTPLibrary
             }
             cleanedFields.Add(cleanField);
 
-            this.rights  = cleanedFields.ElementAt(0).Substring(1);
+            this.rights = cleanedFields.ElementAt(0).Substring(1);
             this.linkNumnber = cleanedFields.ElementAt(1);
             this.owner = cleanedFields.ElementAt(2);
             this.group = cleanedFields.ElementAt(3);
@@ -65,7 +65,7 @@ namespace FTPLibrary
         private void SetDataType(string dataField)
         {
             this.dataType = "File";
-            
+
             string codeType = dataField.Substring(0, 1);
 
             if (codeType.Equals("d"))
@@ -78,7 +78,7 @@ namespace FTPLibrary
                 {
                     int formatIndex = this.name.LastIndexOf(".");
 
-                    if(formatIndex > -1)
+                    if (formatIndex > -1)
                         this.dataType = this.name.Substring(formatIndex);
                 }
             }
