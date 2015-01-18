@@ -22,5 +22,15 @@ namespace FTPClient.ServerEntities
 
             InitializeComponent();
         }
+
+        public void InitRoot()
+        {
+            TreeNode serverNode = new TreeNode();
+            serverNode = new TreeNode("/");
+            serverNode.Tag = "/";
+            serverNode.ImageIndex = 0;
+            serverNode.SelectedImageIndex = 0;
+            this.Nodes.Add(serverNode);
+        }
     }
 }

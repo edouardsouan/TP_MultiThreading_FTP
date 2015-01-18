@@ -18,15 +18,10 @@ namespace FTPClient
     {
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            TreeNode serverNode = new TreeNode();
-            serverNode = new TreeNode("/");
-            serverNode.Tag = "/";
-            serverNode.ImageIndex = 0;
-            serverNode.SelectedImageIndex = 0;
-            serverTreeView.Nodes.Add(serverNode);
-
+            serverTreeView.InitRoot();
             GetTreeViewFromServer("", serverTreeView.Nodes[0]);
         }
+
 
         private async void GetTreeViewFromServer(string serverPath, TreeNode parentNode)
         {
