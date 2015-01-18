@@ -1,4 +1,5 @@
-﻿using FTPClient.FormEntites;
+﻿using FTPClient.LogEntities;
+using FTPClient.LocalEntities;
 
 namespace FTPClient
 {
@@ -45,10 +46,10 @@ namespace FTPClient
             this.btnConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.logWindow = new FTPClient.FormEntites.LogFTPWindow(this.components);
+            this.logWindow = new FTPClient.LogEntities.LogFTPWindow(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.localTreeView = new FTPClient.FormEntites.LocalTreeView(this.components);
+            this.localTreeView = new FTPClient.LocalEntities.LocalTreeView(this.components);
             this.listViewLocal = new LocalListView();
             this.fileNameLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSizeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));

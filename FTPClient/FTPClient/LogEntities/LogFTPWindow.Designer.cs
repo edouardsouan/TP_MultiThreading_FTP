@@ -1,6 +1,6 @@
-﻿namespace FTPClient.FormEntites
+﻿namespace FTPClient.LogEntities
 {
-    partial class LocalTreeView
+    partial class LogFTPWindow
     {
         /// <summary>
         /// Variable nécessaire au concepteur.

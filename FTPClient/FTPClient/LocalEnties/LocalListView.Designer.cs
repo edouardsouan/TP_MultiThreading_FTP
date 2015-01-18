@@ -1,4 +1,4 @@
-﻿namespace FTPClient.FormEntites
+﻿namespace FTPClient.LocalEntities
 {
     partial class LocalListView
     {

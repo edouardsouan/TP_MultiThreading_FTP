@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FTPClient.FormEntites
+namespace FTPClient.LocalEntities
 {
     public partial class LocalTreeView : TreeView
     {
