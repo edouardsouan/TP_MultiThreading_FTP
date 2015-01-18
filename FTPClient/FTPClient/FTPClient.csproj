@@ -68,6 +68,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEntites\LocalListView.cs" />
+    <Compile Include="FormEntites\LocalListView.Designer.cs">
+      <DependentUpon>LocalListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEntites\LocalTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -84,6 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEntites\LocalListView.resx">
+      <DependentUpon>LocalListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

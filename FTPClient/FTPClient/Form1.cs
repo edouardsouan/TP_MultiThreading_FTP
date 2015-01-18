@@ -63,142 +63,105 @@ namespace FTPClient
         #region TreeView with local directories and local files
         private void Form1_Load(object sender, EventArgs e)
         {
-            PopulateLocalTreeViewWithLogicalDrives();    
+            Local_ShowLogicalDrives();    
         }
 
-        private void PopulateLocalTreeViewWithLogicalDrives()
+        private void Local_ShowLogicalDrives()
         {
-            List<DirectoryInfo> directories = new List<DirectoryInfo>();
             string[] drives = Environment.GetLogicalDrives();
 
             foreach (string drive in drives)
             {
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
-                if (logicalDrive.Exists)
+                localTreeView.AddNode(logicalDrive, 0);
+                listViewLocal.AddItem(logicalDrive);
+            }
+        }
+
+        private List<DirectoryInfo> Local_GetLocalDirectories(TreeNode nodeClicked)
+        {
+            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
+
+            if (nodeClicked.Nodes.Count == 0)
+            {
+                subDirectories = nodeClickedInfo.GetDirectories().ToList();
+            }
+            else
+            {
+                TreeNodeCollection subNodes = nodeClicked.Nodes;
+                foreach (TreeNode subNode in subNodes)
                 {
-                    localTreeView.AddRootNodes(logicalDrive);
+                    if (IsADirectory(subNode))
+                    {
+                        subDirectories.Add((DirectoryInfo)subNode.Tag);
+                    }
                 }
             }
 
-            PopulateLocalListView(directories.ToArray());
+            return subDirectories;
+        }
+
+        private List<FileInfo> Local_GetLocalFiles(TreeNode nodeClicked)
+        {
+            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            List<FileInfo> subFiles = new List<FileInfo>();
+
+            if (nodeClicked.Nodes.Count == 0)
+            {
+                subFiles = nodeClickedInfo.GetFiles().ToList();
+            }
+            else
+            {
+                TreeNodeCollection subNodes = nodeClicked.Nodes;
+                foreach (TreeNode subNode in subNodes)
+                {
+                    if (!IsADirectory(subNode))
+                    {
+                        subFiles.Add((FileInfo)subNode.Tag);
+                    }
+                }
+            }
+
+            return subFiles;
+        }
+
+        private void Local_ShowLinkedDirectories(TreeNode nodeClicked, List<DirectoryInfo> subDirectories)
+        {
+            foreach (DirectoryInfo subDirectory in subDirectories)
+            {
+                localTreeView.AddNode(subDirectory, 1, nodeClicked);
+                listViewLocal.AddItem(subDirectory);
+            }
+        }
+
+        private void Local_ShowLinkedFiles(TreeNode nodeSelected,List<FileInfo> subFiles)
+        {
+            foreach (FileInfo subFile in subFiles)
+            {
+                localTreeView.AddNode(subFile, 2, nodeSelected);
+                listViewLocal.AddItem(subFile);
+            }
+        }
+
+        private void Local_ShowLinkedElements(TreeNode nodeSelected)
+        {
+            listViewLocal.ClearItems();
+
+            List<DirectoryInfo> sudDirectories = Local_GetLocalDirectories(nodeSelected);
+            List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
+
+            Local_ShowLinkedDirectories(nodeSelected, sudDirectories);
+            nodeSelected.Expand();
+            Local_ShowLinkedFiles(nodeSelected, subFiles);
         }
 
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            try
-            {
-                TreeNode nodeClicked = e.Node;
+            TreeNode nodeClicked = e.Node;
+            Local_ShowLinkedElements(nodeClicked);
 
-                if (IsADirectory(nodeClicked))
-                {
-                    localPath = nodeClicked.FullPath;
-                    listViewLocal.Items.Clear();
-
-                    if (nodeClicked.Nodes.Count == 0)
-                    {
-                        PropulateLocalTreeNodeWithDirectories(nodeClicked);
-                        PopulateLocalTreeNodeWithFiles(nodeClicked);
-                    }
-                    else
-                    {
-                        List<FileSystemInfo> fileSystInfos = new List<FileSystemInfo>();
-                        TreeNodeCollection nodes = nodeClicked.Nodes;
-                        foreach (TreeNode node in nodes)
-                        {
-                            fileSystInfos.Add((FileSystemInfo)node.Tag);
-                        }
-                        PopulateLocalListView(fileSystInfos.ToArray());
-                    }
-
-                    nodeClicked.Expand();
-                }
-            }
-            catch (Exception ex)
-            {
-                logWindow.WriteLog("ERROR : " + ex.Message, Color.Red);
-            }
-        }
-
-        private void PropulateLocalTreeNodeWithDirectories(TreeNode nodeClicked)
-        {
-            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
-            List<DirectoryInfo> files = new List<DirectoryInfo>();
-
-            foreach (DirectoryInfo subDir in nodeClickedInfo.GetDirectories())
-            {
-                AddLocalTreeNode(subDir, 1, nodeClicked);
-                files.Add(subDir);
-            }
-
-            PopulateLocalListView(files.ToArray());
-        }
-
-        private void PopulateLocalTreeNodeWithFiles(TreeNode nodeClicked)
-        {
-            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
-            List<FileInfo> files = new List<FileInfo>();
-
-            foreach (FileInfo file in nodeClickedInfo.GetFiles())
-            {
-                AddLocalTreeNode(file, 2, nodeClicked);
-                files.Add(file);
-            }
-
-            PopulateLocalListView(files.ToArray());
-        }
-
-        private void AddLocalTreeNode(FileSystemInfo data, int imageIndex, TreeNode parentNode)
-        {
-            TreeNode newFileNode = new TreeNode(data.Name, 0, 0);
-            newFileNode.Tag = data;
-            newFileNode.ImageIndex = imageIndex;
-            newFileNode.SelectedImageIndex = imageIndex;
-            parentNode.Nodes.Add(newFileNode);
-        }
-
-        private void PopulateLocalListView(FileSystemInfo[] files)
-        {
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-            string extension = "";
-            string size = "";
-            string LastAccessTime = "";
-
-            foreach (FileSystemInfo subFile in files)
-            {
-                item = new ListViewItem(subFile.Name, 0);
-                item.Name = subFile.Name;
-                item.Tag = subFile;
-                extension = subFile.Extension;
-                LastAccessTime = subFile.LastAccessTime.ToShortDateString();
-
-                try
-                {
-                    FileInfo fileInfo = (FileInfo)subFile;
-                    size = fileInfo.Length.ToString();
-                }
-                catch
-                {
-                    size = "";
-                }
-
-                subItems = new ListViewItem.ListViewSubItem[]
-                    {
-                        new ListViewItem.ListViewSubItem(item, size),
-                        new ListViewItem.ListViewSubItem(item, extension), 
-                        new ListViewItem.ListViewSubItem(item, LastAccessTime)
-                    };
-
-                if (extension.Equals(""))
-                    item.ImageIndex = 1;
-                else
-                    item.ImageIndex = 2;
-
-                item.SubItems.AddRange(subItems);
-                listViewLocal.Items.Add(item);
-            }
-
-            listViewLocal.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            localPath = nodeClicked.FullPath;
         }
         #endregion
 

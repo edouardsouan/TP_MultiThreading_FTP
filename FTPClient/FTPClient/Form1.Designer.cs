@@ -49,7 +49,7 @@ namespace FTPClient
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.localTreeView = new FTPClient.FormEntites.LocalTreeView(this.components);
-            this.listViewLocal = new System.Windows.Forms.ListView();
+            this.listViewLocal = new LocalListView();
             this.fileNameLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileSizeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileTypeLocal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -542,7 +542,7 @@ namespace FTPClient
         private System.Windows.Forms.ColumnHeader fileSizeServer;
         private System.Windows.Forms.ColumnHeader fileTypeServer;
         private System.Windows.Forms.ColumnHeader lastModifiedServer;
-        private System.Windows.Forms.ListView listViewLocal;
+        private LocalListView listViewLocal;
         private System.Windows.Forms.ColumnHeader fileNameLocal;
         private System.Windows.Forms.ColumnHeader fileSizeLocal;
         private System.Windows.Forms.ColumnHeader fileTypeLocal;

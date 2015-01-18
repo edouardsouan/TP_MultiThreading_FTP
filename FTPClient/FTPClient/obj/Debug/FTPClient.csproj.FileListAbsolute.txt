@@ -25,14 +25,15 @@ C:\Users\kimsavinfo\Documents\visual studio 2012\Projects\TP_MultiThreading_FTP\
 C:\Users\kimsavinfo\Documents\visual studio 2012\Projects\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 C:\Users\kimsavinfo\Documents\visual studio 2012\Projects\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb
 C:\Users\kimsavinfo\Documents\visual studio 2012\Projects\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
-X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
-X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Form1.resources
-X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Properties.Resources.resources
-X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe.config
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.exe
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPClient.pdb
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPLibrary.dll
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\bin\Debug\FTPLibrary.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csprojResolveAssemblyReference.cache
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Form1.resources
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.FormEntites.LocalListView.resources
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.Properties.Resources.resources
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.csproj.GenerateResource.Cache
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.exe
 X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTPClient\FTPClient\obj\Debug\FTPClient.pdb

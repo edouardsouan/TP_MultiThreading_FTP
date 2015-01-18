@@ -24,17 +24,22 @@ namespace FTPClient.FormEntites
             InitializeComponent();
         }
 
-        public void AddRootNodes(DirectoryInfo logicalDrive)
+        public void AddNode(FileSystemInfo fileInfo, int imageIndex)
         {
-            TreeNode rootNode = new TreeNode(logicalDrive.Name);
-            rootNode.Tag = logicalDrive;
-            rootNode.ImageIndex = 0;
-            rootNode.SelectedImageIndex = 0;
+            TreeNode rootNode = new TreeNode(fileInfo.Name);
+            rootNode.Tag = fileInfo;
+            rootNode.ImageIndex = imageIndex;
+            rootNode.SelectedImageIndex = imageIndex;
             this.Nodes.Add(rootNode);
         }
 
-        public void AddNodes()
+        public void AddNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
         {
+            TreeNode childNode = new TreeNode(fileInfo.Name);
+            childNode.Tag = fileInfo;
+            childNode.ImageIndex = imageIndex;
+            childNode.SelectedImageIndex = imageIndex;
+            parentNode.Nodes.Add(childNode);
         }
     }
 }
