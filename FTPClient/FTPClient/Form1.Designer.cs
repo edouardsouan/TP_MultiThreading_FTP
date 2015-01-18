@@ -1,4 +1,4 @@
-﻿using FTPClient.LogEntities;
+﻿using FTPClient.InfoEntities;
 using FTPClient.LocalEntities;
 using FTPClient.ServerEntities;
 
@@ -47,7 +47,7 @@ namespace FTPClient
             this.btnConnection = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.logWindow = new FTPClient.LogEntities.LogFTPWindow(this.components);
+            this.logWindow = new FTPClient.InfoEntities.LogFTPWindow(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.localTreeView = new FTPClient.LocalEntities.LocalTreeView(this.components);
@@ -68,7 +68,7 @@ namespace FTPClient
             this.fileGroup = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
-            this.FileQueue = new System.Windows.Forms.ListView();
+            this.fileQueue = new FileQueue;
             this.ServerFileLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DistFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -426,7 +426,7 @@ namespace FTPClient
             // 
             // splitContainer6.Panel2
             // 
-            this.splitContainer6.Panel2.Controls.Add(this.FileQueue);
+            this.splitContainer6.Panel2.Controls.Add(this.fileQueue);
             this.splitContainer6.Size = new System.Drawing.Size(877, 89);
             this.splitContainer6.SplitterDistance = 28;
             this.splitContainer6.TabIndex = 0;
@@ -440,19 +440,19 @@ namespace FTPClient
             // 
             // FileQueue
             // 
-            this.FileQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fileQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ServerFileLocation,
             this.Direction,
             this.DistFile,
             this.FileSizeTransfert,
             this.Time});
-            this.FileQueue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileQueue.Location = new System.Drawing.Point(0, 0);
-            this.FileQueue.Name = "FileQueue";
-            this.FileQueue.Size = new System.Drawing.Size(877, 57);
-            this.FileQueue.TabIndex = 0;
-            this.FileQueue.UseCompatibleStateImageBehavior = false;
-            this.FileQueue.View = System.Windows.Forms.View.Details;
+            this.fileQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileQueue.Location = new System.Drawing.Point(0, 0);
+            this.fileQueue.Name = "FileQueue";
+            this.fileQueue.Size = new System.Drawing.Size(877, 57);
+            this.fileQueue.TabIndex = 0;
+            this.fileQueue.UseCompatibleStateImageBehavior = false;
+            this.fileQueue.View = System.Windows.Forms.View.Details;
             // 
             // ServerFileLocation
             // 
@@ -553,7 +553,7 @@ namespace FTPClient
         private System.Windows.Forms.ColumnHeader fileOwner;
         private System.Windows.Forms.ColumnHeader fileGroup;
         private System.Windows.Forms.SplitContainer splitContainer6;
-        private System.Windows.Forms.ListView FileQueue;
+        private FileQueue fileQueue;
         private System.Windows.Forms.ColumnHeader ServerFileLocation;
         private System.Windows.Forms.ColumnHeader Direction;
         private System.Windows.Forms.ColumnHeader DistFile;

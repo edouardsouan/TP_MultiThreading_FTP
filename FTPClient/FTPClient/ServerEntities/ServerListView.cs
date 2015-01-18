@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,40 @@ namespace FTPClient.ServerEntities
         public void ClearItems()
         {
             this.Items.Clear();
+        }
+
+        public ListViewItem GetPointedItem(Point point)
+        {
+            Point pointListOrigin = this.PointToClient(point);
+            ListViewItem targetFile = this.GetItemAt(pointListOrigin.X, pointListOrigin.Y);
+
+            return targetFile;
+        }
+
+        public string GetDirecoryNamePointed(Point point)
+        {
+            string name = "";
+
+            ListViewItem targetFile = GetPointedItem(point);
+            if (IsADirectory(targetFile))
+            {
+                FileServer targetFileInfo = (FileServer)targetFile.Tag;
+                name = targetFileInfo.GetName();
+            }
+
+            return name;
+        }
+
+        private bool IsADirectory(ListViewItem item)
+        {
+            bool isADirectory = false;
+
+            if (item.ImageIndex == 0 || item.ImageIndex == 1)
+            {
+                isADirectory = true;
+            }
+
+            return isADirectory;
         }
     }
 }

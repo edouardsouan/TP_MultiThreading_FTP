@@ -19,18 +19,6 @@ namespace FTPClient
         FTPManager ftpManager;
         bool isSendingListCommand = false;
 
-        private bool Server_IsNameOKToDisplay(string fileName)
-        {
-            bool canDisplay = false;
-
-            if (!(fileName.Equals(".") || fileName.Equals("..")))
-            {
-                canDisplay = true;
-            }
-
-            return canDisplay;
-        }
-
         private void btnConnection_Click(object sender, EventArgs e)
         {
             serverTreeView.InitRoot();
@@ -51,7 +39,7 @@ namespace FTPClient
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
                     logWindow.WriteLog(ftpResponse);
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
-                    Server_ShowFiles(serverData, parentNode);
+                    Server_ShowFiles(serverData, parentNode, serverPath);
                 }
                 catch (WebException ex)
                 {
@@ -64,12 +52,12 @@ namespace FTPClient
             }
         }
 
-        private void Server_ShowFiles(string[] serverData, TreeNode parentNode)
+        private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
         {
             foreach (string aData in serverData)
             {
-                FileServer fileServer = new FileServer(aData);
-                if (Server_IsNameOKToDisplay(fileServer.GetName()))
+                FileServer fileServer = new FileServer(aData, serverPath);
+                if (fileServer.IsNameOKToDisplay())
                 {
                     serverTreeView.AddNode(fileServer, parentNode);
                     serverListView.AddItem(fileServer);

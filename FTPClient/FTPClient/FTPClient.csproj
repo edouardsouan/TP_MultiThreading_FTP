@@ -68,6 +68,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoEntities\FileQueue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InfoEntities\FileQueue.Designer.cs">
+      <DependentUpon>FileQueue.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalEnties\LocalForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,10 +89,10 @@
     <Compile Include="LocalEnties\LocalTreeView.Designer.cs">
       <DependentUpon>LocalTreeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogEntities\LogFTPWindow.cs">
+    <Compile Include="InfoEntities\LogFTPWindow.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="LogEntities\LogFTPWindow.Designer.cs">
+    <Compile Include="InfoEntities\LogFTPWindow.Designer.cs">
       <DependentUpon>LogFTPWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />

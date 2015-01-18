@@ -25,7 +25,20 @@ namespace FTPClient.ServerEntities
             this.port = port;
         }
 
-        private FtpWebRequest CreateFtpWebRequest(string complementPath)
+        ~FTPManager()
+        {
+            LogOut();
+        }
+
+        public void LogOut()
+        {
+            this.user = "";
+            this.password = "";
+            this.server = "";
+            this.port = "";
+        }
+
+        public FtpWebRequest CreateFtpWebRequest(string complementPath)
         {
             string serverTarget = "ftp://" + this.server + ":" + this.port + complementPath + "/";
             
@@ -57,8 +70,5 @@ namespace FTPClient.ServerEntities
 
             return data.Split('\n');
         }
-
-
-
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace FTPClient.LogEntities
+﻿namespace FTPClient.InfoEntities
 {
-    partial class LogFTPWindow
+    partial class FileQueue
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
