@@ -222,20 +222,58 @@ namespace FTPClient
         }
         private void listViewServer_DragDrop(object sender, DragEventArgs e)
         {
-            // TO REFACTO
+            string filePath = this.localPath;
+            try
+            {
+                string draggedFileName = localListView.GetDirecoryNamePointed(new Point(e.X, e.Y));
+                if(draggedFileName.Equals(""))
+                {
+                    filePath += '\\' + draggedFileName;
+                }
+            }
+            catch (NullReferenceException exception)
+            {
+                Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
+            }
+            finally
+            {
+                ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
+                filePath += "\\" + fileToUpload.Name;
+                UploadTransfert(filePath, serverPath.Replace("\\", "//") + "//" + fileToUpload.Name, fileToUpload);
+            }
         }
+
+        private void UploadTransfert(string filePathToUpload, string distPathTarget, FileInfo fileInfo)
+        {
+            FtpWebRequest uploadRequest = ftpManager.CreateFtpWebRequest(distPathTarget);
+            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+
+            UploadFile(filePathToUpload, uploadRequest);
+        }
+
+        private void UploadFile(string filePathToUpload, FtpWebRequest uploadRequest)
+        {
+            StreamReader uploadFileStream = new StreamReader(filePathToUpload);
+            byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);
+            uploadFileStream.Close();
+            uploadRequest.ContentLength = fileContents.Length;
+
+            Stream responseStream = uploadRequest.GetRequestStream();
+            responseStream.Write(fileContents, 0, fileContents.Length);
+            responseStream.Close();
+
+            FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
+            logWindow.WriteLog(uploadResponse);
+
+            uploadResponse.Close();
+            responseStream.Close();
+            uploadFileStream.Close();
+        }
+
+        
         #endregion
-              
-//
-//        #region Upload files / directories to the server
-//        private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
-//        {
-//            serverListView.DoDragDrop(e.Item, DragDropEffects.Move);
-//        }
-//        private void listViewServer_DragEnter(object sender, DragEventArgs e)
-//        {
-//            e.Effect = DragDropEffects.Move;
-//        }
+
 //        private void listViewServer_DragDrop(object sender, DragEventArgs e)
 //        {
 //            String filePath = this.localPath;
@@ -288,7 +326,6 @@ namespace FTPClient
 //
 //            Console.WriteLine("Download Complete, status {0}", uploadResponse.StatusDescription);
 //        }
-//        #endregion
 
     }
 }

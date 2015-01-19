@@ -96,5 +96,39 @@ namespace FTPClient.LocalEntities
         {
             this.Items.Clear();
         }
+
+        public ListViewItem GetPointedItem(Point point)
+        {
+            Point pointListOrigin = this.PointToClient(point);
+            ListViewItem targetFile = this.GetItemAt(pointListOrigin.X, pointListOrigin.Y);
+
+            return targetFile;
+        }
+
+        public string GetDirecoryNamePointed(Point point)
+        {
+            string name = "";
+
+            ListViewItem targetFile = GetPointedItem(point);
+            if (IsADirectory(targetFile))
+            {
+                FileSystemInfo targetFileInfo = (FileSystemInfo)targetFile.Tag;
+                name = targetFileInfo.Name;
+            }
+
+            return name;
+        }
+
+        private bool IsADirectory(ListViewItem item)
+        {
+            bool isADirectory = false;
+
+            if (item.ImageIndex == 0 || item.ImageIndex == 1)
+            {
+                isADirectory = true;
+            }
+
+            return isADirectory;
+        }
     }
 }
