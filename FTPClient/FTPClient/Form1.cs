@@ -129,13 +129,13 @@ namespace FTPClient
                     fileQueue.AddItem(fileFromServer);
 
                     targetPath += "\\" + fileToDownload.Name;
-                    DownloadFile(fileToDownloadPath, targetPath, fileFromServer);
+                    DownloadTransfert(fileToDownloadPath, targetPath, fileFromServer);
                 }
 
             }
         }
 
-        private async void DownloadFile(string filePathToDownload, string localPathTarget, FileServer fileInfo)
+        private async void DownloadTransfert(string filePathToDownload, string localPathTarget, FileServer fileInfo)
         {
             string serverTarget = filePathToDownload;
             string fileName = fileInfo.GetName();
@@ -170,7 +170,7 @@ namespace FTPClient
                     FileServer fileServer = new FileServer(rawData, filePathToDownload);
                     if (fileServer.IsNameOKToDisplay())
                     {
-                        DownloadFile(serverTarget  + "/" + fileServer.GetName(), 
+                        DownloadTransfert(serverTarget  + "/" + fileServer.GetName(), 
                             localPathTarget + "\\" + fileServer.GetName(), 
                             fileServer);
                     }
@@ -178,30 +178,35 @@ namespace FTPClient
             }
             else
             {
-                FtpWebRequest downloadRequest = ftpManager.CreateFtpWebRequest(serverTarget);
-                downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-
-                FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
-                FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
-                Stream responseStream = downloadResponse.GetResponseStream();
-                Int32 bufferSize = 2048;
-                Int32 readCount;
-                Byte[] buffer = new Byte[bufferSize];
-                FileServer fileSize = (FileServer)fileInfo;
-                double totalWeight = (double)fileSize.GetSize();
-                double actualWeigth = 0;
-                readCount = responseStream.Read(buffer, 0, bufferSize);
-                while (readCount > 0)
-                {
-                    actualWeigth += readCount;
-                    downloadedFileStream.Write(buffer, 0, readCount);
-                    readCount = responseStream.Read(buffer, 0, bufferSize);
-                    fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
-                }
-                responseStream.Close();
-                downloadedFileStream.Close();
-                downloadResponse.Close();
+                DownloadFile(localPathTarget, fileInfo, serverTarget);
             }
+        }
+
+        private void DownloadFile(string localPathTarget, FileServer fileInfo, string serverTarget)
+        {
+            FtpWebRequest downloadRequest = ftpManager.CreateFtpWebRequest(serverTarget);
+            downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+
+            FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
+            FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
+            Stream responseStream = downloadResponse.GetResponseStream();
+            Int32 bufferSize = 2048;
+            Int32 readCount;
+            Byte[] buffer = new Byte[bufferSize];
+            FileServer fileSize = (FileServer)fileInfo;
+            double totalWeight = (double)fileSize.GetSize();
+            double actualWeigth = 0;
+            readCount = responseStream.Read(buffer, 0, bufferSize);
+            while (readCount > 0)
+            {
+                actualWeigth += readCount;
+                downloadedFileStream.Write(buffer, 0, readCount);
+                readCount = responseStream.Read(buffer, 0, bufferSize);
+                fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
+            }
+            responseStream.Close();
+            downloadedFileStream.Close();
+            downloadResponse.Close();
         }
         #endregion
 
