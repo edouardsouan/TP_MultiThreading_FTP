@@ -83,6 +83,16 @@ namespace FTPClient
         }
         #endregion
 
+        #region File Transfert
+        private void TransfertGauge(double totalWeigth, double actualWeigth)
+        {
+            fileTransfertBar.Minimum = 0;
+            fileTransfertBar.Maximum = (int)totalWeigth;
+        
+            fileTransfertBar.Value = (int)actualWeigth;
+        }
+        #endregion
+
         #region Download files/directory from the server
         private void listViewLocal_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {
@@ -127,7 +137,7 @@ namespace FTPClient
 
         private async void DownloadFile(string filePathToDownload, string localPathTarget, FileServer fileInfo)
         {
-            string serverTarget = "ftp://" + this.txtServer.Text + "/" + filePathToDownload;
+            string serverTarget = filePathToDownload;
             string fileName = fileInfo.GetName();
 
             if (fileInfo.IsADirectory())
@@ -150,7 +160,7 @@ namespace FTPClient
                     fileName += "1"; 
                 }
 
-                FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
+                FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverTarget);
                 FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
                 logWindow.WriteLog(ftpResponse);
                 string[] serverData = ftpManager.ParseRawData(ftpResponse);
@@ -160,7 +170,9 @@ namespace FTPClient
                     FileServer fileServer = new FileServer(rawData, filePathToDownload);
                     if (fileServer.IsNameOKToDisplay())
                     {
-                        DownloadFile(filePathToDownload + "/" + fileServer.GetName(), localPathTarget + "\\" + fileServer.GetName(), fileServer);
+                        DownloadFile(serverTarget  + "/" + fileServer.GetName(), 
+                            localPathTarget + "\\" + fileServer.GetName(), 
+                            fileServer);
                     }
                 }
             }
@@ -190,24 +202,25 @@ namespace FTPClient
                 downloadedFileStream.Close();
                 downloadResponse.Close();
             }
-
-            // TODO : update treeViewLocal and listViewLocal
         }
         #endregion
 
 
-        // --------------------------------------------------------------
-        //  TODO : upload to the server
-        // --------------------------------------------------------------
-//        #region File Transfert
-//        private void TransfertGauge(double totalWeigth, double actualWeigth)
-//        {
-//            fileTransfertBar.Minimum = 0;
-//            fileTransfertBar.Maximum = (int)totalWeigth;
-//
-//            fileTransfertBar.Value = (int)actualWeigth;
-//        }
-//        #endregion
+        #region Upload files / directories to the server
+        private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
+        {
+            serverListView.DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+        private void listViewServer_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+        private void listViewServer_DragDrop(object sender, DragEventArgs e)
+        {
+            // TO REFACTO
+        }
+        #endregion
+              
 //
 //        #region Upload files / directories to the server
 //        private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)

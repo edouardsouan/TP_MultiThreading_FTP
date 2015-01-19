@@ -40,8 +40,8 @@ namespace FTPClient.ServerEntities
 
         public FtpWebRequest CreateFtpWebRequest(string complementPath)
         {
-            string serverTarget = "ftp://" + this.server + ":" + this.port + complementPath + "/";
-            
+            string serverTarget = "ftp://" + this.server + ":" + this.port + "/" + complementPath;
+
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
             ftpRequest.KeepAlive = false;
             ftpRequest.Credentials = new NetworkCredential(this.user, this.password);
