@@ -99,10 +99,17 @@ namespace FTPClient
 
         private void Server_CreateDirectory(string serverPathTarget)
         {
-            FtpWebRequest makeDirRequest = ftpManager.CreatRequestMakeDirectory(serverPathTarget);
-            FtpWebResponse makeDirResponse = (FtpWebResponse)makeDirRequest.GetResponse();
-            logWindow.WriteLog(makeDirResponse);
-            makeDirResponse.Close();
+            try
+            {
+                FtpWebRequest makeDirRequest = ftpManager.CreatRequestMakeDirectory(serverPathTarget);
+                FtpWebResponse makeDirResponse = (FtpWebResponse)makeDirRequest.GetResponse();
+                logWindow.WriteLog(makeDirResponse);
+                makeDirResponse.Close();
+            }
+            catch (WebException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
         }
     }
 }
