@@ -229,6 +229,10 @@ namespace FTPClient
                 string draggedFileName = localListView.GetDirecoryNamePointed(draggedFilePoint);
                 serverPathTarget += draggedFileName;
             }
+            catch(NullReferenceException exception)
+            {
+                Console.WriteLine("Exception "+ exception.ToString() +"; nothing pointed");
+            }
             finally
             {
                 ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
