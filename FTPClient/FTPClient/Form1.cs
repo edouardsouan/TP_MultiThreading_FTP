@@ -149,15 +149,6 @@ namespace FTPClient
                 catch (System.IO.IOException exception)
                 {
                     Console.WriteLine("File name already exist : " + exception.ToString());
-                    /*
-                     * 3 options possibles :
-                     * - ignorer : arrêter
-                     * - remplacer : on suppose que mettre à jour un fichier devrait mettre à jour 
-                     * la date du dernier accès du dossier
-                     * - copier : rajouter 1
-                     * => Pour le moment on rajoute "1"
-                     * */
-                    fileName += "1"; 
                 }
 
                 FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverTarget);
