@@ -270,62 +270,6 @@ namespace FTPClient
             responseStream.Close();
             uploadFileStream.Close();
         }
-
-        
         #endregion
-
-//        private void listViewServer_DragDrop(object sender, DragEventArgs e)
-//        {
-//            String filePath = this.localPath;
-//            ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-//            try
-//            {
-//                Point targetPoint = serverListView.PointToClient(new Point(e.X, e.Y));
-//                ListViewItem targetFile = serverListView.GetItemAt(targetPoint.X, targetPoint.Y);
-//                if (IsADirectory((FileInfo)targetFile.Tag))
-//                {
-//                    filePath += '\\' + targetFile.Name;
-//                }
-//            }
-//            catch (NullReferenceException exception)
-//            {
-//                Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
-//            }
-//            finally
-//            {
-//                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
-//                filePath += "\\" + fileToUpload.Name;
-//                UploadFile(filePath, serverPath.Replace("\\", "//") + "//" + fileToUpload.Name, fileToUpload);
-//            }
-//        }
-//        // TODO : Traitement récursif pour les dossiers
-//        private void UploadFile(string filePathToUpload, string distPathTarget, FileInfo fileInfo)
-//        {
-//            string serverTarget = "ftp://" + this.txtServer.Text + distPathTarget;
-//            FtpWebRequest uploadRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-//            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
-//            uploadRequest.Credentials = new NetworkCredential(this.txtUserName.Text, this.txtPassword.Text);
-//
-//
-//            StreamReader uploadFileStream = new StreamReader(filePathToUpload);
-//            byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);
-//            uploadFileStream.Close();
-//            uploadRequest.ContentLength = fileContents.Length;
-//
-//
-//            Stream responseStream = uploadRequest.GetRequestStream();
-//            responseStream.Write(fileContents, 0, fileContents.Length);
-//            responseStream.Close();
-//
-//            FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
-//
-//
-//            responseStream.Close();
-//            uploadFileStream.Close();
-//            uploadResponse.Close();
-//
-//            Console.WriteLine("Download Complete, status {0}", uploadResponse.StatusDescription);
-//        }
-
     }
 }
