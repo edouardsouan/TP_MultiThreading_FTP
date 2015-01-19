@@ -30,7 +30,7 @@ namespace FTPClient.InfoEntities
             ListViewItem item = new ListViewItem(fileToDownload.GetName());
             item.Name = fileToDownload.GetName();
             string direction = "<--";
-            string distFile = fileToDownload.GetPath();
+            string distFile = fileToDownload.GetName();
             string taille = fileToDownload.GetSize().ToString();
 
             ListViewItem.ListViewSubItem[]  subItems = new ListViewItem.ListViewSubItem[]

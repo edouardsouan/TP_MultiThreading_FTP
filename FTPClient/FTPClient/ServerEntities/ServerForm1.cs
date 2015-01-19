@@ -56,7 +56,7 @@ namespace FTPClient
         {
             foreach (string aData in serverData)
             {
-                FileServer fileServer = new FileServer(aData, serverPath);
+                FileServer fileServer = new FileServer(aData);
                 if (fileServer.IsNameOKToDisplay())
                 {
                     serverTreeView.AddNode(fileServer, parentNode);

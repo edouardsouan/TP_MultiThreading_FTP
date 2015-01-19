@@ -38,7 +38,7 @@ namespace FTPClient
         }
         #endregion
 
-        #region IsADirectory => Put in each Tree (local and server) ?
+        #region IsADirectory or IsAFile => Put in each Tree (local and server) ?
         private bool IsADirectory(FileSystemInfo fileSystemInfo)
         {
             bool isADirectory = false;
@@ -167,7 +167,7 @@ namespace FTPClient
 
                 foreach (String rawData in serverData)
                 {
-                    FileServer fileServer = new FileServer(rawData, filePathToDownload);
+                    FileServer fileServer = new FileServer(rawData);
                     if (fileServer.IsNameOKToDisplay())
                     {
                         DownloadTransfert(serverTarget  + "/" + fileServer.GetName(), 
@@ -222,38 +222,50 @@ namespace FTPClient
         }
         private void listViewServer_DragDrop(object sender, DragEventArgs e)
         {
-            string filePath = this.localPath;
+            Point draggedFilePoint = new Point(e.X, e.Y);
+            string serverPathTarget = serverPath.Replace("\\", "//");
+
             try
             {
-                string draggedFileName = localListView.GetDirecoryNamePointed(new Point(e.X, e.Y));
-                if(draggedFileName.Equals(""))
-                {
-                    filePath += '\\' + draggedFileName;
-                }
-            }
-            catch (NullReferenceException exception)
-            {
-                Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
+                string draggedFileName = localListView.GetDirecoryNamePointed(draggedFilePoint);
+                serverPathTarget += draggedFileName;
             }
             finally
             {
                 ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
-                filePath += "\\" + fileToUpload.Name;
-                UploadTransfert(filePath, serverPath.Replace("\\", "//") + "//" + fileToUpload.Name, fileToUpload);
+                serverPathTarget += "//" + draggedFile.Name;
+                UploadTransfert(draggedFile, serverPathTarget);
             }
         }
 
-        private void UploadTransfert(string filePathToUpload, string distPathTarget, FileInfo fileInfo)
+        private void UploadTransfert(ListViewItem draggedFile, string serverPathTarget)
         {
-            FtpWebRequest uploadRequest = ftpManager.CreateFtpWebRequest(distPathTarget);
-            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            try
+            {
+                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
+                UploadFile(fileToUpload.FullName, serverPathTarget);
+            }
+            catch (InvalidCastException exception)
+            {
+                Console.WriteLine("Exception " + exception.ToString() + " directory to .");
 
-            UploadFile(filePathToUpload, uploadRequest);
+                DirectoryInfo fileToUpload = (DirectoryInfo)draggedFile.Tag;
+
+
+                UploadDirectory();
+            }
         }
 
-        private void UploadFile(string filePathToUpload, FtpWebRequest uploadRequest)
+        private void UploadDirectory()
         {
+
+        }
+
+        private void UploadFile(string filePathToUpload, string serverPathTarget)
+        {
+            FtpWebRequest uploadRequest = ftpManager.CreateFtpWebRequest(serverPathTarget);
+            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+
             StreamReader uploadFileStream = new StreamReader(filePathToUpload);
             byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);
             uploadFileStream.Close();
@@ -265,10 +277,7 @@ namespace FTPClient
 
             FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
             logWindow.WriteLog(uploadResponse);
-
             uploadResponse.Close();
-            responseStream.Close();
-            uploadFileStream.Close();
         }
         #endregion
     }

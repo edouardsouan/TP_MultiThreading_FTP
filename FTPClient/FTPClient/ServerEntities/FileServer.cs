@@ -17,11 +17,10 @@ namespace FTPClient.ServerEntities
         private long size;
         private string lastModifiedDate;
         private string name;
-        private string path;
         #endregion
 
         #region constructor
-        public FileServer(string rawFileServer, string serverPath)
+        public FileServer(string rawFileServer)
         {
             string rawFileToClean = rawFileServer.Remove(rawFileServer.LastIndexOf("\r"), 1);
             Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileToClean);
@@ -61,7 +60,6 @@ namespace FTPClient.ServerEntities
             this.lastModifiedDate = cleanedFields.ElementAt(5) + ":" + cleanedFields.ElementAt(6) + ":" + cleanedFields.ElementAt(7);
             this.name = cleanedFields.ElementAt(8);
             SetDataType(cleanedFields.ElementAt(0));
-            this.path = serverPath;
         }
 
         private void SetDataType(string dataField)
@@ -95,7 +93,6 @@ namespace FTPClient.ServerEntities
         public long GetSize() { return this.size; }
         public string GetLastModifiedDate() { return this.lastModifiedDate; }
         public string GetName() { return this.name; }
-        public string GetPath() { return this.path; }
 
         public bool IsADirectory()
         {

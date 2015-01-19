@@ -44,6 +44,7 @@ namespace FTPClient.ServerEntities
 
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
             ftpRequest.KeepAlive = false;
+            ftpRequest.UsePassive = true;
             ftpRequest.Credentials = new NetworkCredential(this.user, this.password);
 
             return ftpRequest;
@@ -63,6 +64,7 @@ namespace FTPClient.ServerEntities
             StreamReader streamReader = new StreamReader(responseStream);
 
             string rawResult = streamReader.ReadToEnd();
+            Console.WriteLine(rawResult);
             string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
 
             streamReader.Close();
