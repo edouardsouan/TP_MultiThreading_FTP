@@ -184,8 +184,7 @@ namespace FTPClient
 
         private void DownloadFile(string localPathTarget, FileServer fileInfo, string serverTarget)
         {
-            FtpWebRequest downloadRequest = ftpManager.CreateFtpWebRequest(serverTarget);
-            downloadRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
 
             FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
             FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
@@ -249,22 +248,33 @@ namespace FTPClient
             {
                 Console.WriteLine("Exception " + exception.ToString() + " directory to .");
 
-                DirectoryInfo fileToUpload = (DirectoryInfo)draggedFile.Tag;
-
-
-                UploadDirectory();
+                DirectoryInfo directoryToUpload = (DirectoryInfo)draggedFile.Tag;
+                UploadDirectory(directoryToUpload, serverPathTarget);
             }
         }
 
-        private void UploadDirectory()
+        private void UploadDirectory(DirectoryInfo directoryToUpload, string serverPathTarget)
         {
+            Server_CreateDirectory(serverPathTarget);
 
+            string subServerPathTarget = serverPathTarget + "/";
+
+            List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(directoryToUpload);
+            foreach(DirectoryInfo subDirectory in subDirectories)
+            {
+                UploadDirectory(subDirectory, subServerPathTarget + subDirectory.Name);
+            }
+
+            List<FileInfo> subFiles = Local_GetLocalFiles(directoryToUpload);
+            foreach (FileInfo subFile in subFiles)
+            {
+                UploadFile(subFile.FullName, subServerPathTarget + subFile.Name);
+            }
         }
 
         private void UploadFile(string filePathToUpload, string serverPathTarget)
         {
-            FtpWebRequest uploadRequest = ftpManager.CreateFtpWebRequest(serverPathTarget);
-            uploadRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
 
             StreamReader uploadFileStream = new StreamReader(filePathToUpload);
             byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);

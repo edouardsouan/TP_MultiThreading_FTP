@@ -96,5 +96,13 @@ namespace FTPClient
                 serverListView.AddItem((FileServer)subNode.Tag);
             }
         }
+
+        private void Server_CreateDirectory(string serverPathTarget)
+        {
+            FtpWebRequest makeDirRequest = ftpManager.CreatRequestMakeDirectory(serverPathTarget);
+            FtpWebResponse makeDirResponse = (FtpWebResponse)makeDirRequest.GetResponse();
+            logWindow.WriteLog(makeDirResponse);
+            makeDirResponse.Close();
+        }
     }
 }

@@ -50,6 +50,30 @@ namespace FTPClient.ServerEntities
             return ftpRequest;
         }
 
+        public FtpWebRequest CreatRequestMakeDirectory(string complementPath)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
+
+            return ftpRequest;
+        }
+
+        public FtpWebRequest CreatRequestUploadFile(string complementPath)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+
+            return ftpRequest;
+        }
+
+        public FtpWebRequest CreatRequestDownloadFile(string complementPath)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+
+            return ftpRequest;
+        }
+
         public FtpWebRequest CreatRequestListDirectoriesAndFiles(string complementPath)
         {
             FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);

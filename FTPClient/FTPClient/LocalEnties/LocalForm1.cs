@@ -30,22 +30,31 @@ namespace FTPClient
             }
         }
 
+        private List<DirectoryInfo> Local_GetLocalDirectories(DirectoryInfo directoryInfo)
+        {
+            List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
+
+            try
+            {
+                subDirectories = directoryInfo.GetDirectories().ToList();
+            }
+            catch (UnauthorizedAccessException exception)
+            {
+                logWindow.WriteLog("Access Denied : " + directoryInfo.Name, Color.Red);
+                Console.WriteLine(exception.ToString());
+            }
+
+            return subDirectories;
+        }
+
         private List<DirectoryInfo> Local_GetLocalDirectories(TreeNode nodeClicked)
         {
-            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            DirectoryInfo directoryInfo = (DirectoryInfo)nodeClicked.Tag;
             List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
 
             if (nodeClicked.Nodes.Count == 0)
             {
-                try
-                {
-                    subDirectories = nodeClickedInfo.GetDirectories().ToList();
-                }
-                catch (UnauthorizedAccessException exception)
-                {
-                    logWindow.WriteLog("Access Denied : "+nodeClickedInfo.Name, Color.Red);
-                    Console.WriteLine(exception.ToString());
-                }
+                subDirectories = Local_GetLocalDirectories(directoryInfo);
             }
             else
             {
@@ -62,22 +71,31 @@ namespace FTPClient
             return subDirectories;
         }
 
+        private List<FileInfo> Local_GetLocalFiles(DirectoryInfo directoryInfo)
+        {
+            List<FileInfo> subFiles = new List<FileInfo>();
+
+            try
+            {
+                subFiles = directoryInfo.GetFiles().ToList();
+            }
+            catch (UnauthorizedAccessException exception)
+            {
+                logWindow.WriteLog("Access Denied : " + directoryInfo.Name, Color.Red);
+                Console.WriteLine(exception.ToString());
+            }
+
+            return subFiles;
+        }
+
         private List<FileInfo> Local_GetLocalFiles(TreeNode nodeClicked)
         {
-            DirectoryInfo nodeClickedInfo = (DirectoryInfo)nodeClicked.Tag;
+            DirectoryInfo directoryInfo = (DirectoryInfo)nodeClicked.Tag;
             List<FileInfo> subFiles = new List<FileInfo>();
 
             if (nodeClicked.Nodes.Count == 0)
             {
-                try
-                {
-                    subFiles = nodeClickedInfo.GetFiles().ToList();
-                }
-                catch (UnauthorizedAccessException exception)
-                {
-                    logWindow.WriteLog("Access Denied : "+nodeClickedInfo.Name, Color.Red);
-                    Console.WriteLine(exception.ToString());
-                }
+                subFiles = Local_GetLocalFiles(directoryInfo);
             }
             else
             {
