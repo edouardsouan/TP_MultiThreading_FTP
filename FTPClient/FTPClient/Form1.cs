@@ -124,7 +124,7 @@ namespace FTPClient
                 }
                 finally
                 {
-                    FileServer fileFromServer = (FileServer)fileToDownload.Tag;
+                    FileServer fileFromServer = (FileServer)((TreeNode)fileToDownload.Tag).Tag;
                     
                     fileQueue.AddItem(fileFromServer);
 
@@ -183,8 +183,7 @@ namespace FTPClient
             Int32 bufferSize = 2048;
             Int32 readCount;
             Byte[] buffer = new Byte[bufferSize];
-            FileServer fileSize = (FileServer)fileInfo;
-            double totalWeight = (double)fileSize.GetSize();
+            double totalWeight = (double)fileInfo.GetSize();
             double actualWeigth = 0;
             readCount = responseStream.Read(buffer, 0, bufferSize);
             while (readCount > 0)

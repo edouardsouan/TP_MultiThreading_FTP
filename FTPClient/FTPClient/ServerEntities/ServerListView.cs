@@ -24,8 +24,10 @@ namespace FTPClient.ServerEntities
             InitializeComponent();
         }
 
-        public void AddItem(FileServer fileServer)
+        public void AddItem(TreeNode node)
         {
+            FileServer fileServer = (FileServer)node.Tag;
+
             string size = fileServer.GetSize().ToString();
             string extension = fileServer.GetDataType();
             string date = fileServer.GetLastModifiedDate();
@@ -35,7 +37,7 @@ namespace FTPClient.ServerEntities
 
             ListViewItem item = new ListViewItem(fileServer.GetName(), 0);
             item.Name = fileServer.GetName();
-            item.Tag = fileServer;
+            item.Tag = node;
             item.ImageIndex = AssignImage(extension);
 
             ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[]

@@ -59,8 +59,9 @@ namespace FTPClient
                 FileServer fileServer = new FileServer(aData);
                 if (fileServer.IsNameOKToDisplay())
                 {
-                    serverTreeView.AddNode(fileServer, parentNode);
-                    serverListView.AddItem(fileServer);
+                    TreeNode fileNode = serverTreeView.CreateNode(fileServer, parentNode);
+                    serverTreeView.AddNode(fileNode, parentNode);
+                    serverListView.AddItem(fileNode);
                 }
             }
 
@@ -93,7 +94,7 @@ namespace FTPClient
             TreeNodeCollection subNodes = parentNode.Nodes;
             foreach (TreeNode subNode in subNodes)
             {
-                serverListView.AddItem((FileServer)subNode.Tag);
+                serverListView.AddItem(subNode);
             }
         }
 

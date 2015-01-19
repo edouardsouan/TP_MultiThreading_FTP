@@ -33,12 +33,18 @@ namespace FTPClient.LocalEntities
             this.Nodes.Add(rootNode);
         }
 
+        public TreeNode CreateNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
+        {
+            TreeNode node = new TreeNode(fileInfo.Name);
+            node.Tag = fileInfo;
+            node.ImageIndex = imageIndex;
+            node.SelectedImageIndex = imageIndex;
+            return node;
+        }
+
         public void AddNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
         {
-            TreeNode childNode = new TreeNode(fileInfo.Name);
-            childNode.Tag = fileInfo;
-            childNode.ImageIndex = imageIndex;
-            childNode.SelectedImageIndex = imageIndex;
+            TreeNode childNode = CreateNode(fileInfo, imageIndex, parentNode);
             parentNode.Nodes.Add(childNode);
         }
 

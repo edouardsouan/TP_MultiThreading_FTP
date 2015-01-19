@@ -33,7 +33,7 @@ namespace FTPClient.ServerEntities
             this.Nodes.Add(serverNode);
         }
 
-        public void AddNode(FileServer fileServer, TreeNode parentNode)
+        public TreeNode CreateNode(FileServer fileServer, TreeNode parentNode)
         {
             TreeNode serverNode = new TreeNode(fileServer.GetName());
             serverNode.Tag = fileServer;
@@ -49,6 +49,17 @@ namespace FTPClient.ServerEntities
                 serverNode.SelectedImageIndex = 2;
             }
 
+            return serverNode;
+        }
+
+        public void AddNode(FileServer fileServer, TreeNode parentNode)
+        {
+            TreeNode serverNode = CreateNode(fileServer, parentNode);
+            parentNode.Nodes.Add(serverNode);
+        }
+
+        public void AddNode(TreeNode serverNode, TreeNode parentNode)
+        {
             parentNode.Nodes.Add(serverNode);
         }
     }
