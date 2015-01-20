@@ -242,9 +242,10 @@ namespace FTPClient
 
         private void UploadTransfert(ListViewItem draggedFile, string serverPathTarget)
         {
+            TreeNode fileNode = (TreeNode)draggedFile.Tag;
+
             try
             {
-                TreeNode fileNode = (TreeNode)draggedFile.Tag;
                 FileInfo fileToUpload = (FileInfo)fileNode.Tag;
                 UploadFile(fileToUpload.FullName, serverPathTarget);
             }
@@ -252,7 +253,6 @@ namespace FTPClient
             {
                 Console.WriteLine("Exception " + exception.ToString() + " directory to .");
 
-                TreeNode fileNode = (TreeNode)draggedFile.Tag;
                 DirectoryInfo directoryToUpload = (DirectoryInfo)fileNode.Tag;
                 UploadDirectory(directoryToUpload, serverPathTarget);
             }

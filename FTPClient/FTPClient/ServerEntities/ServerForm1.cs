@@ -67,7 +67,7 @@ namespace FTPClient
                     TreeNode fileNode = serverTreeView.CreateNode(fileServer, parentNode);
 
                     serverTreeView.AddNode(fileNode, parentNode);
-                    serverListView.AddItem(fileNode);
+                    serverListView.AddItem(fileNode, fileNode.Name);
                 }
             }
 
@@ -108,7 +108,7 @@ namespace FTPClient
             TreeNodeCollection subNodes = parentNode.Nodes;
             foreach (TreeNode subNode in subNodes)
             {
-                serverListView.AddItem(subNode);
+                serverListView.AddItem(subNode, subNode.Name);
             }
         }
 

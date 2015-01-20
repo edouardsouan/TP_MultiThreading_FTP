@@ -24,37 +24,6 @@ namespace FTPClient.ServerEntities
             InitializeComponent();
         }
 
-        public void AddItem(TreeNode node)
-        {
-            FileServer fileServer = (FileServer)node.Tag;
-
-            string size = fileServer.GetSize().ToString();
-            string extension = fileServer.GetDataType();
-            string date = fileServer.GetLastModifiedDate();
-            string rights = fileServer.GetRights();
-            string owner = fileServer.GetOwner();
-            string group = fileServer.GetGroup();
-
-            ListViewItem item = new ListViewItem(fileServer.GetName(), 0);
-            item.Name = fileServer.GetName();
-            item.Tag = node;
-            item.ImageIndex = AssignImage(extension);
-
-            ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[]
-                    {
-                        new ListViewItem.ListViewSubItem(item, size),
-                        new ListViewItem.ListViewSubItem(item, extension), 
-                        new ListViewItem.ListViewSubItem(item, date),
-                        new ListViewItem.ListViewSubItem(item, rights),
-                        new ListViewItem.ListViewSubItem(item, owner),
-                        new ListViewItem.ListViewSubItem(item, group)
-                    };
-            ;
-            item.SubItems.AddRange(subItems);
-
-            this.Items.Add(item);
-        }
-
         public void AddItem(TreeNode node, String displayName)
         {
             FileServer fileServer = (FileServer)node.Tag;

@@ -35,7 +35,9 @@ namespace FTPClient.ServerEntities
 
         public TreeNode CreateNode(FileServer fileServer, TreeNode parentNode)
         {
-            TreeNode serverNode = new TreeNode(fileServer.GetName());
+            string name = fileServer.GetName();
+            TreeNode serverNode = new TreeNode(name);
+            serverNode.Name = name;
             serverNode.Tag = fileServer;
 
             if (fileServer.GetDataType().Equals("Directory"))

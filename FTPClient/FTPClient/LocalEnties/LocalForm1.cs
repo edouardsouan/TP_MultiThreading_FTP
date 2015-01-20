@@ -27,7 +27,7 @@ namespace FTPClient
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
                 TreeNode newNode = localTreeView.GenerateTreeNode(logicalDrive, 0);
                 localTreeView.AddRootNode(newNode);
-                localListView.AddItem(newNode);
+                localListView.AddItem(newNode, newNode.Name);
             }
         }
 
@@ -134,23 +134,19 @@ namespace FTPClient
                 foreach(DirectoryInfo subDir in subDirectories)
                 {
                     TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
-                    localListView.AddItem(dirNode);
+                    localListView.AddItem(dirNode, dirNode.Name);
                 }
 
                 foreach(FileSystemInfo subFile in subFiles)
                 {
                     TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
-                    localListView.AddItem(fileNode);
+                    localListView.AddItem(fileNode, fileNode.Name);
                 }
             }
         }
 
         private void DisplayParentNodeInListView(TreeNode nodeSelected)
         {
-            // ListViewItem parentItem = localListView.GenerateItem((FileSystemInfo)nodeSelected.Tag);
-            // parentItem.Text = "..";
-            // TreeNode parentNode = localTreeView.GenerateTreeNode(parentItem, parentItem.ImageIndex);
-            // nodeSelected.Name = "..";
             localListView.AddItem(nodeSelected,"..");
         }
 
