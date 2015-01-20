@@ -47,7 +47,7 @@ namespace FTPClient.LocalEntities
             }
         }
 
-        private ListViewItem GenerateItem(FileSystemInfo fileInfo)
+        public ListViewItem GenerateItem(FileSystemInfo fileInfo)
         {
             ListViewItem newItem = new ListViewItem(fileInfo.Name, 0);
             newItem.Name = fileInfo.Name;
@@ -63,6 +63,10 @@ namespace FTPClient.LocalEntities
             newItem.SubItems.AddRange(newSubItems);
 
             return newItem;
+        }
+
+        public void AddItem(ListViewItem itemToAdd) {
+            this.Items.Add(itemToAdd);
         }
 
         private string RetrieveSize(FileSystemInfo fileInfo)

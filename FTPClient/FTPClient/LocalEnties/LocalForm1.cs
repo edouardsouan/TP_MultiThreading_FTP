@@ -127,6 +127,12 @@ namespace FTPClient
                 nodeSelected.Expand();
 
                 localListView.ClearItems();
+
+                ListViewItem parentNode = localListView.GenerateItem((FileSystemInfo)nodeSelected.Tag);
+                parentNode.Text = "..";
+                localListView.AddItem(parentNode);
+
+
                 localListView.AddItems(subDirectories);
                 localListView.AddItems(subFiles);
             }
