@@ -54,12 +54,18 @@ namespace FTPClient
 
         private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
         {
+            if (parentNode.Parent != null)
+            {
+                 serverListView.AddItem(parentNode, "..");
+            }
+           
             foreach (string aData in serverData)
             {
                 FileServer fileServer = new FileServer(aData);
                 if (fileServer.IsNameOKToDisplay())
                 {
                     TreeNode fileNode = serverTreeView.CreateNode(fileServer, parentNode);
+
                     serverTreeView.AddNode(fileNode, parentNode);
                     serverListView.AddItem(fileNode);
                 }
