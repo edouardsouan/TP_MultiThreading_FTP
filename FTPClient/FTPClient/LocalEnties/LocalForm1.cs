@@ -25,8 +25,9 @@ namespace FTPClient
             foreach (string drive in drives)
             {
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
-                localTreeView.AddRootNode(logicalDrive, 0);
-                localListView.AddItem(logicalDrive);
+                TreeNode newNode = localTreeView.GenerateTreeNode(logicalDrive, 0);
+                localTreeView.AddRootNode(newNode);
+                localListView.AddItem(newNode);
             }
         }
 
@@ -128,14 +129,29 @@ namespace FTPClient
 
                 localListView.ClearItems();
 
-                ListViewItem parentNode = localListView.GenerateItem((FileSystemInfo)nodeSelected.Tag);
-                parentNode.Text = "..";
-                localListView.AddItem(parentNode);
+                DisplayParentNodeInListView(nodeSelected);
 
+                foreach(DirectoryInfo subDir in subDirectories)
+                {
+                    TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
+                    localListView.AddItem(dirNode);
+                }
 
-                localListView.AddItems(subDirectories);
-                localListView.AddItems(subFiles);
+                foreach(FileSystemInfo subFile in subFiles)
+                {
+                    TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
+                    localListView.AddItem(fileNode);
+                }
             }
+        }
+
+        private void DisplayParentNodeInListView(TreeNode nodeSelected)
+        {
+            // ListViewItem parentItem = localListView.GenerateItem((FileSystemInfo)nodeSelected.Tag);
+            // parentItem.Text = "..";
+            // TreeNode parentNode = localTreeView.GenerateTreeNode(parentItem, parentItem.ImageIndex);
+            // nodeSelected.Name = "..";
+            localListView.AddItem(nodeSelected,"..");
         }
 
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

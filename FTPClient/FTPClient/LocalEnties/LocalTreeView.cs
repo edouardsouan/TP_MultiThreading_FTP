@@ -24,12 +24,18 @@ namespace FTPClient.LocalEntities
             InitializeComponent();
         }
 
-        public void AddRootNode(FileSystemInfo fileInfo, int imageIndex)
+        public TreeNode GenerateTreeNode(FileSystemInfo fileInfo, int imageIndex)
         {
-            TreeNode rootNode = new TreeNode(fileInfo.Name);
-            rootNode.Tag = fileInfo;
-            rootNode.ImageIndex = imageIndex;
-            rootNode.SelectedImageIndex = imageIndex;
+            TreeNode node = new TreeNode(fileInfo.Name);
+            node.Tag = fileInfo;
+            node.ImageIndex = imageIndex;
+            node.SelectedImageIndex = imageIndex;
+
+            return node;
+        }
+
+        public void AddRootNode(TreeNode rootNode)
+        {
             this.Nodes.Add(rootNode);
         }
 

@@ -145,6 +145,7 @@ namespace FTPClient
                 try
                 {
                     Directory.CreateDirectory(localPathTarget);
+                    Local_RefreshView();
                 }
                 catch (System.IO.IOException exception)
                 {
@@ -196,6 +197,14 @@ namespace FTPClient
             responseStream.Close();
             downloadedFileStream.Close();
             downloadResponse.Close();
+            Local_RefreshView();
+        }
+
+        public void Local_RefreshView() {
+            ListViewItem parentItem = localListView.Items[0];
+            TreeNode parentNode = (TreeNode)parentItem.Tag;
+            parentNode.Nodes.Clear();
+            Local_ShowLinkedElements(parentNode);
         }
         #endregion
 
@@ -235,14 +244,16 @@ namespace FTPClient
         {
             try
             {
-                FileInfo fileToUpload = (FileInfo)draggedFile.Tag;
+                TreeNode fileNode = (TreeNode)draggedFile.Tag;
+                FileInfo fileToUpload = (FileInfo)fileNode.Tag;
                 UploadFile(fileToUpload.FullName, serverPathTarget);
             }
             catch (InvalidCastException exception)
             {
                 Console.WriteLine("Exception " + exception.ToString() + " directory to .");
 
-                DirectoryInfo directoryToUpload = (DirectoryInfo)draggedFile.Tag;
+                TreeNode fileNode = (TreeNode)draggedFile.Tag;
+                DirectoryInfo directoryToUpload = (DirectoryInfo)fileNode.Tag;
                 UploadDirectory(directoryToUpload, serverPathTarget);
             }
         }

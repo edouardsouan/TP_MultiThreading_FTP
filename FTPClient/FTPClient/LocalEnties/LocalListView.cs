@@ -25,28 +25,31 @@ namespace FTPClient.LocalEntities
             InitializeComponent();
         }
 
+        /*
         public void AddItem(FileSystemInfo fileInfo)
         {
             ListViewItem newItem = GenerateItem(fileInfo);
             this.Items.Add(newItem);
         }
+         */
 
-        public void AddItems(List<DirectoryInfo> directoriesToAdd)
+       /* public void AddItems(List<DirectoryInfo> directoriesToAdd)
         {
             foreach (DirectoryInfo directory in directoriesToAdd)
             {
                 AddItem(directory);
             }
-        }
+        }*/
 
-        public void AddItems(List<FileInfo> filesToAdd)
+     /*   public void AddItems(List<FileInfo> filesToAdd)
         {
             foreach (FileInfo file in filesToAdd)
             {
                 AddItem(file);
             }
-        }
+        }*/
 
+        /*
         public ListViewItem GenerateItem(FileSystemInfo fileInfo)
         {
             ListViewItem newItem = new ListViewItem(fileInfo.Name, 0);
@@ -64,8 +67,63 @@ namespace FTPClient.LocalEntities
 
             return newItem;
         }
+         * */
+        
+         
+        public ListViewItem GenerateItem(TreeNode fileNode)
+        {
+            FileSystemInfo fileInfo = (FileSystemInfo)fileNode.Tag;
 
-        public void AddItem(ListViewItem itemToAdd) {
+            ListViewItem newItem = new ListViewItem(fileInfo.Name, 0);
+            newItem.Name = fileInfo.Name;
+            newItem.Tag = fileNode;
+            newItem.ImageIndex = AssignImage(fileInfo.Extension);
+
+            ListViewItem.ListViewSubItem[] newSubItems = new ListViewItem.ListViewSubItem[]
+            {
+                new ListViewItem.ListViewSubItem(newItem, RetrieveSize(fileInfo)),
+                new ListViewItem.ListViewSubItem(newItem, fileInfo.Extension), 
+                new ListViewItem.ListViewSubItem(newItem, fileInfo.LastAccessTime.ToShortDateString())
+            };
+            newItem.SubItems.AddRange(newSubItems);
+
+            return newItem;
+        }
+
+        public ListViewItem GenerateItem(TreeNode fileNode, string displayName)
+        {
+            FileSystemInfo fileInfo = (FileSystemInfo)fileNode.Tag;
+
+            ListViewItem newItem = new ListViewItem(displayName, 0);
+            newItem.Name = fileInfo.Name;
+            newItem.Tag = fileNode;
+            newItem.ImageIndex = AssignImage(fileInfo.Extension);
+
+            ListViewItem.ListViewSubItem[] newSubItems = new ListViewItem.ListViewSubItem[]
+            {
+                new ListViewItem.ListViewSubItem(newItem, RetrieveSize(fileInfo)),
+                new ListViewItem.ListViewSubItem(newItem, fileInfo.Extension), 
+                new ListViewItem.ListViewSubItem(newItem, fileInfo.LastAccessTime.ToShortDateString())
+            };
+            newItem.SubItems.AddRange(newSubItems);
+
+            return newItem;
+        }
+
+        /*public void AddItem(ListViewItem itemToAdd) {
+            this.Items.Add(itemToAdd);
+        }
+         * */
+
+        public void AddItem(TreeNode node)
+        {
+            ListViewItem itemToAdd = GenerateItem(node);
+            this.Items.Add(itemToAdd);
+        }
+
+        public void AddItem(TreeNode node, string displayNode)
+        {
+            ListViewItem itemToAdd = GenerateItem(node, displayNode);
             this.Items.Add(itemToAdd);
         }
 
