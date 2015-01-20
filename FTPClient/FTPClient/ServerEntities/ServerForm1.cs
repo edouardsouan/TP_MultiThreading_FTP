@@ -34,7 +34,6 @@ namespace FTPClient
                 try
                 {
                     isSendingListCommand = true;
-
                     FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
                     logWindow.WriteLog(ftpResponse);
@@ -54,10 +53,8 @@ namespace FTPClient
 
         private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
         {
-            if (parentNode.Parent != null)
-            {
-                 serverListView.AddItem(parentNode, "..");
-            }
+            serverListView.ClearItems();
+            Server_DisplayParentNode(parentNode);
            
             foreach (string aData in serverData)
             {
@@ -74,13 +71,20 @@ namespace FTPClient
             parentNode.Expand();
         }
 
+        private void Server_DisplayParentNode(TreeNode parentNode)
+        {
+            if (parentNode.Parent != null)
+            {
+                serverListView.AddItem(parentNode, "..");
+            }
+        }
+
         private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode nodeClicked = e.Node;
             if (IsADirectory(nodeClicked))
             {
                 serverPath = nodeClicked.FullPath;
-                serverListView.ClearItems();
 
                 if (nodeClicked.Nodes.Count == 0)
                 {
@@ -93,6 +97,7 @@ namespace FTPClient
 
                 nodeClicked.Expand();
             }
+
         }
 
         private void Server_ShowSubItems(TreeNode parentNode)

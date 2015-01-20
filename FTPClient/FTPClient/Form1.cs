@@ -261,7 +261,7 @@ namespace FTPClient
         private void UploadDirectory(DirectoryInfo directoryToUpload, string serverPathTarget)
         {
             Server_CreateDirectory(serverPathTarget);
-
+            Server_RefreshView();
             string subServerPathTarget = serverPathTarget + "/";
 
             List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(directoryToUpload);
@@ -293,6 +293,14 @@ namespace FTPClient
             FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
             logWindow.WriteLog(uploadResponse);
             uploadResponse.Close();
+            Server_RefreshView();
+        }
+        public void Server_RefreshView()
+        {
+            ListViewItem parentItem = serverListView.Items[0];
+            TreeNode parentNode = (TreeNode)parentItem.Tag;
+            parentNode.Nodes.Clear();
+            Server_ShowLinkedFTPElements(serverPath,parentNode);
         }
         #endregion
     }
