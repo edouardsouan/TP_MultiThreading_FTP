@@ -21,9 +21,7 @@ namespace FTPClient
         private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode nodeClicked = e.Node;
-            Local_ShowLinkedElements(nodeClicked);
-
-            localPath = nodeClicked.FullPath;
+            Local_OpenNode(nodeClicked);
         }
 
         private void localListView_MouseDoubleClick(object sender, EventArgs e)
@@ -31,13 +29,18 @@ namespace FTPClient
             if (localListView.SelectedItems.Count > 0)
             {
                 TreeNode nodeClicked = (TreeNode)localListView.SelectedItems[0].Tag;
-                if (IsADirectory(nodeClicked))
-                {
-                    Local_ShowLinkedElements(nodeClicked);
-                    localPath = nodeClicked.FullPath;
-                }
+                Local_OpenNode(nodeClicked);
             }
 
+        }
+
+        private void Local_OpenNode(TreeNode nodeClicked)
+        {
+            if (IsADirectory(nodeClicked))
+            {
+                Local_ShowLinkedElements(nodeClicked);
+                localPath = nodeClicked.FullPath;
+            }
         }
 
         #region Functions for FileSystemInfo

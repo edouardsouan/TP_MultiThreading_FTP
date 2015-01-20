@@ -411,6 +411,7 @@ namespace FTPClient
             this.serverListView.UseCompatibleStateImageBehavior = false;
             this.serverListView.View = System.Windows.Forms.View.Details;
             this.serverListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewLocal_ItemDrag);
+            this.serverListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.serverListView_MouseDoubleClick);
             this.serverListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragDrop);
             this.serverListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewServer_DragEnter);
             // 

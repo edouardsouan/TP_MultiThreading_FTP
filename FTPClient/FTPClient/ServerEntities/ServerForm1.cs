@@ -30,6 +30,42 @@ namespace FTPClient
             }
         }
 
+        private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode nodeClicked = e.Node;
+            Server_OpenNode(nodeClicked);
+        }
+
+        private void serverListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            if (serverListView.SelectedItems.Count > 0)
+            {
+                TreeNode nodeClicked = (TreeNode)serverListView.SelectedItems[0].Tag;
+                Server_OpenNode(nodeClicked);
+            }
+
+        }
+
+        private void Server_OpenNode(TreeNode nodeClicked)
+        {
+            if (IsADirectory(nodeClicked))
+            {
+                serverPath = nodeClicked.FullPath;
+
+                if (nodeClicked.Nodes.Count == 0)
+                {
+                    Server_ShowLinkedFTPElements(nodeClicked.FullPath, nodeClicked);
+                }
+                else
+                {
+                    Server_ShowSubItems(nodeClicked);
+                }
+
+                nodeClicked.Expand();
+            }
+        }
+
+        #region Functions and Methodes for TreeNode
         private async void Server_ShowLinkedFTPElements(string serverPath, TreeNode parentNode)
         {
             if (!isSendingListCommand)
@@ -81,27 +117,7 @@ namespace FTPClient
                 serverListView.AddItem(parentNode, "..");
             }
         }
-
-        private void treeViewServer_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode nodeClicked = e.Node;
-            if (IsADirectory(nodeClicked))
-            {
-                serverPath = nodeClicked.FullPath;
-
-                if (nodeClicked.Nodes.Count == 0)
-                {
-                    Server_ShowLinkedFTPElements(nodeClicked.FullPath, nodeClicked);
-                }
-                else
-                {
-                    Server_ShowSubItems(nodeClicked);
-                }
-
-                nodeClicked.Expand();
-            }
-
-        }
+        #endregion
 
         private void Server_ShowSubItems(TreeNode parentNode)
         {

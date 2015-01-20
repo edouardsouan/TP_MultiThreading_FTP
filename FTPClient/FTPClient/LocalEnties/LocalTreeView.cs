@@ -29,6 +29,11 @@ namespace FTPClient.LocalEntities
             this.Nodes.Add(rootNode);
         }
 
+        public void AddNode(TreeNode childNode, TreeNode parentNode)
+        {
+            parentNode.Nodes.Add(childNode);
+        }
+
         private TreeNode CreateNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
         {
             TreeNode node = GenerateTreeNode(fileInfo, imageIndex);
@@ -45,28 +50,6 @@ namespace FTPClient.LocalEntities
             node.SelectedImageIndex = imageIndex;
 
             return node;
-        }
-
-        public void AddNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
-        {
-            TreeNode childNode = CreateNode(fileInfo, imageIndex, parentNode);
-            parentNode.Nodes.Add(childNode);
-        }
-
-        public void AddNodes(List<DirectoryInfo> directoryToAdd, TreeNode parentNode)
-        {
-            foreach (DirectoryInfo directoryInfo in directoryToAdd)
-            {
-                AddNode(directoryInfo, 1, parentNode);
-            }
-        }
-
-        public void AddNodes(List<FileInfo> filesToAdd, TreeNode parentNode)
-        {
-            foreach (FileInfo fileInfo in filesToAdd)
-            {
-                AddNode(fileInfo, 2, parentNode);
-            }
         }
     }
 }
