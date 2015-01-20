@@ -21,10 +21,13 @@ namespace FTPClient
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            serverTreeView.InitRoot();
+            if (serverTreeView.Nodes.Count == 0)
+            { 
+                serverTreeView.InitRoot();
 
-            ftpManager = new FTPManager(this.txtUserName.Text, this.txtPassword.Text, this.txtServer.Text, this.txtPort.Text);
-            Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
+                ftpManager = new FTPManager(this.txtUserName.Text, this.txtPassword.Text, this.txtServer.Text, this.txtPort.Text);
+                Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
+            }
         }
 
         private async void Server_ShowLinkedFTPElements(string serverPath, TreeNode parentNode)
