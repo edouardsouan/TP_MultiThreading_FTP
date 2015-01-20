@@ -208,7 +208,6 @@ namespace FTPClient
         }
         #endregion
 
-
         #region Upload files / directories to the server
         private void listViewServer_ItemDrag(object sender, System.Windows.Forms.ItemDragEventArgs e)
         {

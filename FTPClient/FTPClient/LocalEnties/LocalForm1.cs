@@ -18,6 +18,29 @@ namespace FTPClient
             Local_ShowLogicalDrives();
         }
 
+        private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode nodeClicked = e.Node;
+            Local_ShowLinkedElements(nodeClicked);
+
+            localPath = nodeClicked.FullPath;
+        }
+
+        private void localListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            if (localListView.SelectedItems.Count > 0)
+            {
+                TreeNode nodeClicked = (TreeNode)localListView.SelectedItems[0].Tag;
+                if (IsADirectory(nodeClicked))
+                {
+                    Local_ShowLinkedElements(nodeClicked);
+                    localPath = nodeClicked.FullPath;
+                }
+            }
+
+        }
+
+        #region Functions for FileSystemInfo
         private void Local_ShowLogicalDrives()
         {
             string[] drives = Environment.GetLogicalDrives();
@@ -48,6 +71,69 @@ namespace FTPClient
             return subDirectories;
         }
 
+        private List<FileInfo> Local_GetLocalFiles(DirectoryInfo directoryInfo)
+        {
+            List<FileInfo> subFiles = new List<FileInfo>();
+
+            try
+            {
+                subFiles = directoryInfo.GetFiles().ToList();
+            }
+            catch (UnauthorizedAccessException exception)
+            {
+                logWindow.WriteLog("Access Denied : " + directoryInfo.Name, Color.Red);
+                Console.WriteLine(exception.ToString());
+            }
+
+            return subFiles;
+        }
+        #endregion
+
+        #region Functions and Methodes for TreeNode
+        private void Local_ShowLinkedElements(TreeNode nodeSelected)
+        {
+            if (IsADirectory((FileSystemInfo)nodeSelected.Tag))
+            {
+                localListView.ClearItems();
+                DisplayParentNodeInListView(nodeSelected);
+
+                List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
+                List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
+
+                bool addDirectoriesAndFiles = false;
+                if (nodeSelected.Nodes.Count == 0)
+                {
+                    addDirectoriesAndFiles = true;
+                }
+                
+                foreach (DirectoryInfo subDir in subDirectories)
+                {
+                    TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
+
+                    if (addDirectoriesAndFiles)
+                    {
+                        localTreeView.AddNode(dirNode, nodeSelected);
+                    }
+
+                    localListView.AddItem(dirNode, dirNode.Name);
+                }
+
+                foreach (FileSystemInfo subFile in subFiles)
+                {
+                    TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
+
+                    if (addDirectoriesAndFiles)
+                    {
+                        localTreeView.AddNode(fileNode, nodeSelected);
+                    }
+
+                    localListView.AddItem(fileNode, fileNode.Name);
+                }
+
+                nodeSelected.Expand();
+            }
+        }
+
         private List<DirectoryInfo> Local_GetLocalDirectories(TreeNode nodeClicked)
         {
             DirectoryInfo directoryInfo = (DirectoryInfo)nodeClicked.Tag;
@@ -70,23 +156,6 @@ namespace FTPClient
             }
 
             return subDirectories;
-        }
-
-        private List<FileInfo> Local_GetLocalFiles(DirectoryInfo directoryInfo)
-        {
-            List<FileInfo> subFiles = new List<FileInfo>();
-
-            try
-            {
-                subFiles = directoryInfo.GetFiles().ToList();
-            }
-            catch (UnauthorizedAccessException exception)
-            {
-                logWindow.WriteLog("Access Denied : " + directoryInfo.Name, Color.Red);
-                Console.WriteLine(exception.ToString());
-            }
-
-            return subFiles;
         }
 
         private List<FileInfo> Local_GetLocalFiles(TreeNode nodeClicked)
@@ -113,49 +182,11 @@ namespace FTPClient
             return subFiles;
         }
 
-        private void Local_ShowLinkedElements(TreeNode nodeSelected)
-        {
-            if(IsADirectory((FileSystemInfo)nodeSelected.Tag))
-            {
-                List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
-                List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
-
-                if (nodeSelected.Nodes.Count == 0)
-                {
-                    localTreeView.AddNodes(subDirectories, nodeSelected);
-                    localTreeView.AddNodes(subFiles, nodeSelected);
-                }
-                nodeSelected.Expand();
-
-                localListView.ClearItems();
-
-                DisplayParentNodeInListView(nodeSelected);
-
-                foreach(DirectoryInfo subDir in subDirectories)
-                {
-                    TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
-                    localListView.AddItem(dirNode, dirNode.Name);
-                }
-
-                foreach(FileSystemInfo subFile in subFiles)
-                {
-                    TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
-                    localListView.AddItem(fileNode, fileNode.Name);
-                }
-            }
-        }
-
         private void DisplayParentNodeInListView(TreeNode nodeSelected)
         {
             localListView.AddItem(nodeSelected,"..");
         }
+        #endregion
 
-        private void treeViewLocal_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode nodeClicked = e.Node;
-            Local_ShowLinkedElements(nodeClicked);
-
-            localPath = nodeClicked.FullPath;
-        }
     }
 }
