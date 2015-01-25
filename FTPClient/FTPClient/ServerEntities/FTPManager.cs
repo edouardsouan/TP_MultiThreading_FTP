@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FTPClient.ServerEntities
@@ -43,7 +44,7 @@ namespace FTPClient.ServerEntities
             string serverTarget = "ftp://" + this.server + ":" + this.port + "/" + complementPath;
 
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(serverTarget);
-            ftpRequest.KeepAlive = false;
+            ftpRequest.KeepAlive =true;
             ftpRequest.UsePassive = true;
             ftpRequest.Credentials = new NetworkCredential(this.user, this.password);
 
@@ -89,7 +90,9 @@ namespace FTPClient.ServerEntities
 
             string rawResult = streamReader.ReadToEnd();
             Console.WriteLine(rawResult);
-            string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+            //string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+            string data = Regex.Replace(rawResult, "\r", "");
+            data = rawResult.Remove(data.LastIndexOf("\n"), 1);
 
             streamReader.Close();
             ftpResponse.Close();

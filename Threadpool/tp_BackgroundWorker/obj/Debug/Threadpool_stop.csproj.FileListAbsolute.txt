@@ -1,0 +1,9 @@
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\bin\Debug\tp_BackgroundWorker.exe.config
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\bin\Debug\tp_BackgroundWorker.exe
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\bin\Debug\tp_BackgroundWorker.pdb
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\Threadpool_stop.csprojResolveAssemblyReference.cache
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.Form1.resources
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.Properties.Resources.resources
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\Threadpool_stop.csproj.GenerateResource.Cache
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.exe
+X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.pdb

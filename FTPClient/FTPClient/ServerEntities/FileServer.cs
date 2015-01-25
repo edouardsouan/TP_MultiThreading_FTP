@@ -22,8 +22,7 @@ namespace FTPClient.ServerEntities
         #region constructor
         public FileServer(string rawFileServer)
         {
-            string rawFileToClean = rawFileServer.Remove(rawFileServer.LastIndexOf("\r"), 1);
-            Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileToClean);
+            Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileServer);
 
             bool isSpaceBefore = false;
             int iCleanField = 0;
@@ -33,6 +32,8 @@ namespace FTPClient.ServerEntities
             // 32 = ASCII code for untimely space
             foreach (Byte byteTest in byteFields)
             {
+                Console.WriteLine(byteTest);
+
                 if (byteTest == 32)
                 {
                     if (!isSpaceBefore)

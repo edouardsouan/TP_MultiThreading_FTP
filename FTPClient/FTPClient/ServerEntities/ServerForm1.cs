@@ -74,7 +74,13 @@ namespace FTPClient
                 {
                     isSendingListCommand = true;
                     FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
+
+                    Console.WriteLine(ftpRequest.ToString());
+
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+
+                    Console.WriteLine(ftpResponse.ToString());
+                    
                     logWindow.WriteLog(ftpResponse);
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
                     Server_ShowFiles(serverData, parentNode, serverPath);
