@@ -89,7 +89,7 @@ namespace FTPClient.ServerEntities
             StreamReader streamReader = new StreamReader(responseStream);
 
             string rawResult = streamReader.ReadToEnd();
-            Console.WriteLine(rawResult);
+            // Console.WriteLine(rawResult);
             
             string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
            

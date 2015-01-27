@@ -33,7 +33,7 @@ namespace FTPClient.ServerEntities
             // 32 = ASCII code for untimely space
             foreach (Byte byteTest in byteFields)
             {
-                Console.WriteLine(byteTest);
+                // Console.WriteLine(byteTest);
 
                 if (byteTest == 32)
                 {
