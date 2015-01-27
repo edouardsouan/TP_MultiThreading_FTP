@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -21,6 +22,8 @@ namespace FTPClient
         #region Variables
         string localPath = "";
         string serverPath = "";
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken;
         #endregion
 
         #region Constructor
@@ -28,6 +31,7 @@ namespace FTPClient
         {
             InitializeComponent();
             txtPassword.TextBox.PasswordChar = '*';
+            cancellationToken = cancellationTokenSource.Token;
         }
         #endregion
 
@@ -302,5 +306,10 @@ namespace FTPClient
             Server_ShowLinkedFTPElements(serverPath,parentNode);
         }
         #endregion
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
