@@ -184,7 +184,7 @@ namespace FTPClient
 
         private void DownloadFile(string localPathTarget, FileServer fileInfo, string serverTarget)
         {
-            Task task = Task.Factory.StartNew( () =>{
+           // Task task = Task.Factory.StartNew( () =>{
 
                 FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
                 FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
@@ -208,14 +208,16 @@ namespace FTPClient
                 downloadedFileStream.Close();
                 downloadResponse.Close();
                 Local_RefreshView();
-        }, cancellationToken);
+      //  }, cancellationToken);
         }
 
         public void Local_RefreshView() {
+            /*
             ListViewItem parentItem = localListView.Items[0];
             TreeNode parentNode = (TreeNode)parentItem.Tag;
             parentNode.Nodes.Clear();
             Local_ShowLinkedElements(parentNode);
+             * */
         }
         #endregion
 

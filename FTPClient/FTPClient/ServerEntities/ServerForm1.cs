@@ -99,7 +99,7 @@ namespace FTPClient
         private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
         {
             serverListView.ClearItems();
-            Server_DisplayParentNode(parentNode);
+            // Server_DisplayParentNode(parentNode);
            
             foreach (string aData in serverData)
             {

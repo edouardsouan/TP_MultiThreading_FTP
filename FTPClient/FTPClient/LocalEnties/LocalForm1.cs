@@ -98,7 +98,7 @@ namespace FTPClient
             if (IsADirectory((FileSystemInfo)nodeSelected.Tag))
             {
                 localListView.ClearItems();
-                DisplayParentNodeInListView(nodeSelected);
+               //  DisplayParentNodeInListView(nodeSelected);
 
                 List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
                 List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
