@@ -22,7 +22,7 @@ namespace FTPClient
         #region Variables
         string localPath = "";
         string serverPath = "";
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationTokenSource cancellationTokenSource;
         CancellationToken cancellationToken;
         #endregion
 
@@ -31,7 +31,7 @@ namespace FTPClient
         {
             InitializeComponent();
             txtPassword.TextBox.PasswordChar = '*';
-            cancellationToken = cancellationTokenSource.Token;
+            cancellationTokenSource = new CancellationTokenSource();
         }
         #endregion
 
@@ -110,6 +110,10 @@ namespace FTPClient
         {
             ListViewItem fileToDownload = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
             Point pointWhereDropped = new Point(e.X, e.Y);
+            cancellationTokenSource.Dispose();
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken = cancellationTokenSource.Token;
+
 
             if (IsServerListTheSender(fileToDownload.ListView))
             {
@@ -164,7 +168,7 @@ namespace FTPClient
                 foreach (String rawData in serverData)
                 {
                     FileServer fileServer = new FileServer(rawData);
-                    if (fileServer.IsNameOKToDisplay())
+                    if (fileServer.IsNameOKToDisplay() && !cancellationToken.IsCancellationRequested)
                     {
                         DownloadTransfert(serverTarget  + "/" + fileServer.GetName(), 
                             localPathTarget + "\\" + fileServer.GetName(), 
@@ -180,28 +184,31 @@ namespace FTPClient
 
         private void DownloadFile(string localPathTarget, FileServer fileInfo, string serverTarget)
         {
-            FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
+            Task task = Task.Factory.StartNew( () =>{
 
-            FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
-            FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
-            Stream responseStream = downloadResponse.GetResponseStream();
-            Int32 bufferSize = 2048;
-            Int32 readCount;
-            Byte[] buffer = new Byte[bufferSize];
-            double totalWeight = (double)fileInfo.GetSize();
-            double actualWeigth = 0;
-            readCount = responseStream.Read(buffer, 0, bufferSize);
-            while (readCount > 0)
-            {
-                actualWeigth += readCount;
-                downloadedFileStream.Write(buffer, 0, readCount);
+                FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
+                FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
+
+                FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
+                Stream responseStream = downloadResponse.GetResponseStream();
+                Int32 bufferSize = 2048;
+                Int32 readCount;
+                Byte[] buffer = new Byte[bufferSize];
+                double totalWeight = (double)fileInfo.GetSize();
+                double actualWeigth = 0;
                 readCount = responseStream.Read(buffer, 0, bufferSize);
-                fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
-            }
-            responseStream.Close();
-            downloadedFileStream.Close();
-            downloadResponse.Close();
-            Local_RefreshView();
+                while (readCount > 0 && !cancellationToken.IsCancellationRequested)
+                {
+                    actualWeigth += readCount;
+                    downloadedFileStream.Write(buffer, 0, readCount);
+                    readCount = responseStream.Read(buffer, 0, bufferSize);
+                    fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
+                }
+                responseStream.Close();
+                downloadedFileStream.Close();
+                downloadResponse.Close();
+                Local_RefreshView();
+        }, cancellationToken);
         }
 
         public void Local_RefreshView() {
@@ -309,7 +316,7 @@ namespace FTPClient
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            cancellationTokenSource.Cancel();
         }
     }
 }

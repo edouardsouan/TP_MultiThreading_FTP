@@ -90,9 +90,12 @@ namespace FTPClient.ServerEntities
 
             string rawResult = streamReader.ReadToEnd();
             Console.WriteLine(rawResult);
-            //string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
-            string data = Regex.Replace(rawResult, "\r", "");
-            data = rawResult.Remove(data.LastIndexOf("\n"), 1);
+            
+            string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
+           
+            // data = Regex.Replace(rawResult, "\r", "");
+            //string data = Regex.Replace(rawResult, "\r", "");
+            //data = rawResult.Remove(data.LastIndexOf("\n"), 1);
 
             streamReader.Close();
             ftpResponse.Close();

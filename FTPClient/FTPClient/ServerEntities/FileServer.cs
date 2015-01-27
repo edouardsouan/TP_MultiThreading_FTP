@@ -22,7 +22,8 @@ namespace FTPClient.ServerEntities
         #region constructor
         public FileServer(string rawFileServer)
         {
-            Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileServer);
+            string rawFileToClean = rawFileServer.Remove(rawFileServer.LastIndexOf("\r"), 1);
+            Byte[] byteFields = Encoding.ASCII.GetBytes(rawFileToClean);
 
             bool isSpaceBefore = false;
             int iCleanField = 0;
