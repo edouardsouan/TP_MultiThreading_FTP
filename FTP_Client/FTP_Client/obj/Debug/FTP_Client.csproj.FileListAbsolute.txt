@@ -1,0 +1,1 @@
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\FTP_Client.exe.config
