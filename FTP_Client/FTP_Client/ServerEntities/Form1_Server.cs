@@ -36,25 +36,30 @@ namespace FTP_Client
         {
             if (serverListView.SelectedItems.Count > 0)
             {
-                TreeNode nodeClicked = (TreeNode)serverListView.SelectedItems[0].Tag;
+                TreeNode nodeClicked;
+
+                if (serverListView.SelectedItems[0].Text.Equals(".."))
+                {
+                    nodeClicked = ((TreeNode)serverListView.SelectedItems[0].Tag).Parent;
+                }
+                else
+                {
+                    nodeClicked = (TreeNode)serverListView.SelectedItems[0].Tag;
+                }
+
                 Server_OpenNode(nodeClicked);
             }
         }
 
         private void Server_OpenNode(TreeNode nodeClicked)
         {
-            if (serverTreeView.IsADirectory(nodeClicked))
+            if (serverTreeView.IsNodeADirectory(nodeClicked))
             {
-                if(nodeClicked.Text.Equals(".."))
-                {
-                    serverPath = nodeClicked.Parent.FullPath;
-                }
-                else
-                {
-                    serverPath = nodeClicked.FullPath;
-                }
+                serverPath = nodeClicked.FullPath;
 
                 serverListView.Items.Clear();
+                Server_DisplayParentNode(nodeClicked);
+
                 if (nodeClicked.Nodes.Count == 0)
                 {
                     Server_ShowLinkedFTPElements(nodeClicked.FullPath, nodeClicked);
@@ -81,7 +86,8 @@ namespace FTP_Client
 
                     logWindow.WriteLog(ftpResponse);
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
-                    Server_ShowFiles(serverData, parentNode, serverPath);
+                    // Server_ShowFiles(serverData, parentNode, serverPath);
+                    Server_ShowFiles(serverData, parentNode);
                 }
                 catch (WebException ex)
                 {
@@ -94,7 +100,8 @@ namespace FTP_Client
             }
         }
 
-        private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
+        // private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
+        private void Server_ShowFiles(string[] serverData, TreeNode parentNode)
         {
             serverListView.ClearItems();
             Server_DisplayParentNode(parentNode);
@@ -131,6 +138,9 @@ namespace FTP_Client
             }
         }
 
+        
+        # endregion
+
         private void Server_CreateDirectory(string serverPathTarget)
         {
             try
@@ -145,6 +155,5 @@ namespace FTP_Client
                 Console.WriteLine(exception.ToString());
             }
         }
-        # endregion
     }
 }

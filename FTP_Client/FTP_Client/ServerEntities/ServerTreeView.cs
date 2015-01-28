@@ -59,7 +59,7 @@ namespace FTP_Client.ServerEntities
             parentNode.Nodes.Add(serverNode);
         }
 
-        public bool IsADirectory(TreeNode node)
+        public bool IsNodeADirectory(TreeNode node)
         {
             bool isADirectory = false;
 
