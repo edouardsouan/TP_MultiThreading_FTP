@@ -12,10 +12,6 @@ namespace FTP_Client.ServerEntities
 {
     public class ServerTreeView : TreeView
     {
-        public ServerTreeView() : base()
-        {
-        }
-
         public ServerTreeView(IContainer container) : base()
         {
             container.Add(this);
@@ -24,8 +20,8 @@ namespace FTP_Client.ServerEntities
         public void InitRoot()
         {
             TreeNode serverNode = new TreeNode();
-            serverNode = new TreeNode("/");
-            serverNode.Tag = "/";
+            serverNode = new TreeNode("");
+            serverNode.Tag = "";
             serverNode.ImageIndex = 0;
             serverNode.SelectedImageIndex = 0;
             this.Nodes.Add(serverNode);
@@ -61,6 +57,18 @@ namespace FTP_Client.ServerEntities
         public void AddNode(TreeNode serverNode, TreeNode parentNode)
         {
             parentNode.Nodes.Add(serverNode);
+        }
+
+        public bool IsADirectory(TreeNode node)
+        {
+            bool isADirectory = false;
+
+            if (node.ImageIndex == 0 || node.ImageIndex == 1)
+            {
+                isADirectory = true;
+            }
+
+            return isADirectory;
         }
     }
 }

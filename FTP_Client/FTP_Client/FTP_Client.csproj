@@ -63,6 +63,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ServerEntities\FTPManager.cs" />
+    <Compile Include="ServerEntities\ServerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ServerEntities\ServerTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -94,6 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\connexion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\folder.png" />
+    <Content Include="Resources\hard_disk.png" />
+    <Content Include="Resources\text_file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

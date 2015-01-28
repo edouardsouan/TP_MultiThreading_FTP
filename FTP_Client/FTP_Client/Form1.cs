@@ -13,10 +13,18 @@ namespace FTP_Client
 {
     public partial class Form1 : Form
     {
+        #region Variables
+        string serverPath = "";
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
         }
+
+       
+
+        
 
 
     }
