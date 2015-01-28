@@ -234,6 +234,9 @@ namespace FTPClient
         {
             Point draggedFilePoint = new Point(e.X, e.Y);
             string serverPathTarget = serverPath.Replace("\\", "//");
+            cancellationTokenSource.Dispose();
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken = cancellationTokenSource.Token;
 
             try
             {
@@ -285,43 +288,69 @@ namespace FTPClient
             List<FileInfo> subFiles = Local_GetLocalFiles(directoryToUpload);
             foreach (FileInfo subFile in subFiles)
             {
-                UploadFile(subFile.FullName, subServerPathTarget + subFile.Name);
+                if(!cancellationToken.IsCancellationRequested)
+                {
+                    UploadFile(subFile.FullName, subServerPathTarget + subFile.Name);
+                }
             }
         }
 
         private void UploadFile(string filePathToUpload, string serverPathTarget)
         {
-            FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
+            Task task = Task.Factory.StartNew(() =>
+            {
+                FileInfo fi = new FileInfo(filePathToUpload);
+                FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
 
-            StreamReader uploadFileStream = new StreamReader(filePathToUpload);
-            byte[] fileContents = System.IO.File.ReadAllBytes(filePathToUpload);
-            uploadFileStream.Close();
-            uploadRequest.ContentLength = fileContents.Length;
 
-            Stream responseStream = uploadRequest.GetRequestStream();
-            responseStream.Write(fileContents, 0, fileContents.Length);
-            responseStream.Close();
+                Int32 buffLength = 2048;
+                byte[] buff = new byte[buffLength];
+                int contentLen;
+                FileStream fs = fi.OpenRead();
 
-            FtpWebResponse uploadResponse = (FtpWebResponse)uploadRequest.GetResponse();
-            logWindow.WriteLog(uploadResponse);
-            uploadResponse.Close();
-            Server_RefreshView();
+                //try{
+                    // Stream to which the file to be upload is written
+                    Stream strm = uploadRequest.GetRequestStream();
+
+                    // Read from the file stream 2kb at a time
+                    contentLen = fs.Read(buff, 0, buffLength);
+
+                    double actualWeigth = 0;
+                    // Till Stream content ends
+                    while (contentLen != 0 && !cancellationToken.IsCancellationRequested)
+                    {
+                        actualWeigth += contentLen;
+
+                        // Write Content from the file stream to the 
+                        // FTP Upload Stream
+                        strm.Write(buff, 0, contentLen);
+                        contentLen = fs.Read(buff, 0, buffLength);
+
+                        fileTransfertBar.Invoke(new Action(() => TransfertGauge(fi.Length, actualWeigth)));
+                    }
+
+                    // Close the file stream and the Request Stream
+                strm.Close();
+                fs.Close();
+                Server_RefreshView();
+            }, cancellationToken);
         }
         public void Server_RefreshView()
         {
+            /*
             ListViewItem parentItem = serverListView.Items[0];
             TreeNode parentNode = (TreeNode)parentItem.Tag;
             parentNode.Nodes.Clear();
             Server_ShowLinkedFTPElements(serverPath,parentNode);
+             * */
         }
         #endregion
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             cancellationTokenSource.Cancel();
-
             fileTransfertBar.Value = 0;
-            Console.WriteLine("STTTTTTTOOOOOOPPPPP");
+            Console.WriteLine("The transfert has been stop.");
         }
     }
 }
