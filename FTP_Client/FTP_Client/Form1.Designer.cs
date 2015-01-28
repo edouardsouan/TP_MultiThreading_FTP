@@ -181,6 +181,7 @@
             this.btnConnection.Size = new System.Drawing.Size(42, 31);
             this.btnConnection.TabIndex = 8;
             this.btnConnection.UseVisualStyleBackColor = true;
+            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
             // 
             // Form1
             // 
