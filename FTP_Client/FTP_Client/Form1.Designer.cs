@@ -176,9 +176,9 @@
             // btnConnection
             // 
             this.btnConnection.Image = global::FTP_Client.Properties.Resources.connexion;
-            this.btnConnection.Location = new System.Drawing.Point(799, 5);
+            this.btnConnection.Location = new System.Drawing.Point(799, 0);
             this.btnConnection.Name = "btnConnection";
-            this.btnConnection.Size = new System.Drawing.Size(38, 23);
+            this.btnConnection.Size = new System.Drawing.Size(42, 31);
             this.btnConnection.TabIndex = 8;
             this.btnConnection.UseVisualStyleBackColor = true;
             // 
