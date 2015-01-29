@@ -26,15 +26,6 @@ namespace FTP_Client.LocalEntities
             parentNode.Nodes.Add(childNode);
         }
 
-        /*
-        private TreeNode CreateNode(FileSystemInfo fileInfo, int imageIndex, TreeNode parentNode)
-        {
-            TreeNode node = GenerateTreeNode(fileInfo, imageIndex);
-            return node;
-        }
-         * */
-
-
         public TreeNode GenerateTreeNode(FileSystemInfo fileInfo, int imageIndex)
         {
             string name = fileInfo.Name;

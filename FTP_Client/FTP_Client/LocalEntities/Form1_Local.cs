@@ -44,9 +44,6 @@ namespace FTP_Client
         {
             if (localTreeView.IsNodeADirectory(nodeClicked))
             {
-                Console.WriteLine(nodeClicked.Name);
-                Console.WriteLine(nodeClicked.FullPath);
-
                 Local_ShowLinkedElements(nodeClicked);
                 localPath = nodeClicked.FullPath;
             }
@@ -106,89 +103,36 @@ namespace FTP_Client
                 localListView.ClearItems();
                 DisplayParentNodeInListView(nodeSelected);
 
-                List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(nodeSelected);
-                List<FileInfo> subFiles = Local_GetLocalFiles(nodeSelected);
-
-                bool addDirectoriesAndFiles = false;
-                if (nodeSelected.Nodes.Count == 0)
+                if (nodeSelected.Nodes.Count > 0)
                 {
-                    addDirectoriesAndFiles = true;
-                }
-
-                foreach (DirectoryInfo subDir in subDirectories)
-                {
-                    TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
-
-                    if (addDirectoriesAndFiles)
+                    foreach (TreeNode subNode in nodeSelected.Nodes)
                     {
+                        localListView.AddItem(subNode, subNode.Name);
+                    }
+                }
+                else
+                {
+                    DirectoryInfo directoryInfo = (DirectoryInfo)nodeSelected.Tag;
+
+                    List<DirectoryInfo>  subDirectories = Local_GetLocalDirectories(directoryInfo);
+                    foreach (DirectoryInfo subDir in subDirectories)
+                    {
+                        TreeNode dirNode = localTreeView.GenerateTreeNode(subDir, 1);
                         localTreeView.AddNode(dirNode, nodeSelected);
+                        localListView.AddItem(dirNode, dirNode.Name);
                     }
 
-                    localListView.AddItem(dirNode, dirNode.Name);
-                }
-
-                foreach (FileSystemInfo subFile in subFiles)
-                {
-                    TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
-
-                    if (addDirectoriesAndFiles)
+                    List<FileInfo> subFiles = Local_GetLocalFiles(directoryInfo);
+                    foreach (FileSystemInfo subFile in subFiles)
                     {
+                        TreeNode fileNode = localTreeView.GenerateTreeNode(subFile, 2);
                         localTreeView.AddNode(fileNode, nodeSelected);
+                        localListView.AddItem(fileNode, fileNode.Name);
                     }
-
-                    localListView.AddItem(fileNode, fileNode.Name);
                 }
 
                 nodeSelected.Expand();
             }
-        }
-
-        private List<DirectoryInfo> Local_GetLocalDirectories(TreeNode nodeClicked)
-        {
-            DirectoryInfo directoryInfo = (DirectoryInfo)nodeClicked.Tag;
-            List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
-
-            if (nodeClicked.Nodes.Count == 0)
-            {
-                subDirectories = Local_GetLocalDirectories(directoryInfo);
-            }
-            else
-            {
-                TreeNodeCollection subNodes = nodeClicked.Nodes;
-                foreach (TreeNode subNode in subNodes)
-                {
-                    if (localTreeView.IsNodeADirectory(subNode))
-                    {
-                        subDirectories.Add((DirectoryInfo)subNode.Tag);
-                    }
-                }
-            }
-
-            return subDirectories;
-        }
-
-        private List<FileInfo> Local_GetLocalFiles(TreeNode nodeClicked)
-        {
-            DirectoryInfo directoryInfo = (DirectoryInfo)nodeClicked.Tag;
-            List<FileInfo> subFiles = new List<FileInfo>();
-
-            if (nodeClicked.Nodes.Count == 0)
-            {
-                subFiles = Local_GetLocalFiles(directoryInfo);
-            }
-            else
-            {
-                TreeNodeCollection subNodes = nodeClicked.Nodes;
-                foreach (TreeNode subNode in subNodes)
-                {
-                    if (!localTreeView.IsNodeADirectory(subNode))
-                    {
-                        subFiles.Add((FileInfo)subNode.Tag);
-                    }
-                }
-            }
-
-            return subFiles;
         }
 
         private void DisplayParentNodeInListView(TreeNode nodeSelected)

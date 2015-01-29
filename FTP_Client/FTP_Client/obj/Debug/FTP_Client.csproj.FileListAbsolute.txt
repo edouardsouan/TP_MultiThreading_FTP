@@ -6,3 +6,4 @@ C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debu
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\FTP_Client.pdb
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.exe
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.pdb
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.csprojResolveAssemblyReference.cache
