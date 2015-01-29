@@ -53,6 +53,13 @@ namespace FTP_Client
         }
         #endregion
 
+        #region Time Left
+        private double CalculateTimeLeft(DateTime beginDate, double nbProcessed, double nbTotal)
+        {
+            return (DateTime.Now.Subtract(beginDate).TotalSeconds / nbProcessed) * (nbTotal - nbProcessed);
+        }
+        #endregion
+
         #region Drag and Drop check
         private bool IsServerListTheSender(ListView listView)
         {
@@ -130,48 +137,54 @@ namespace FTP_Client
         #region Download files/directory from the server
         private void localListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            localListView.DoDragDrop(e.Item, DragDropEffects.Move);
+            localListView.DoDragDrop(localListView.SelectedItems, DragDropEffects.Move);
         }
 
         private void localListView_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         private void localListView_DragDrop(object sender, DragEventArgs e)
         {
-            ListViewItem fileToDownload = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
             Point pointWhereDropped = new Point(e.X, e.Y);
             cancellationTokenSource.Dispose();
             cancellationTokenSource = new CancellationTokenSource();
             cancellationToken = cancellationTokenSource.Token;
+            fileQueue.Items.Clear();
 
-            if (IsServerListTheSender(fileToDownload.ListView) && !fileToDownload.Text.Equals(".."))
+            ListView.SelectedListViewItemCollection draggedFiles =
+            (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
+            foreach (ListViewItem fileToDownload in draggedFiles)
             {
-                string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
-                string targetPath = localPath;
-
-                try
+                if (IsServerListTheSender(fileToDownload.ListView) && !fileToDownload.Text.Equals(".."))
                 {
-                    targetPath += '\\';
-                    targetPath += serverListView.GetDirecoryNamePointed(pointWhereDropped);
-                }
-                catch (NullReferenceException exception)
-                {
-                    Console.WriteLine("Exception " + exception.ToString() + " was thrown because no Patrice was found !!");
-                    Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
-                }
-                finally
-                {
-                    FileServer fileFromServer = (FileServer)((TreeNode)fileToDownload.Tag).Tag;
+                    string fileToDownloadPath = serverPath + "/" + fileToDownload.Name;
+                    string targetPath = localPath;
 
-                    fileQueue.AddItem(fileFromServer);
+                    try
+                    {
+                        targetPath += '\\';
+                        targetPath += serverListView.GetDirecoryNamePointed(pointWhereDropped);
+                    }
+                    catch (NullReferenceException exception)
+                    {
+                        Console.WriteLine("Exception " + exception.ToString() + " was thrown because no Patrice was found !!");
+                        Console.WriteLine("Exception " + exception.ToString() + " no file directory pointed.");
+                    }
+                    finally
+                    {
+                        FileServer fileFromServer = (FileServer)((TreeNode)fileToDownload.Tag).Tag;
 
-                    targetPath += "\\" + fileToDownload.Name;
-                    DownloadTransfert(fileToDownloadPath, targetPath, fileFromServer);
+                        targetPath += "\\" + fileToDownload.Name;
+                        DownloadTransfert(fileToDownloadPath, targetPath, fileFromServer);
+                    }
                 }
-
             }
+
         }
 
         private async void DownloadTransfert(string filePathToDownload, string localPathTarget, FileServer fileInfo)
@@ -215,13 +228,22 @@ namespace FTP_Client
 
         private void DownloadFile(string localPathTarget, FileServer fileInfo, string serverTarget)
         {
-            Task task = Task.Factory.StartNew(() =>
-            {
+            fileQueue.AddItem(fileInfo);
+            ListViewItem itemQueue = fileQueue.GetLastItem();
 
+            Task.Factory.StartNew(() =>
+            {
                 FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
+                Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
+                   logWindow.WriteLog(downloadRequest.Method + " : " + serverTarget + "\n", Color.Blue)))
+                );
                 FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
 
                 FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
+                Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
+                    logWindow.WriteLog(downloadResponse)))
+                );
+                
                 Stream responseStream = downloadResponse.GetResponseStream();
                 Int32 bufferSize = 2048;
                 Int32 readCount;
@@ -229,20 +251,31 @@ namespace FTP_Client
                 double totalWeight = (double)fileInfo.GetSize();
                 double actualWeigth = 0;
                 readCount = responseStream.Read(buffer, 0, bufferSize);
+
+                DateTime beginDate = DateTime.Now;
                 while (readCount > 0 && !cancellationToken.IsCancellationRequested)
                 {
                     actualWeigth += readCount;
                     downloadedFileStream.Write(buffer, 0, readCount);
                     readCount = responseStream.Read(buffer, 0, bufferSize);
-                    fileTransfertBar.Invoke(new Action(() => TransfertGauge(totalWeight, actualWeigth)));
+                    
+                    Task.Factory.StartNew(() =>
+                    {
+                        fileQueue.Invoke(new Action(() =>
+                            itemQueue.SubItems[4].Text = CalculateTimeLeft(beginDate, actualWeigth, totalWeight).ToString()
+                        ));
+                        fileTransfertBar.Invoke(new Action(() =>
+                            TransfertGauge(totalWeight, actualWeigth)
+                        ));
+                    });
                 }
                 responseStream.Close();
                 downloadedFileStream.Close();
                 downloadResponse.Close();
 
-                this.Invoke(new Action(() => Local_RefreshView()) );
-
             }, cancellationToken);
+
+            Local_RefreshView();
         }
 
         public void Local_RefreshView()
@@ -257,12 +290,15 @@ namespace FTP_Client
         #region Upload files / directories to the server#
         private void serverListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            serverListView.DoDragDrop(e.Item, DragDropEffects.Move);
+            serverListView.DoDragDrop(serverListView.SelectedItems, DragDropEffects.Move);
         }
 
         private void serverListView_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         private void serverListView_DragDrop(object sender, DragEventArgs e)
@@ -285,9 +321,12 @@ namespace FTP_Client
             }
             finally
             {
-                ListViewItem draggedFile = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                serverPathTarget += "//" + draggedFile.Name;
-                UploadTransfert(draggedFile, serverPathTarget);
+                ListView.SelectedListViewItemCollection draggedFiles =
+                (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
+                foreach (ListViewItem draggedFile in draggedFiles)
+                {
+                    UploadTransfert(draggedFile, serverPathTarget +"//" + draggedFile.Name);
+                }
             }
         }
 
@@ -375,18 +414,9 @@ namespace FTP_Client
                 strm.Close();
                 fs.Close();
 
-                fileQueue.Invoke(new Action(() =>
-                    itemQueue.SubItems[4].Text = "DONE"
-                ));
-
             }, cancellationToken);
 
             Server_RefreshView();
-        }
-
-        private double CalculateTimeLeft(DateTime beginDate, double nbProcessed, double nbTotal)
-        {
-            return (DateTime.Now.Subtract(beginDate).TotalSeconds / nbProcessed) * (nbTotal - nbProcessed);
         }
 
         public void Server_RefreshView()
