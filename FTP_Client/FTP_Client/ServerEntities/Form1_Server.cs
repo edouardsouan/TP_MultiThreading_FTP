@@ -28,33 +28,6 @@ namespace FTP_Client
             Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
         }
 
-        private void serverTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode nodeClicked = e.Node;
-            Server_OpenNode(nodeClicked);
-        }
-
-        private void serverListView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (serverListView.SelectedItems.Count > 0)
-            {
-                TreeNode nodeClicked;
-
-                ListViewItem selectedItem = serverListView.SelectedItems[0];
-                if (selectedItem.Text.Equals(".."))
-                {
-                    nodeClicked = ((TreeNode)selectedItem.Tag).Parent;
-
-                }
-                else
-                {
-                    nodeClicked = (TreeNode)selectedItem.Tag;
-                }
-
-                Server_OpenNode(nodeClicked);
-            }
-        }
-
         private void Server_OpenNode(TreeNode nodeClicked)
         {
             if (serverTreeView.IsNodeADirectory(nodeClicked))

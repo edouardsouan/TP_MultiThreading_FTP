@@ -13,32 +13,6 @@ namespace FTP_Client
 {
     public partial class Form1 : Form
     {
-        private void localTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode nodeClicked = e.Node;
-            Local_OpenNode(nodeClicked);
-        }
-
-        private void localListView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (localListView.SelectedItems.Count > 0)
-            {
-                TreeNode nodeClicked;
-
-                ListViewItem selectedItem = localListView.SelectedItems[0];
-                if (selectedItem.Text.Equals(".."))
-                {
-                    nodeClicked = ((TreeNode)selectedItem.Tag).Parent;
-                }
-                else
-                {
-                    nodeClicked = (TreeNode)selectedItem.Tag;
-                }
-                
-                Local_OpenNode(nodeClicked);
-                nodeClicked.Expand();
-            }
-        }
 
         private void Local_OpenNode(TreeNode nodeClicked)
         {

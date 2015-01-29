@@ -68,6 +68,7 @@ namespace FTP_Client
             this.fileOwnerServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fileGroupServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -79,6 +80,7 @@ namespace FTP_Client
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -92,6 +94,8 @@ namespace FTP_Client
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -263,6 +267,10 @@ namespace FTP_Client
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer7);
             this.splitContainer2.Size = new System.Drawing.Size(879, 639);
             this.splitContainer2.SplitterDistance = 413;
             this.splitContainer2.TabIndex = 1;
@@ -448,6 +456,16 @@ namespace FTP_Client
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer7.Name = "splitContainer7";
+            this.splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainer7.Size = new System.Drawing.Size(879, 222);
+            this.splitContainer7.SplitterDistance = 58;
+            this.splitContainer7.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -472,6 +490,7 @@ namespace FTP_Client
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -486,6 +505,8 @@ namespace FTP_Client
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
+            this.splitContainer7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -526,6 +547,7 @@ namespace FTP_Client
         private System.Windows.Forms.ColumnHeader fileSizeLocal;
         private System.Windows.Forms.ColumnHeader fileTypeLocal;
         private System.Windows.Forms.ColumnHeader lastModifiedLocal;
+        private System.Windows.Forms.SplitContainer splitContainer7;
     }
 }
 
