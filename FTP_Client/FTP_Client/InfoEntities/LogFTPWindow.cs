@@ -38,7 +38,6 @@ namespace FTP_Client.InfoEntities
             this.WriteLog(ftpResponse.WelcomeMessage, Color.Green);
             this.WriteLog(ftpResponse.StatusDescription, Color.Blue);
             this.WriteLog(ftpResponse.StatusCode.ToString() + "\n", Color.Blue);
-            this.WriteLog(WebRequestMethods.Ftp.ListDirectoryDetails, Color.Black);
         }
     }
 }

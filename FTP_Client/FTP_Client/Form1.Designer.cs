@@ -540,7 +540,7 @@ namespace FTP_Client
             // 
             // time
             // 
-            this.time.Text = "Time";
+            this.time.Text = "Time Left (sec)";
             // 
             // splitter1
             // 

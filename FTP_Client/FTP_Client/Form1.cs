@@ -272,6 +272,7 @@ namespace FTP_Client
             cancellationTokenSource.Dispose();
             cancellationTokenSource = new CancellationTokenSource();
             cancellationToken = cancellationTokenSource.Token;
+            fileQueue.Items.Clear();
 
             try
             {
@@ -332,12 +333,17 @@ namespace FTP_Client
 
         private void UploadFile(string filePathToUpload, string serverPathTarget)
         {
-            Task task = Task.Factory.StartNew(() =>
-            {
-                FileInfo fi = new FileInfo(filePathToUpload);
-                fileQueue.Invoke(new Action(() => fileQueue.AddItem(fi)));
-                FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
+            FileInfo fi = new FileInfo(filePathToUpload);
+            fileQueue.AddItem(fi);
+            ListViewItem itemQueue = fileQueue.GetLastItem();
 
+            Task.Factory.StartNew(() =>
+            {
+                FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
+                Task.Factory.StartNew(() => logWindow.Invoke(new Action(() => 
+                    logWindow.WriteLog(uploadRequest.Method + " : " + serverPathTarget+"\n", Color.Blue)))
+                );
+                
                 Int32 buffLength = 2048;
                 byte[] buff = new byte[buffLength];
                 int contentLen;
@@ -346,6 +352,8 @@ namespace FTP_Client
                 Stream strm = uploadRequest.GetRequestStream();
                 contentLen = fs.Read(buff, 0, buffLength);
                 double actualWeigth = 0;
+
+                DateTime beginDate = DateTime.Now;
                 while (contentLen != 0 && !cancellationToken.IsCancellationRequested)
                 {
                     actualWeigth += contentLen;
@@ -353,15 +361,32 @@ namespace FTP_Client
                     strm.Write(buff, 0, contentLen);
                     contentLen = fs.Read(buff, 0, buffLength);
 
-                    fileTransfertBar.Invoke(new Action(() => TransfertGauge(fi.Length, actualWeigth)));
+                    Task.Factory.StartNew(() =>
+                    {
+                        fileQueue.Invoke(new Action(() =>
+                            itemQueue.SubItems[4].Text = CalculateTimeLeft(beginDate, actualWeigth, fi.Length).ToString()
+                        ));
+                        fileTransfertBar.Invoke(new Action(() =>
+                            TransfertGauge(fi.Length, actualWeigth)
+                        ));
+                    });
                 }
 
                 strm.Close();
                 fs.Close();
-                
-                this.Invoke(new Action(() => Server_RefreshView()) );
 
-           }, cancellationToken);
+                fileQueue.Invoke(new Action(() =>
+                    itemQueue.SubItems[4].Text = "DONE"
+                ));
+
+            }, cancellationToken);
+
+            Server_RefreshView();
+        }
+
+        private double CalculateTimeLeft(DateTime beginDate, double nbProcessed, double nbTotal)
+        {
+            return (DateTime.Now.Subtract(beginDate).TotalSeconds / nbProcessed) * (nbTotal - nbProcessed);
         }
 
         public void Server_RefreshView()

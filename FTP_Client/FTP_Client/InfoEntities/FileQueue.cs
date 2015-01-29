@@ -26,7 +26,8 @@ namespace FTP_Client.InfoEntities
                         {
                             new ListViewItem.ListViewSubItem(item, direction), 
                             new ListViewItem.ListViewSubItem(item, distFile),
-                            new ListViewItem.ListViewSubItem(item, taille)
+                            new ListViewItem.ListViewSubItem(item, taille),
+                            new ListViewItem.ListViewSubItem(item, "---")
                         };
             item.SubItems.AddRange(subItems);
 
@@ -45,11 +46,17 @@ namespace FTP_Client.InfoEntities
                         {
                             new ListViewItem.ListViewSubItem(item, direction), 
                             new ListViewItem.ListViewSubItem(item, distFile),
-                            new ListViewItem.ListViewSubItem(item, taille)
+                            new ListViewItem.ListViewSubItem(item, taille),
+                            new ListViewItem.ListViewSubItem(item, "---")
                         };
             item.SubItems.AddRange(subItems);
 
             this.Items.Add(item);
+        }
+
+        public ListViewItem GetLastItem()
+        {
+            return this.Items[this.Items.Count - 1];
         }
     }
 }
