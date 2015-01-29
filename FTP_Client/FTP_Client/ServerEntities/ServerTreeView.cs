@@ -27,7 +27,7 @@ namespace FTP_Client.ServerEntities
             this.Nodes.Add(serverNode);
         }
 
-        public TreeNode CreateNode(FileServer fileServer, TreeNode parentNode)
+        public TreeNode CreateNode(FileServer fileServer)
         {
             string name = fileServer.GetName();
             TreeNode serverNode = new TreeNode(name);
@@ -50,7 +50,7 @@ namespace FTP_Client.ServerEntities
 
         public void AddNode(FileServer fileServer, TreeNode parentNode)
         {
-            TreeNode serverNode = CreateNode(fileServer, parentNode);
+            TreeNode serverNode = CreateNode(fileServer);
             parentNode.Nodes.Add(serverNode);
         }
 

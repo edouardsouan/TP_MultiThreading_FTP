@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 using FTP_Client.ServerEntities;
 
+// Complete Form1.cs and manage the server aspect 
+
 namespace FTP_Client
 {
     public partial class Form1 : Form
@@ -38,13 +40,15 @@ namespace FTP_Client
             {
                 TreeNode nodeClicked;
 
-                if (serverListView.SelectedItems[0].Text.Equals(".."))
+                ListViewItem selectedItem = serverListView.SelectedItems[0];
+                if (selectedItem.Text.Equals(".."))
                 {
-                    nodeClicked = ((TreeNode)serverListView.SelectedItems[0].Tag).Parent;
+                    nodeClicked = ((TreeNode)selectedItem.Tag).Parent;
+
                 }
                 else
                 {
-                    nodeClicked = (TreeNode)serverListView.SelectedItems[0].Tag;
+                    nodeClicked = (TreeNode)selectedItem.Tag;
                 }
 
                 Server_OpenNode(nodeClicked);
@@ -86,7 +90,6 @@ namespace FTP_Client
 
                     logWindow.WriteLog(ftpResponse);
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
-                    // Server_ShowFiles(serverData, parentNode, serverPath);
                     Server_ShowFiles(serverData, parentNode);
                 }
                 catch (WebException ex)
@@ -100,7 +103,6 @@ namespace FTP_Client
             }
         }
 
-        // private void Server_ShowFiles(string[] serverData, TreeNode parentNode, string serverPath)
         private void Server_ShowFiles(string[] serverData, TreeNode parentNode)
         {
             serverListView.ClearItems();
@@ -111,7 +113,7 @@ namespace FTP_Client
                 FileServer fileServer = new FileServer(aData);
                 if (fileServer.IsNameOKToDisplay())
                 {
-                    TreeNode fileNode = serverTreeView.CreateNode(fileServer, parentNode);
+                    TreeNode fileNode = serverTreeView.CreateNode(fileServer);
 
                     serverTreeView.AddNode(fileNode, parentNode);
                     serverListView.AddItem(fileNode, fileNode.Name);
@@ -137,10 +139,9 @@ namespace FTP_Client
                 serverListView.AddItem(subNode, subNode.Name);
             }
         }
+        #endregion
 
-        
-        # endregion
-
+        #region FTP Actions
         private void Server_CreateDirectory(string serverPathTarget)
         {
             try
@@ -155,5 +156,6 @@ namespace FTP_Client
                 Console.WriteLine(exception.ToString());
             }
         }
+        #endregion
     }
 }

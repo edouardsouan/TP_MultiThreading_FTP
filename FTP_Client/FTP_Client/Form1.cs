@@ -14,6 +14,7 @@ namespace FTP_Client
     public partial class Form1 : Form
     {
         #region Variables
+        string localPath = "";
         string serverPath = "";
         #endregion
 
@@ -22,10 +23,10 @@ namespace FTP_Client
             InitializeComponent();
         }
 
-       
-
-        
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Local_ShowLogicalDrives();
+        }
 
     }
 }
