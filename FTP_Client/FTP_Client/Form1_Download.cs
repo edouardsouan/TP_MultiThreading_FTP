@@ -71,10 +71,6 @@ namespace FTP_Client
                 FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
 
                 FtpWebResponse downloadResponse = (FtpWebResponse)downloadRequest.GetResponse();
-                Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
-                    logWindow.WriteLog(downloadResponse)))
-                );
-
                 Stream responseStream = downloadResponse.GetResponseStream();
                 Int32 bufferSize = 2048;
                 Int32 readCount;
@@ -90,7 +86,7 @@ namespace FTP_Client
                     downloadedFileStream.Write(buffer, 0, readCount);
                     readCount = responseStream.Read(buffer, 0, bufferSize);
 
-                    Task.Factory.StartNew(() =>
+                    Task showInfo = Task.Factory.StartNew(() =>
                     {
                         fileQueue.Invoke(new Action(() =>
                             itemQueue.SubItems[4].Text = TimeManager.CalculateTimeLeft(beginDate, actualWeigth, totalWeight).ToString()
@@ -99,6 +95,7 @@ namespace FTP_Client
                             UpdateTransfertGauge(totalWeight, actualWeigth)
                         ));
                     });
+                    Task.WaitAny(showInfo);
                 }
                 responseStream.Close();
                 downloadedFileStream.Close();
