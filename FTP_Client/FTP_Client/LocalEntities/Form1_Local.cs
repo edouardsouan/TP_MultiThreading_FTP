@@ -13,6 +13,14 @@ namespace FTP_Client
 {
     public partial class Form1 : Form
     {
+        #region managing local events
+        public void Local_RefreshView()
+        {
+            ListViewItem parentItem = localListView.Items[0];
+            TreeNode parentNode = (TreeNode)parentItem.Tag;
+            parentNode.Nodes.Clear();
+            Local_ShowLinkedElements(parentNode);
+        }
 
         private void Local_OpenNode(TreeNode nodeClicked)
         {
@@ -22,20 +30,17 @@ namespace FTP_Client
                 localPath = nodeClicked.FullPath;
             }
         }
-        
-        #region Local travel
-        private void Local_ShowLogicalDrives()
+
+        private void Local_DisplayParentNodeInListView(TreeNode nodeSelected)
         {
-            string[] drives = Environment.GetLogicalDrives();
-            foreach (string drive in drives)
+            if (nodeSelected.Parent != null)
             {
-                DirectoryInfo logicalDrive = new DirectoryInfo(drive);
-                TreeNode newNode = localTreeView.GenerateTreeNode(logicalDrive, 0);
-                localTreeView.AddRootNode(newNode);
-                localListView.AddItem(newNode, newNode.Name);
+                localListView.AddItem(nodeSelected, "..");
             }
         }
+        #endregion
 
+        #region get and show File/Directory Info
         private List<DirectoryInfo> Local_GetLocalDirectories(DirectoryInfo directoryInfo)
         {
             List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
@@ -75,7 +80,7 @@ namespace FTP_Client
             if ( localTreeView.IsNodeADirectory(nodeSelected) )
             {
                 localListView.ClearItems();
-                DisplayParentNodeInListView(nodeSelected);
+                Local_DisplayParentNodeInListView(nodeSelected);
 
                 if (nodeSelected.Nodes.Count > 0)
                 {
@@ -109,13 +114,18 @@ namespace FTP_Client
             }
         }
 
-        private void DisplayParentNodeInListView(TreeNode nodeSelected)
+        private void Local_ShowLogicalDrives()
         {
-            if (nodeSelected.Parent != null)
+            string[] drives = Environment.GetLogicalDrives();
+            foreach (string drive in drives)
             {
-                localListView.AddItem(nodeSelected, "..");
+                DirectoryInfo logicalDrive = new DirectoryInfo(drive);
+                TreeNode newNode = localTreeView.GenerateTreeNode(logicalDrive, 0);
+                localTreeView.AddRootNode(newNode);
+                localListView.AddItem(newNode, newNode.Name);
             }
         }
         #endregion
+
     }
 }

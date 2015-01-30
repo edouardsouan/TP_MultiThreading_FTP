@@ -50,6 +50,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form1_Download.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1_Upload.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InfoEntities\FileQueue.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -111,6 +117,12 @@
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\hard_disk.png" />
     <Content Include="Resources\text_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeLibrary\TimeLibrary.csproj">
+      <Project>{5518f00f-c099-4c55-8c76-c39281be1ae3}</Project>
+      <Name>TimeLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

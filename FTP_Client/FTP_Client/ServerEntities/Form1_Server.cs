@@ -19,13 +19,13 @@ namespace FTP_Client
         FTPManager ftpManager;
         bool isSendingListCommand = false;
 
-        private void btnConnection_Click(object sender, EventArgs e)
+        #region managing server events
+        public void Server_RefreshView()
         {
-            serverTreeView.Nodes.Clear();
-            serverTreeView.InitRoot();
-
-            ftpManager = new FTPManager(this.txtUserName.Text, this.txtPassword.Text, this.txtServer.Text, this.txtPort.Text);
-            Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
+            ListViewItem parentItem = serverListView.Items[0];
+            TreeNode parentNode = (TreeNode)parentItem.Tag;
+            parentNode.Nodes.Clear();
+            Server_ShowLinkedFTPElements(serverPath, parentNode);
         }
 
         private void Server_OpenNode(TreeNode nodeClicked)
@@ -50,7 +50,16 @@ namespace FTP_Client
             }
         }
 
-        #region FTP travel
+        private void Server_DisplayParentNode(TreeNode parentNode)
+        {
+            if (parentNode.Parent != null)
+            {
+                serverListView.AddItem(parentNode, "..");
+            }
+        }
+        #endregion
+
+        #region FTP : get and show distant files/directories
         private async void Server_ShowLinkedFTPElements(string serverPath, TreeNode parentNode)
         {
             if (!isSendingListCommand)
@@ -94,14 +103,6 @@ namespace FTP_Client
             }
 
             parentNode.Expand();
-        }
-
-        private void Server_DisplayParentNode(TreeNode parentNode)
-        {
-            if (parentNode.Parent != null)
-            {
-                serverListView.AddItem(parentNode, "..");
-            }
         }
 
         private void Server_ShowSubItems(TreeNode parentNode)

@@ -1,0 +1,5 @@
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\TimeLibrary\bin\Debug\TimeLibrary.dll
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\TimeLibrary\bin\Debug\TimeLibrary.pdb
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\TimeLibrary\obj\Debug\TimeLibrary.csprojResolveAssemblyReference.cache
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\TimeLibrary\obj\Debug\TimeLibrary.dll
+C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\TimeLibrary\obj\Debug\TimeLibrary.pdb
