@@ -492,6 +492,7 @@ namespace FTP_Client
             // fileNameServer
             // 
             this.fileNameServer.Text = "Name";
+            this.fileNameServer.Width = 175;
             // 
             // fileSizeServer
             // 
@@ -564,6 +565,7 @@ namespace FTP_Client
             this.ClientSize = new System.Drawing.Size(883, 753);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Lucida Sans Unicode", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

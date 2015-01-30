@@ -118,6 +118,7 @@ namespace FTP_Client
         #endregion
 
         #region Transfert events
+
         private void UpdateTransfertGauge(double totalWeigth, double actualWeigth)
         {
             fileTransfertBar.Minimum = 0;

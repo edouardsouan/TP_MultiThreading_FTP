@@ -86,7 +86,7 @@ namespace FTP_Client
                     downloadedFileStream.Write(buffer, 0, readCount);
                     readCount = responseStream.Read(buffer, 0, bufferSize);
 
-                    Task showInfo = Task.Factory.StartNew(() =>
+                    Task.Factory.StartNew(() =>
                     {
                         fileQueue.Invoke(new Action(() =>
                             itemQueue.SubItems[4].Text = TimeManager.CalculateTimeLeft(beginDate, actualWeigth, totalWeight).ToString()
@@ -95,7 +95,6 @@ namespace FTP_Client
                             UpdateTransfertGauge(totalWeight, actualWeigth)
                         ));
                     });
-                    Task.WaitAny(showInfo);
                 }
                 responseStream.Close();
                 downloadedFileStream.Close();

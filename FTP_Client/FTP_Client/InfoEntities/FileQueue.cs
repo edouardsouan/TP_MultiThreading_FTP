@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,7 @@ namespace FTP_Client.InfoEntities
             string distFile = fileToUpload.Name;
             string taille = fileToUpload.Length.ToString();
 
+
             ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[]
                         {
                             new ListViewItem.ListViewSubItem(item, direction), 
@@ -49,8 +51,8 @@ namespace FTP_Client.InfoEntities
                             new ListViewItem.ListViewSubItem(item, taille),
                             new ListViewItem.ListViewSubItem(item, "---")
                         };
-            item.SubItems.AddRange(subItems);
 
+            item.SubItems.AddRange(subItems);
             this.Items.Add(item);
         }
 
