@@ -262,16 +262,15 @@ namespace FTP_Client
                 Local_OpenNode(e.Node.Parent);
             }
         }
-        #endregion
 
         private void serverTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            if( serverTreeView.IsNodeNameOK(e) )
+            if (serverTreeView.IsNodeNameOK(e))
             {
                 Server_Rename(e.Node.Name, e.Label);
                 e.Node.Name = e.Label;
 
-                if(serverTreeView.IsNodeADirectory(e.Node))
+                if (serverTreeView.IsNodeADirectory(e.Node))
                 {
                     Server_OpenNode(e.Node);
                 }
@@ -281,5 +280,44 @@ namespace FTP_Client
                 }
             }
         }
+        #endregion
+
+        #region Delete file/directory
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (localTreeView.SelectedNode != null)
+            { 
+                TreeNode nodeToDelete = localTreeView.SelectedNode;
+
+                try
+                {
+                    if (localTreeView.IsNodeADirectory(nodeToDelete))
+                    {
+                        DirectoryInfo dirToDelete = (DirectoryInfo)nodeToDelete.Tag;
+                        dirToDelete.Delete();
+                    }
+                    else
+                    {
+                        FileInfo fileToDelete = (FileInfo)nodeToDelete.Tag;
+                        fileToDelete.Delete();
+                    }
+
+                    TreeNode parentNode = nodeToDelete.Parent;
+                    nodeToDelete.Remove();
+                    Local_OpenNode(parentNode);
+                }
+                catch(IOException exception)
+                {
+                    Console.WriteLine(exception.ToString());
+                    MessageBox.Show("Access denied");
+                }
+            }
+            else
+            {
+                Console.WriteLine(serverTreeView.SelectedNode.Name);
+            }
+        }
+        #endregion
+
     }
 }

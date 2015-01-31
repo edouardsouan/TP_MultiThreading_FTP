@@ -37,7 +37,6 @@ namespace FTP_Client
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnConnection = new System.Windows.Forms.Button();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
@@ -49,13 +48,14 @@ namespace FTP_Client
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.contextMenuLocalTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.splitContainer7 = new System.Windows.Forms.SplitContainer();
             this.btnCancel = new System.Windows.Forms.Button();
             this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnConnection = new System.Windows.Forms.Button();
             this.logWindow = new FTP_Client.InfoEntities.LogFTPWindow(this.components);
             this.localTreeView = new FTP_Client.LocalEntities.LocalTreeView();
             this.serverTreeView = new FTP_Client.ServerEntities.ServerTreeView(this.components);
@@ -125,7 +125,7 @@ namespace FTP_Client
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Controls.Add(this.splitter1);
-            this.splitContainer1.Size = new System.Drawing.Size(883, 753);
+            this.splitContainer1.Size = new System.Drawing.Size(934, 753);
             this.splitContainer1.SplitterDistance = 110;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -144,13 +144,14 @@ namespace FTP_Client
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.logWindow);
-            this.splitContainer6.Size = new System.Drawing.Size(883, 110);
+            this.splitContainer6.Size = new System.Drawing.Size(934, 110);
             this.splitContainer6.SplitterDistance = 38;
             this.splitContainer6.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnConnection);
             this.panel1.Controls.Add(this.txtPort);
             this.panel1.Controls.Add(this.labelPort);
@@ -164,20 +165,8 @@ namespace FTP_Client
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(883, 38);
+            this.panel1.Size = new System.Drawing.Size(934, 38);
             this.panel1.TabIndex = 0;
-            // 
-            // btnConnection
-            // 
-            this.btnConnection.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConnection.Image = global::FTP_Client.Properties.Resources.connexion;
-            this.btnConnection.Location = new System.Drawing.Point(788, 6);
-            this.btnConnection.Margin = new System.Windows.Forms.Padding(4);
-            this.btnConnection.Name = "btnConnection";
-            this.btnConnection.Size = new System.Drawing.Size(43, 31);
-            this.btnConnection.TabIndex = 8;
-            this.btnConnection.UseVisualStyleBackColor = false;
-            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
             // 
             // txtPort
             // 
@@ -271,7 +260,7 @@ namespace FTP_Client
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer7);
-            this.splitContainer2.Size = new System.Drawing.Size(879, 639);
+            this.splitContainer2.Size = new System.Drawing.Size(930, 639);
             this.splitContainer2.SplitterDistance = 413;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -290,7 +279,7 @@ namespace FTP_Client
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer3.Size = new System.Drawing.Size(879, 413);
+            this.splitContainer3.Size = new System.Drawing.Size(930, 413);
             this.splitContainer3.SplitterDistance = 262;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -308,14 +297,9 @@ namespace FTP_Client
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.serverTreeView);
-            this.splitContainer4.Size = new System.Drawing.Size(879, 262);
-            this.splitContainer4.SplitterDistance = 408;
+            this.splitContainer4.Size = new System.Drawing.Size(930, 262);
+            this.splitContainer4.SplitterDistance = 431;
             this.splitContainer4.TabIndex = 0;
-            // 
-            // contextMenuLocalTree
-            // 
-            this.contextMenuLocalTree.Name = "contextMenuStrip1";
-            this.contextMenuLocalTree.Size = new System.Drawing.Size(61, 4);
             // 
             // imageList1
             // 
@@ -339,8 +323,8 @@ namespace FTP_Client
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.serverListView);
-            this.splitContainer5.Size = new System.Drawing.Size(879, 147);
-            this.splitContainer5.SplitterDistance = 408;
+            this.splitContainer5.Size = new System.Drawing.Size(930, 147);
+            this.splitContainer5.SplitterDistance = 431;
             this.splitContainer5.TabIndex = 0;
             // 
             // splitContainer7
@@ -358,7 +342,7 @@ namespace FTP_Client
             // splitContainer7.Panel2
             // 
             this.splitContainer7.Panel2.Controls.Add(this.fileQueue);
-            this.splitContainer7.Size = new System.Drawing.Size(879, 222);
+            this.splitContainer7.Size = new System.Drawing.Size(930, 222);
             this.splitContainer7.SplitterDistance = 28;
             this.splitContainer7.TabIndex = 0;
             // 
@@ -388,6 +372,29 @@ namespace FTP_Client
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDelete.Image = global::FTP_Client.Properties.Resources.file_delete;
+            this.btnDelete.Location = new System.Drawing.Point(839, 6);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(48, 31);
+            this.btnDelete.TabIndex = 9;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnConnection
+            // 
+            this.btnConnection.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConnection.Image = global::FTP_Client.Properties.Resources.connexion;
+            this.btnConnection.Location = new System.Drawing.Point(788, 6);
+            this.btnConnection.Margin = new System.Windows.Forms.Padding(4);
+            this.btnConnection.Name = "btnConnection";
+            this.btnConnection.Size = new System.Drawing.Size(43, 31);
+            this.btnConnection.TabIndex = 8;
+            this.btnConnection.UseVisualStyleBackColor = false;
+            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+            // 
             // logWindow
             // 
             this.logWindow.BackColor = System.Drawing.SystemColors.Info;
@@ -396,13 +403,12 @@ namespace FTP_Client
             this.logWindow.Margin = new System.Windows.Forms.Padding(4);
             this.logWindow.Name = "logWindow";
             this.logWindow.ReadOnly = true;
-            this.logWindow.Size = new System.Drawing.Size(883, 68);
+            this.logWindow.Size = new System.Drawing.Size(934, 68);
             this.logWindow.TabIndex = 0;
             this.logWindow.Text = "";
             // 
             // localTreeView
             // 
-            this.localTreeView.ContextMenuStrip = this.contextMenuLocalTree;
             this.localTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.localTreeView.ImageIndex = 0;
             this.localTreeView.ImageList = this.imageList1;
@@ -411,7 +417,7 @@ namespace FTP_Client
             this.localTreeView.Margin = new System.Windows.Forms.Padding(4);
             this.localTreeView.Name = "localTreeView";
             this.localTreeView.SelectedImageIndex = 0;
-            this.localTreeView.Size = new System.Drawing.Size(408, 262);
+            this.localTreeView.Size = new System.Drawing.Size(431, 262);
             this.localTreeView.TabIndex = 0;
             this.localTreeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.localTreeView_AfterLabelEdit);
             this.localTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.localTreeView_NodeMouseDoubleClick);
@@ -426,7 +432,7 @@ namespace FTP_Client
             this.serverTreeView.Margin = new System.Windows.Forms.Padding(4);
             this.serverTreeView.Name = "serverTreeView";
             this.serverTreeView.SelectedImageIndex = 0;
-            this.serverTreeView.Size = new System.Drawing.Size(467, 262);
+            this.serverTreeView.Size = new System.Drawing.Size(495, 262);
             this.serverTreeView.TabIndex = 0;
             this.serverTreeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.serverTreeView_AfterLabelEdit);
             this.serverTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.serverTreeView_NodeMouseDoubleClick);
@@ -442,7 +448,7 @@ namespace FTP_Client
             this.localListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.localListView.Location = new System.Drawing.Point(0, 0);
             this.localListView.Name = "localListView";
-            this.localListView.Size = new System.Drawing.Size(408, 147);
+            this.localListView.Size = new System.Drawing.Size(431, 147);
             this.localListView.SmallImageList = this.imageList1;
             this.localListView.TabIndex = 0;
             this.localListView.UseCompatibleStateImageBehavior = false;
@@ -484,7 +490,7 @@ namespace FTP_Client
             this.serverListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.serverListView.Location = new System.Drawing.Point(0, 0);
             this.serverListView.Name = "serverListView";
-            this.serverListView.Size = new System.Drawing.Size(467, 147);
+            this.serverListView.Size = new System.Drawing.Size(495, 147);
             this.serverListView.SmallImageList = this.imageList1;
             this.serverListView.TabIndex = 0;
             this.serverListView.UseCompatibleStateImageBehavior = false;
@@ -534,7 +540,7 @@ namespace FTP_Client
             this.fileQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileQueue.Location = new System.Drawing.Point(0, 0);
             this.fileQueue.Name = "fileQueue";
-            this.fileQueue.Size = new System.Drawing.Size(879, 190);
+            this.fileQueue.Size = new System.Drawing.Size(930, 190);
             this.fileQueue.TabIndex = 0;
             this.fileQueue.UseCompatibleStateImageBehavior = false;
             this.fileQueue.View = System.Windows.Forms.View.Details;
@@ -567,7 +573,7 @@ namespace FTP_Client
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(883, 753);
+            this.ClientSize = new System.Drawing.Size(934, 753);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Lucida Sans Unicode", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -655,7 +661,7 @@ namespace FTP_Client
         private System.Windows.Forms.ColumnHeader time;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ProgressBar fileTransfertBar;
-        private System.Windows.Forms.ContextMenuStrip contextMenuLocalTree;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

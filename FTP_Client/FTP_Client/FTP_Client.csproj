@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\EPSI.ico" />
+    <None Include="Resources\file_delete.png" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\hard_disk.png" />
     <Content Include="Resources\text_file.png" />
