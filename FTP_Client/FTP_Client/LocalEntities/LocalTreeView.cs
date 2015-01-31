@@ -143,5 +143,21 @@ namespace FTP_Client.LocalEntities
 
             return nameCheck;
         }
+
+        #region Delete
+        public void DeleteNode(TreeNode nodeToDelete)
+        {
+            if (IsNodeADirectory(nodeToDelete))
+            {
+                DirectoryInfo dirToDelete = (DirectoryInfo)nodeToDelete.Tag;
+                dirToDelete.Delete(true);
+            }
+            else
+            {
+                FileInfo fileToDelete = (FileInfo)nodeToDelete.Tag;
+                fileToDelete.Delete();
+            }
+        }
+        #endregion
     }
 }

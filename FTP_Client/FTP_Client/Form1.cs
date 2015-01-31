@@ -291,16 +291,7 @@ namespace FTP_Client
 
                 try
                 {
-                    if (localTreeView.IsNodeADirectory(nodeToDelete))
-                    {
-                        DirectoryInfo dirToDelete = (DirectoryInfo)nodeToDelete.Tag;
-                        dirToDelete.Delete();
-                    }
-                    else
-                    {
-                        FileInfo fileToDelete = (FileInfo)nodeToDelete.Tag;
-                        fileToDelete.Delete();
-                    }
+                    localTreeView.DeleteNode(nodeToDelete);
 
                     TreeNode parentNode = nodeToDelete.Parent;
                     nodeToDelete.Remove();
