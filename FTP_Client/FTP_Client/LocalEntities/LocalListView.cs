@@ -43,6 +43,13 @@ namespace FTP_Client.LocalEntities
             this.Items.Add(itemToAdd);
         }
 
+        public void AddRootItem(TreeNode node, string displayName)
+        {
+            ListViewItem itemToAdd = GenerateItem(node, displayName);
+            itemToAdd.ImageIndex = 0;
+            this.Items.Add(itemToAdd);
+        }
+
         private string RetrieveSize(FileSystemInfo fileInfo)
         {
             string size = "";

@@ -249,8 +249,6 @@ namespace FTP_Client
         #endregion
 
         #region Rename
-        
-
         private void localTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             localTreeView.RenameNode(e);
@@ -265,6 +263,5 @@ namespace FTP_Client
             }
         }
         #endregion
-
     }
 }

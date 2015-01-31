@@ -122,7 +122,7 @@ namespace FTP_Client
                 DirectoryInfo logicalDrive = new DirectoryInfo(drive);
                 TreeNode newNode = localTreeView.GenerateTreeNode(logicalDrive, 0);
                 localTreeView.AddRootNode(newNode);
-                localListView.AddItem(newNode, newNode.Name);
+                localListView.AddRootItem(newNode, newNode.Name);
             }
         }
         #endregion
