@@ -135,7 +135,7 @@ namespace FTP_Client
         {
             string oldPath = serverPath + "/" + oldName;
 
-            try  
+            try
             {
                 FtpWebRequest renameRequest = ftpManager.CreatRequestRename(oldPath, newName);
 

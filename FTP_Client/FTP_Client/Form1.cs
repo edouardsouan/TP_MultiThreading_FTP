@@ -269,6 +269,16 @@ namespace FTP_Client
             if( serverTreeView.IsNodeNameOK(e) )
             {
                 Server_Rename(e.Node.Name, e.Label);
+                e.Node.Name = e.Label;
+
+                if(serverTreeView.IsNodeADirectory(e.Node))
+                {
+                    Server_OpenNode(e.Node);
+                }
+                else
+                {
+                    Server_OpenNode(e.Node.Parent);
+                }
             }
         }
     }
