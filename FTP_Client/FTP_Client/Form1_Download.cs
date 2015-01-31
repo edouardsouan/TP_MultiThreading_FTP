@@ -56,6 +56,8 @@ namespace FTP_Client
             {
                 Download_File(localPathTarget, fileInfo, serverTarget);
             }
+
+            Local_RefreshView();
         }
 
         private void Download_File(string localPathTarget, FileServer fileInfo, string serverTarget)

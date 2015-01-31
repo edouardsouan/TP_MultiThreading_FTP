@@ -114,12 +114,15 @@ namespace FTP_Client.ServerEntities
 
             string rawResult = streamReader.ReadToEnd();
             
-            string data = rawResult.Remove(rawResult.LastIndexOf("\n"), 1);
-
             streamReader.Close();
             ftpResponse.Close();
 
-            return data.Split('\n');
+            string[] stringSeparators = new string[] { "\r\n" };
+            string[] rawLinesArray = rawResult.Split(stringSeparators, StringSplitOptions.None);
+            List<string> rawLinesList = rawLinesArray.OfType<string>().ToList();
+            rawLinesList.RemoveAll(String.IsNullOrEmpty);
+
+            return rawLinesList.ToArray<string>();
         }
     }
 }

@@ -33,6 +33,8 @@ namespace FTP_Client
                 DirectoryInfo directoryToUpload = (DirectoryInfo)fileNode.Tag;
                 Upload_Directory(directoryToUpload, serverPathTarget);
             }
+
+            Server_RefreshView();
         }
 
         private void Upload_Directory(DirectoryInfo directoryToUpload, string serverPathTarget)

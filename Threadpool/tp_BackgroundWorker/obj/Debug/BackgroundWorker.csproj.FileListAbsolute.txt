@@ -1,3 +1,0 @@
-X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\bin\Debug\tp_BackgroundWorker.exe.config
-X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.exe
-X:\epsi\I4\multithread\Threadpool\tp_BackgroundWorker\obj\Debug\tp_BackgroundWorker.pdb
