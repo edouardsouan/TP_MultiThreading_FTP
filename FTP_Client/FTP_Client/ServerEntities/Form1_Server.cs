@@ -153,5 +153,105 @@ namespace FTP_Client
             }
         }
         #endregion
+
+        #region Delete
+        private void Server_Delete(TreeNode nodeToDelete)
+        {
+            try
+            {
+                string fullPath = nodeToDelete.FullPath.Replace("\\", "/");
+
+                if (serverTreeView.IsNodeADirectory(nodeToDelete))
+                {
+                    Server_DeleteFolder(fullPath);
+                }
+                else
+                {
+                    Server_DeleteFile(fullPath);
+                }
+
+                TreeNode parentNode = nodeToDelete.Parent;
+                nodeToDelete.Remove();
+                Server_OpenNode(parentNode);
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine(exception.ToString());
+                MessageBox.Show("Access denied");
+            }
+        }
+
+        private void Server_DeleteFolder(string fullPath)
+        {
+            FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(fullPath);
+            FtpWebResponse ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+            string[] serverData = ftpManager.ParseRawData(ftpResponse);
+
+            foreach (string aData in serverData)
+            {
+                FileServer fileServer = new FileServer(aData);
+                if (fileServer.IsNameOKToDisplay())
+                {
+                    if (fileServer.IsADirectory())
+                    {
+                        Server_DeleteFolder(fullPath + "/" + fileServer.GetName());
+                    }
+                    else
+                    {
+                        Server_DeleteFile(fullPath + "/" + fileServer.GetName());
+                    }
+                }
+            }
+
+            try
+            {
+                FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteDirectory(fullPath);
+                FtpWebResponse response = (FtpWebResponse)deleteRequest.GetResponse();
+                String result = String.Empty;
+                Int64 size = response.ContentLength;
+                using (Stream datastream = response.GetResponseStream())
+                {
+                    using (StreamReader streamReader = new StreamReader(datastream))
+                    {
+                        result = streamReader.ReadToEnd();
+                        streamReader.Close();
+                        datastream.Close();
+                        response.Close();
+                    }
+                }
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine(exception.ToString());
+                MessageBox.Show("Access denied");
+            }
+        }
+
+        private void Server_DeleteFile(string fullPath)
+        {
+            try
+            {
+                FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteFile(fullPath);
+                FtpWebResponse response = (FtpWebResponse)deleteRequest.GetResponse();
+                String result = String.Empty;
+                Int64 size = response.ContentLength;
+                using (Stream datastream = response.GetResponseStream())
+                {
+                    using (StreamReader streamReader = new StreamReader(datastream))
+                    {
+                        result = streamReader.ReadToEnd();
+                        streamReader.Close();
+                        datastream.Close();
+                        response.Close();
+                    }
+                }
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine(exception.ToString());
+                MessageBox.Show("Access denied");
+            }
+        }
+        #endregion
     }
 }

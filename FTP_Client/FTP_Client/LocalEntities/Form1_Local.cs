@@ -127,6 +127,23 @@ namespace FTP_Client
         }
         #endregion
 
-        
+        #region Delete
+        private void Local_Delete(TreeNode nodeToDelete)
+        {
+            try
+            {
+                localTreeView.DeleteNode(nodeToDelete);
+
+                TreeNode parentNode = nodeToDelete.Parent;
+                nodeToDelete.Remove();
+                Local_OpenNode(parentNode);
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine(exception.ToString());
+                MessageBox.Show("Access denied");
+            }
+        }
+        #endregion
     }
 }

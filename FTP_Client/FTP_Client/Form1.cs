@@ -288,24 +288,12 @@ namespace FTP_Client
             if (localTreeView.SelectedNode != null)
             { 
                 TreeNode nodeToDelete = localTreeView.SelectedNode;
-
-                try
-                {
-                    localTreeView.DeleteNode(nodeToDelete);
-
-                    TreeNode parentNode = nodeToDelete.Parent;
-                    nodeToDelete.Remove();
-                    Local_OpenNode(parentNode);
-                }
-                catch(IOException exception)
-                {
-                    Console.WriteLine(exception.ToString());
-                    MessageBox.Show("Access denied");
-                }
+                Local_Delete(nodeToDelete);
             }
-            else
+            else if(serverTreeView.SelectedNode != null)
             {
-                Console.WriteLine(serverTreeView.SelectedNode.Name);
+                TreeNode nodeToDelete = serverTreeView.SelectedNode;
+                Server_Delete(nodeToDelete);
             }
         }
         #endregion

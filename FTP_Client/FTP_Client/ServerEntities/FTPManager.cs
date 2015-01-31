@@ -91,6 +91,22 @@ namespace FTP_Client.ServerEntities
             return ftpRequest;
         }
 
+        public FtpWebRequest CreatRequestDeleteFile(string complementPath)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.DeleteFile;
+
+            return ftpRequest;
+        }
+
+        public FtpWebRequest CreatRequestDeleteDirectory(string complementPath)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(complementPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.RemoveDirectory;
+
+            return ftpRequest;
+        }
+
         public string[] ParseRawData(FtpWebResponse ftpResponse)
         {
             Stream responseStream = ftpResponse.GetResponseStream();
