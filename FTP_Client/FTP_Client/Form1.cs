@@ -24,6 +24,13 @@ namespace FTP_Client
         CancellationToken cancellationToken;
         #endregion
 
+        /*
+         * ftp.kimsavinfo.fr
+         * kimsavin
+         * Se8yBapG
+         * 21
+         */
+
         public Form1()
         {
             InitializeComponent();
@@ -103,7 +110,6 @@ namespace FTP_Client
                 if (selectedItem.Text.Equals(".."))
                 {
                     nodeClicked = ((TreeNode)selectedItem.Tag).Parent;
-
                 }
                 else
                 {
@@ -113,12 +119,9 @@ namespace FTP_Client
                 Server_OpenNode(nodeClicked);
             }
         }
-
-        
         #endregion
 
         #region Transfert events
-
         private void UpdateTransfertGauge(double totalWeigth, double actualWeigth)
         {
             fileTransfertBar.Minimum = 0;
@@ -244,5 +247,24 @@ namespace FTP_Client
             }
         }
         #endregion
+
+        #region Rename
+        
+
+        private void localTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            localTreeView.RenameNode(e);
+
+            if (localTreeView.IsNodeADirectory(e.Node))
+            {
+                Local_OpenNode(e.Node);
+            }
+            else
+            {
+                Local_OpenNode(e.Node.Parent);
+            }
+        }
+        #endregion
+
     }
 }
