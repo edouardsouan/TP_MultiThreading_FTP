@@ -70,5 +70,42 @@ namespace FTP_Client.ServerEntities
 
             return isADirectory;
         }
+
+        public bool IsNodeNameOK(NodeLabelEditEventArgs e)
+        {
+            bool nameCheck = false;
+            string newName = e.Label;
+
+            if (newName != null)
+            {
+                if (newName.Length > 0)
+                {
+                    if (newName.IndexOfAny(new char[] { '@', ',', '!' }) == -1)
+                    {
+                        e.Node.EndEdit(false);
+                        nameCheck = true;
+                    }
+                    else
+                    {
+                        e.CancelEdit = true;
+                        MessageBox.Show("Invalid tree node label.\n" +
+                            "The invalid characters are: '@', ',', '!'",
+                            "Node Label Edit");
+                        e.Node.BeginEdit();
+                    }
+                }
+                else
+                {
+                    /* Cancel the label edit action, inform the user, and 
+                        place the node in edit mode again. */
+                    e.CancelEdit = true;
+                    MessageBox.Show("Invalid tree node label.\nThe label cannot be blank",
+                        "Node Label Edit");
+                    e.Node.BeginEdit();
+                }
+            }
+
+            return nameCheck;
+        }
     }
 }

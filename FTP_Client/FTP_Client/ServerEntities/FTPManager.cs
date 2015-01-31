@@ -82,6 +82,15 @@ namespace FTP_Client.ServerEntities
             return ftpRequest;
         }
 
+        public FtpWebRequest CreatRequestRename(string oldPath, string newName)
+        {
+            FtpWebRequest ftpRequest = CreateFtpWebRequest(oldPath);
+            ftpRequest.Method = WebRequestMethods.Ftp.Rename;
+            ftpRequest.RenameTo = newName;
+
+            return ftpRequest;
+        }
+
         public string[] ParseRawData(FtpWebResponse ftpResponse)
         {
             Stream responseStream = ftpResponse.GetResponseStream();

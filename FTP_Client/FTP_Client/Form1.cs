@@ -263,5 +263,13 @@ namespace FTP_Client
             }
         }
         #endregion
+
+        private void serverTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            if( serverTreeView.IsNodeNameOK(e) )
+            {
+                Server_Rename(e.Node.Name, e.Label);
+            }
+        }
     }
 }

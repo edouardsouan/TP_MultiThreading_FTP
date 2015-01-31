@@ -32,7 +32,7 @@ namespace FTP_Client
         {
             if (serverTreeView.IsNodeADirectory(nodeClicked))
             {
-                serverPath = nodeClicked.FullPath;
+                serverPath = nodeClicked.FullPath.Replace("\\", "/");
 
                 serverListView.Items.Clear();
                 Server_DisplayParentNode(nodeClicked);
@@ -128,6 +128,28 @@ namespace FTP_Client
             catch (WebException exception)
             {
                 Console.WriteLine(exception.ToString());
+            }
+        }
+
+        private void Server_Rename(string oldName, string newName)
+        {
+            string oldPath = serverPath + "/" + oldName;
+
+            try  
+            {
+                FtpWebRequest renameRequest = ftpManager.CreatRequestRename(oldPath, newName);
+
+                FtpWebResponse response = (FtpWebResponse)renameRequest.GetResponse();
+                using (Stream ftpStream = response.GetResponseStream())
+                {
+                    ftpStream.Close();
+                    response.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                logWindow.WriteLog("Error rename", Color.Red);
             }
         }
         #endregion
