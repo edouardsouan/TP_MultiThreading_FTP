@@ -22,7 +22,7 @@ namespace FTP_Client.InfoEntities
         public void WriteLog(string text, Color color)
         {
             this.SelectionColor = color;
-            this.AppendText(DateTime.Now + " - " + text);
+            this.AppendText(DateTime.Now + " - " + text+"\n");
             ScrollToEnd();
         }
 
@@ -32,12 +32,33 @@ namespace FTP_Client.InfoEntities
             this.ScrollToCaret();
         }
 
-        public void WriteLog(FtpWebResponse ftpResponse)
+        public void WriteLog(FtpWebRequest ftpRequest)
+        {
+            this.WriteLog("Command : " + ftpRequest.Method, Color.Blue);
+            this.WriteLog("Uri : " + ftpRequest.RequestUri, Color.Blue);
+        }
+
+        public void WriteLogBannerMessage(FtpWebResponse ftpResponse)
         {
             this.WriteLog(ftpResponse.BannerMessage, Color.Green);
+        }
+
+        public void WriteLogWelcomeMessage(FtpWebResponse ftpResponse)
+        {
             this.WriteLog(ftpResponse.WelcomeMessage, Color.Green);
-            this.WriteLog(ftpResponse.StatusDescription, Color.Blue);
-            this.WriteLog(ftpResponse.StatusCode.ToString() + "\n", Color.Blue);
+        }
+
+        public void WriteLog(FtpWebResponse ftpResponse)
+        {
+            this.WriteLog(ftpResponse.StatusDescription, Color.Green);
+            this.WriteLog(ftpResponse.StatusCode.ToString() + "\n", Color.Green);
+        }
+
+        public void WriteLogConnectionResponse(FtpWebResponse ftpResponse)
+        {
+            WriteLogBannerMessage(ftpResponse);
+            WriteLogWelcomeMessage(ftpResponse);
+            WriteLog(ftpResponse);
         }
     }
 }

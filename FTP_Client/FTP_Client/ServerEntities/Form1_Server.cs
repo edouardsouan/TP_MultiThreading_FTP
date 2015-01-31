@@ -70,7 +70,17 @@ namespace FTP_Client
                     FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
 
-                    logWindow.WriteLog(ftpResponse);
+                    logWindow.WriteLog(ftpRequest);
+                    if (showConnectionLog)
+                    {
+                        logWindow.WriteLogConnectionResponse(ftpResponse);
+                        showConnectionLog = false;
+                    }
+                    else
+                    {
+                        logWindow.WriteLog(ftpResponse);
+                    }
+
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
                     Server_ShowFiles(serverData, parentNode);
                 }
@@ -122,6 +132,7 @@ namespace FTP_Client
             {
                 FtpWebRequest makeDirRequest = ftpManager.CreatRequestMakeDirectory(serverPathTarget);
                 FtpWebResponse makeDirResponse = (FtpWebResponse)makeDirRequest.GetResponse();
+                logWindow.WriteLog(makeDirRequest);
                 logWindow.WriteLog(makeDirResponse);
                 makeDirResponse.Close();
             }
@@ -138,12 +149,15 @@ namespace FTP_Client
             try
             {
                 FtpWebRequest renameRequest = ftpManager.CreatRequestRename(oldPath, newName);
+                FtpWebResponse renameResponse = (FtpWebResponse)renameRequest.GetResponse();
 
-                FtpWebResponse response = (FtpWebResponse)renameRequest.GetResponse();
-                using (Stream ftpStream = response.GetResponseStream())
+                logWindow.WriteLog(renameRequest);
+                logWindow.WriteLog(renameResponse);
+
+                using (Stream ftpStream = renameResponse.GetResponseStream())
                 {
                     ftpStream.Close();
-                    response.Close();
+                    renameResponse.Close();
                 }
             }
             catch (Exception exception)
@@ -206,17 +220,21 @@ namespace FTP_Client
             try
             {
                 FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteDirectory(fullPath);
-                FtpWebResponse response = (FtpWebResponse)deleteRequest.GetResponse();
+                FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse();
+
+                logWindow.WriteLog(deleteRequest);
+                logWindow.WriteLog(deleteResponse);
+
                 String result = String.Empty;
-                Int64 size = response.ContentLength;
-                using (Stream datastream = response.GetResponseStream())
+                Int64 size = deleteResponse.ContentLength;
+                using (Stream datastream = deleteResponse.GetResponseStream())
                 {
                     using (StreamReader streamReader = new StreamReader(datastream))
                     {
                         result = streamReader.ReadToEnd();
                         streamReader.Close();
                         datastream.Close();
-                        response.Close();
+                        deleteResponse.Close();
                     }
                 }
             }
@@ -232,17 +250,21 @@ namespace FTP_Client
             try
             {
                 FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteFile(fullPath);
-                FtpWebResponse response = (FtpWebResponse)deleteRequest.GetResponse();
+                FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse();
+
+                logWindow.WriteLog(deleteRequest);
+                logWindow.WriteLog(deleteResponse);
+
                 String result = String.Empty;
-                Int64 size = response.ContentLength;
-                using (Stream datastream = response.GetResponseStream())
+                Int64 size = deleteResponse.ContentLength;
+                using (Stream datastream = deleteResponse.GetResponseStream())
                 {
                     using (StreamReader streamReader = new StreamReader(datastream))
                     {
                         result = streamReader.ReadToEnd();
                         streamReader.Close();
                         datastream.Close();
-                        response.Close();
+                        deleteResponse.Close();
                     }
                 }
             }

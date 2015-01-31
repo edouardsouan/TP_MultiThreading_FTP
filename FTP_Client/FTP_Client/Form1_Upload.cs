@@ -67,8 +67,8 @@ namespace FTP_Client
             {
                 FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
                 Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
-                    logWindow.WriteLog(uploadRequest.Method + " : " + serverPathTarget + "\n", Color.Blue)))
-                );
+                    logWindow.WriteLog(uploadRequest)
+                )));
 
                 Int32 buffLength = 2048;
                 byte[] buff = new byte[buffLength];
@@ -101,9 +101,9 @@ namespace FTP_Client
 
                 strm.Close();
                 fs.Close();
-
             }, cancellationToken);
 
+            logWindow.WriteLog("Response:	226-File successfully transferred", Color.Green);
             Server_RefreshView();
         }
     }
