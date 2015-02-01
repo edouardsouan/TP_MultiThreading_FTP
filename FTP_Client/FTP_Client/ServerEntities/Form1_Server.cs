@@ -39,7 +39,7 @@ namespace FTP_Client
 
                 if (nodeClicked.Nodes.Count == 0)
                 {
-                    Server_ShowLinkedFTPElements(nodeClicked.FullPath, nodeClicked);
+                    Server_ShowLinkedFTPElements(serverPath, nodeClicked);
                 }
                 else
                 {

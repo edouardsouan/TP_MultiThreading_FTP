@@ -25,16 +25,16 @@ namespace FTP_Client
         CancellationToken cancellationToken;
         #endregion
 
-        /*
-         * ftp.kimsavinfo.fr
-         * kimsavin
-         * Se8yBapG
-         * 21
-         */
-
         public Form1()
         {
             InitializeComponent();
+
+            /*
+            txtServer.Text = "ftp.kimsavinfo.fr";
+            txtUserName.Text = "kimsavin";
+            txtPassword.Text = "Se8yBapG";
+            txtPort.Text = "21";
+            */
 
             cancellationTokenSource = new CancellationTokenSource();
         }
