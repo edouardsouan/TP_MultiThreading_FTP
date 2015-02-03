@@ -260,14 +260,12 @@ namespace FTP_Client
         {
             if (serverTreeView.IsNodeNameOK(e))
             {
-                try
+                if (serverTreeView.IsNodeADirectory(e.Node))
                 {
-                    Server_Rename(e.Node, e.Label);
+                    serverPath = e.Node.Parent.FullPath.Replace("\\", "/");
                 }
-                catch
-                {
-                    e.CancelEdit = true;
-                }
+
+                Server_Rename(e, e.Label);
             }
         }
         #endregion

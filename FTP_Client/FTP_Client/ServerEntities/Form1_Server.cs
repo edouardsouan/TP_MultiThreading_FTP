@@ -142,8 +142,9 @@ namespace FTP_Client
             }
         }
 
-        private void Server_Rename(TreeNode nodeToRename, string newName)
+        private void Server_Rename(NodeLabelEditEventArgs e, string newName)
         {
+            TreeNode nodeToRename = e.Node;
             string oldPath = serverPath + "/" + nodeToRename.Name;
 
             try
@@ -165,6 +166,7 @@ namespace FTP_Client
             }
             catch (Exception exception)
             {
+                e.CancelEdit = true;
                 Console.WriteLine(exception.ToString());
                 logWindow.WriteLog("Error rename", Color.Red);
             }
