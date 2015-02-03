@@ -253,15 +253,7 @@ namespace FTP_Client
         private void localTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             localTreeView.RenameNode(e);
-
-            if (localTreeView.IsNodeADirectory(e.Node))
-            {
-                Local_OpenNode(e.Node);
-            }
-            else
-            {
-                Local_OpenNode(e.Node.Parent);
-            }
+            Local_OpenNode(e.Node.Parent);
         }
 
         private void serverTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -276,19 +268,6 @@ namespace FTP_Client
                 {
                     e.CancelEdit = true;
                 }
-                /*
-                Server_Rename(e.Node.Name, e.Label);
-                e.Node.Name = e.Label;
-
-                if (serverTreeView.IsNodeADirectory(e.Node))
-                {
-                    Server_OpenNode(e.Node);
-                }
-                else
-                {
-                    Server_OpenNode(e.Node.Parent);
-                }
-                 */
             }
         }
         #endregion
