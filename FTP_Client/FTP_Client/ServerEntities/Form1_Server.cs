@@ -142,9 +142,9 @@ namespace FTP_Client
             }
         }
 
-        private void Server_Rename(string oldName, string newName)
+        private void Server_Rename(TreeNode nodeToRename, string newName)
         {
-            string oldPath = serverPath + "/" + oldName;
+            string oldPath = serverPath + "/" + nodeToRename.Name;
 
             try
             {
@@ -159,6 +159,9 @@ namespace FTP_Client
                     ftpStream.Close();
                     renameResponse.Close();
                 }
+
+                nodeToRename.Name = newName;
+                Server_OpenNode(nodeToRename.Parent);
             }
             catch (Exception exception)
             {

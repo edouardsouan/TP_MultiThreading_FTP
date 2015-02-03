@@ -9,3 +9,14 @@ C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debu
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.csprojResolveAssemblyReference.cache
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\TimeLibrary.dll
 C:\Users\kimsavinfo\Desktop\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\TimeLibrary.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\FTP_Client.exe.config
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.exe
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\FTP_Client.exe
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\FTP_Client.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\TimeLibrary.dll
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\bin\Debug\TimeLibrary.pdb
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.csprojResolveAssemblyReference.cache
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.Form1.resources
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.Properties.Resources.resources
+X:\epsi\I4\multithread\TP_MultiThreading_FTP\FTP_Client\FTP_Client\obj\Debug\FTP_Client.csproj.GenerateResource.Cache

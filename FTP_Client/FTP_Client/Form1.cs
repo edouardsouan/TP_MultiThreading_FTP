@@ -29,12 +29,11 @@ namespace FTP_Client
         {
             InitializeComponent();
 
-            /*
+            
             txtServer.Text = "ftp.kimsavinfo.fr";
             txtUserName.Text = "kimsavin";
             txtPassword.Text = "Se8yBapG";
             txtPort.Text = "21";
-            */
 
             cancellationTokenSource = new CancellationTokenSource();
         }
@@ -269,6 +268,15 @@ namespace FTP_Client
         {
             if (serverTreeView.IsNodeNameOK(e))
             {
+                try
+                {
+                    Server_Rename(e.Node, e.Label);
+                }
+                catch
+                {
+                    e.CancelEdit = true;
+                }
+                /*
                 Server_Rename(e.Node.Name, e.Label);
                 e.Node.Name = e.Label;
 
@@ -280,6 +288,7 @@ namespace FTP_Client
                 {
                     Server_OpenNode(e.Node.Parent);
                 }
+                 */
             }
         }
         #endregion
