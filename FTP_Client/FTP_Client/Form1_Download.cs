@@ -37,8 +37,7 @@ namespace FTP_Client
 
                 FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverTarget);
                 FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
-                logWindow.WriteLog(ftpRequest);
-                logWindow.WriteLog(ftpResponse);
+                logWindow.WriteLog();
                 string[] serverData = ftpManager.ParseRawData(ftpResponse);
 
                 foreach (String rawData in serverData)
@@ -69,7 +68,7 @@ namespace FTP_Client
             {
                 FtpWebRequest downloadRequest = ftpManager.CreatRequestDownloadFile(serverTarget);
                 Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
-                   logWindow.WriteLog(downloadRequest)
+                   logWindow.WriteLog()
                 )));
                 FileStream downloadedFileStream = new FileStream(localPathTarget, FileMode.Create);
 
@@ -105,7 +104,7 @@ namespace FTP_Client
 
             }, cancellationToken);
 
-            logWindow.WriteLog("Response:	226-File successfully transferred", Color.Green);
+            logWindow.WriteLog();
             Local_RefreshView();
         }
     }

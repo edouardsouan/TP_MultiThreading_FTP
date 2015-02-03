@@ -70,23 +70,14 @@ namespace FTP_Client
                     FtpWebRequest ftpRequest = ftpManager.CreatRequestListDirectoriesAndFiles(serverPath);
                     FtpWebResponse ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
 
-                    logWindow.WriteLog(ftpRequest);
-                    if (showConnectionLog)
-                    {
-                        logWindow.WriteLogConnectionResponse(ftpResponse);
-                        showConnectionLog = false;
-                    }
-                    else
-                    {
-                        logWindow.WriteLog(ftpResponse);
-                    }
+                    logWindow.WriteLog();
 
                     string[] serverData = ftpManager.ParseRawData(ftpResponse);
                     Server_ShowFiles(serverData, parentNode);
                 }
                 catch (WebException ex)
                 {
-                    logWindow.WriteLog(ex.Message, Color.Red);
+                    Console.WriteLine(ex.ToString());
                 }
                 finally
                 {
@@ -132,8 +123,7 @@ namespace FTP_Client
             {
                 FtpWebRequest makeDirRequest = ftpManager.CreatRequestMakeDirectory(serverPathTarget);
                 FtpWebResponse makeDirResponse = (FtpWebResponse)makeDirRequest.GetResponse();
-                logWindow.WriteLog(makeDirRequest);
-                logWindow.WriteLog(makeDirResponse);
+                logWindow.WriteLog();
                 makeDirResponse.Close();
             }
             catch (WebException exception)
@@ -152,8 +142,7 @@ namespace FTP_Client
                 FtpWebRequest renameRequest = ftpManager.CreatRequestRename(oldPath, newName);
                 FtpWebResponse renameResponse = (FtpWebResponse)renameRequest.GetResponse();
 
-                logWindow.WriteLog(renameRequest);
-                logWindow.WriteLog(renameResponse);
+                logWindow.WriteLog();
 
                 using (Stream ftpStream = renameResponse.GetResponseStream())
                 {
@@ -227,8 +216,7 @@ namespace FTP_Client
                 FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteDirectory(fullPath);
                 FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse();
 
-                logWindow.WriteLog(deleteRequest);
-                logWindow.WriteLog(deleteResponse);
+                logWindow.WriteLog();
 
                 String result = String.Empty;
                 Int64 size = deleteResponse.ContentLength;
@@ -257,8 +245,7 @@ namespace FTP_Client
                 FtpWebRequest deleteRequest = ftpManager.CreatRequestDeleteFile(fullPath);
                 FtpWebResponse deleteResponse = (FtpWebResponse)deleteRequest.GetResponse();
 
-                logWindow.WriteLog(deleteRequest);
-                logWindow.WriteLog(deleteResponse);
+                logWindow.WriteLog();
 
                 String result = String.Empty;
                 Int64 size = deleteResponse.ContentLength;

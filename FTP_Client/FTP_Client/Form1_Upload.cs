@@ -69,7 +69,7 @@ namespace FTP_Client
             {
                 FtpWebRequest uploadRequest = ftpManager.CreatRequestUploadFile(serverPathTarget);
                 Task.Factory.StartNew(() => logWindow.Invoke(new Action(() =>
-                    logWindow.WriteLog(uploadRequest)
+                    logWindow.WriteLog()
                 )));
 
                 Int32 buffLength = 2048;
