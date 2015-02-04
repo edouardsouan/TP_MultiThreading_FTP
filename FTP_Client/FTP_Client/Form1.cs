@@ -271,19 +271,24 @@ namespace FTP_Client
         #endregion
 
         #region Delete file/directory
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDeleteServer_Click(object sender, EventArgs e)
         {
-            if (localTreeView.SelectedNode != null)
-            { 
-                TreeNode nodeToDelete = localTreeView.SelectedNode;
-                Local_Delete(nodeToDelete);
-            }
-            else if(serverTreeView.SelectedNode != null)
+            if (serverTreeView.SelectedNode != null)
             {
                 TreeNode nodeToDelete = serverTreeView.SelectedNode;
                 Server_Delete(nodeToDelete);
             }
         }
+
+        private void btnDeleteLocal_Click(object sender, EventArgs e)
+        {
+            if (localTreeView.SelectedNode != null)
+            {
+                TreeNode nodeToDelete = localTreeView.SelectedNode;
+                Local_Delete(nodeToDelete);
+            }
+        }
+
         #endregion
 
     }

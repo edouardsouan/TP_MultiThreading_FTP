@@ -5106,3 +5106,477 @@ System.Net Information: 0 : [9108] FtpControlStream#23324256 - Received response
 System.Net Information: 0 : [9108] FtpControlStream#23324256 - Received response [226-Options: -a -l 
 226 5 matches total]
 System.Net Information: 0 : [9108] FtpWebRequest#64083652::(Releasing FTP connection#23324256.)
+System.Net Information: 0 : [9964] FtpWebRequest#63249743::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [10004] FtpWebRequest#63249743::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [10004] Current OS installation type is 'Client'.
+System.Net Information: 0 : [10004] RAS supported: True
+System.Net Error: 0 : [10004] Can't retrieve proxy settings for Uri 'ftp://ftp.kimsavinfo.fr/'. Error code: 12180.
+System.Net Information: 0 : [7356] FtpControlStream#20554616 - Created connection from 192.168.8.54:55980 to 213.186.33.206:21.
+System.Net Information: 0 : [7356] Associating FtpWebRequest#63249743 with FtpControlStream#20554616
+System.Net Information: 0 : [7356] FtpControlStream#20554616 - Received response [220-Bienvenue,
+220-
+220-    On Vous Héberge ?
+220-
+220-Vous êtes connecté sur webm362.
+220 This is a private system - No anonymous login]
+System.Net Information: 0 : [7356] FtpControlStream#20554616 - Sending command [USER kimsavin]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [331 User kimsavin OK. Password required]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Sending command [PASS ********]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [230-User kimsavin has group access to:  users     
+230 OK. Current restricted directory is /]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [200 OK, UTF-8 enabled]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Sending command [PWD]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [257 "/" is your current location]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Sending command [TYPE I]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [200 TYPE is now 8-bit binary]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Sending command [PASV]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [227 Entering Passive Mode (213,186,33,206,107,86)]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Sending command [LIST]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [9328] FtpWebRequest#63249743::(Releasing FTP connection#20554616.)
+System.Net Information: 0 : [9964] FtpWebRequest#13476220::.ctor(ftp://ftp.kimsavinfo.fr//www)
+System.Net Information: 0 : [10004] FtpWebRequest#13476220::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [10004] Associating FtpWebRequest#13476220 with FtpControlStream#20554616
+System.Net Information: 0 : [10004] FtpControlStream#20554616 - Sending command [CWD /]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Sending command [PASV]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [227 Entering Passive Mode (213,186,33,206,108,109)]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Sending command [LIST www]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [226-Options: -a -l 
+226 20 matches total]
+System.Net Information: 0 : [9328] FtpWebRequest#13476220::(Releasing FTP connection#20554616.)
+System.Net Information: 0 : [9964] FtpWebRequest#37839230::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2)
+System.Net Information: 0 : [10004] FtpWebRequest#37839230::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [10004] Associating FtpWebRequest#37839230 with FtpControlStream#20554616
+System.Net Information: 0 : [10004] FtpControlStream#20554616 - Sending command [CWD /www]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [250 OK. Current directory is /www]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Sending command [PASV]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Received response [227 Entering Passive Mode (213,186,33,206,108,191)]
+System.Net Information: 0 : [8840] FtpControlStream#20554616 - Sending command [LIST a_ftpTestEPSI2]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [9328] FtpControlStream#20554616 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [9328] FtpWebRequest#37839230::(Releasing FTP connection#20554616.)
+System.Net Information: 0 : [7912] ServicePoint#15645912 - Closed as idle.
+System.Net Information: 0 : [1968] FtpWebRequest#11090012::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [2460] FtpWebRequest#11090012::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [2460] Current OS installation type is 'Client'.
+System.Net Information: 0 : [2460] RAS supported: True
+System.Net Error: 0 : [2460] Can't retrieve proxy settings for Uri 'ftp://ftp.kimsavinfo.fr/'. Error code: 12180.
+System.Net Information: 0 : [5800] FtpControlStream#20974680 - Created connection from 192.168.8.54:56020 to 213.186.33.206:21.
+System.Net Information: 0 : [5800] Associating FtpWebRequest#11090012 with FtpControlStream#20974680
+System.Net Information: 0 : [5800] FtpControlStream#20974680 - Received response [220-Bienvenue,
+220-
+220-    On Vous Héberge ?
+220-
+220-Vous êtes connecté sur webm362.
+220 This is a private system - No anonymous login]
+System.Net Information: 0 : [5800] FtpControlStream#20974680 - Sending command [USER kimsavin]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [331 User kimsavin OK. Password required]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [PASS ********]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [230-User kimsavin has group access to:  users     
+230 OK. Current restricted directory is /]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [200 OK, UTF-8 enabled]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [PWD]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [257 "/" is your current location]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [TYPE I]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [200 TYPE is now 8-bit binary]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,149,50)]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [LIST]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [7852] FtpWebRequest#11090012::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [1968] FtpWebRequest#12162820::.ctor(ftp://ftp.kimsavinfo.fr//www)
+System.Net Information: 0 : [2460] FtpWebRequest#12162820::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [2460] Associating FtpWebRequest#12162820 with FtpControlStream#20974680
+System.Net Information: 0 : [2460] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,150,109)]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [LIST www]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 20 matches total]
+System.Net Information: 0 : [3904] FtpWebRequest#12162820::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [1968] FtpWebRequest#44606316::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2)
+System.Net Information: 0 : [2460] FtpWebRequest#44606316::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [2460] Associating FtpWebRequest#44606316 with FtpControlStream#20974680
+System.Net Information: 0 : [2460] FtpControlStream#20974680 - Sending command [CWD /www]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,151,233)]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [LIST a_ftpTestEPSI2]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [3904] FtpWebRequest#44606316::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [1968] FtpWebRequest#22616502::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src)
+System.Net Information: 0 : [2460] FtpWebRequest#22616502::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [2460] Associating FtpWebRequest#22616502 with FtpControlStream#20974680
+System.Net Information: 0 : [2460] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [CWD /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,152,251)]
+System.Net Information: 0 : [7852] FtpControlStream#20974680 - Sending command [LIST src]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3904] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 4 matches total]
+System.Net Information: 0 : [3904] FtpWebRequest#22616502::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [5976] ServicePoint#17653682 - Closed as idle.
+System.Net Information: 0 : [5288] FtpWebRequest#42282156::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [8540] FtpWebRequest#42282156::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [8540] Current OS installation type is 'Client'.
+System.Net Information: 0 : [8540] RAS supported: True
+System.Net Error: 0 : [8540] Can't retrieve proxy settings for Uri 'ftp://ftp.kimsavinfo.fr/'. Error code: 12180.
+System.Net Information: 0 : [4292] FtpControlStream#15510466 - Created connection from 192.168.8.54:56036 to 213.186.33.206:21.
+System.Net Information: 0 : [4292] Associating FtpWebRequest#42282156 with FtpControlStream#15510466
+System.Net Information: 0 : [4292] FtpControlStream#15510466 - Received response [220-Bienvenue,
+220-
+220-    On Vous Héberge ?
+220-
+220-Vous êtes connecté sur webm362.
+220 This is a private system - No anonymous login]
+System.Net Information: 0 : [4292] FtpControlStream#15510466 - Sending command [USER kimsavin]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [331 User kimsavin OK. Password required]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PASS ********]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Received response [230-User kimsavin has group access to:  users     
+230 OK. Current restricted directory is /]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [200 OK, UTF-8 enabled]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PWD]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Received response [257 "/" is your current location]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Sending command [TYPE I]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [200 TYPE is now 8-bit binary]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PASV]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Received response [227 Entering Passive Mode (213,186,33,206,34,91)]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Sending command [LIST]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [4800] FtpWebRequest#42282156::(Releasing FTP connection#15510466.)
+System.Net Information: 0 : [5288] FtpWebRequest#59602202::.ctor(ftp://ftp.kimsavinfo.fr//www)
+System.Net Information: 0 : [8540] FtpWebRequest#59602202::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [8540] Associating FtpWebRequest#59602202 with FtpControlStream#15510466
+System.Net Information: 0 : [8540] FtpControlStream#15510466 - Sending command [CWD /]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PASV]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Received response [227 Entering Passive Mode (213,186,33,206,34,187)]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Sending command [LIST www]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [226-Options: -a -l 
+226 20 matches total]
+System.Net Information: 0 : [4800] FtpWebRequest#59602202::(Releasing FTP connection#15510466.)
+System.Net Information: 0 : [5288] FtpWebRequest#32721800::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2)
+System.Net Information: 0 : [8540] FtpWebRequest#32721800::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [8540] Associating FtpWebRequest#32721800 with FtpControlStream#15510466
+System.Net Information: 0 : [8540] FtpControlStream#15510466 - Sending command [CWD /www]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [250 OK. Current directory is /www]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PASV]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Received response [227 Entering Passive Mode (213,186,33,206,35,18)]
+System.Net Information: 0 : [1924] FtpControlStream#15510466 - Sending command [LIST a_ftpTestEPSI2]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [4800] FtpWebRequest#32721800::(Releasing FTP connection#15510466.)
+System.Net Information: 0 : [5288] FtpWebRequest#25196644::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src)
+System.Net Information: 0 : [8540] FtpWebRequest#25196644::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [8540] Associating FtpWebRequest#25196644 with FtpControlStream#15510466
+System.Net Information: 0 : [8540] FtpControlStream#15510466 - Sending command [CWD /]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [CWD /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Sending command [PASV]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [227 Entering Passive Mode (213,186,33,206,36,0)]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [LIST src]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Received response [226-Options: -a -l 
+226 4 matches total]
+System.Net Information: 0 : [2524] FtpWebRequest#25196644::(Releasing FTP connection#15510466.)
+System.Net Information: 0 : [5288] FtpWebRequest#20467555::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib)
+System.Net Information: 0 : [8540] FtpWebRequest#20467555::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [8540] Associating FtpWebRequest#20467555 with FtpControlStream#15510466
+System.Net Information: 0 : [8540] FtpControlStream#15510466 - Sending command [CWD /]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Sending command [CWD /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Sending command [PASV]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Received response [227 Entering Passive Mode (213,186,33,206,36,50)]
+System.Net Information: 0 : [2524] FtpControlStream#15510466 - Sending command [LIST lib]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [4800] FtpControlStream#15510466 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [4800] FtpWebRequest#20467555::(Releasing FTP connection#15510466.)
+System.Net Information: 0 : [7324] FtpWebRequest#32099333::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [3164] FtpWebRequest#32099333::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Current OS installation type is 'Client'.
+System.Net Information: 0 : [3164] RAS supported: True
+System.Net Error: 0 : [3164] Can't retrieve proxy settings for Uri 'ftp://ftp.kimsavinfo.fr/'. Error code: 12180.
+System.Net Information: 0 : [9824] FtpControlStream#36610825 - Created connection from 192.168.8.54:56042 to 213.186.33.206:21.
+System.Net Information: 0 : [9824] Associating FtpWebRequest#32099333 with FtpControlStream#36610825
+System.Net Information: 0 : [9824] FtpControlStream#36610825 - Received response [220-Bienvenue,
+220-
+220-    On Vous Héberge ?
+220-
+220-Vous êtes connecté sur webm362.
+220 This is a private system - No anonymous login]
+System.Net Information: 0 : [9824] FtpControlStream#36610825 - Sending command [USER kimsavin]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [331 User kimsavin OK. Password required]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Sending command [PASS ********]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [230-User kimsavin has group access to:  users     
+230 OK. Current restricted directory is /]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [200 OK, UTF-8 enabled]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Sending command [PWD]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [257 "/" is your current location]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [TYPE I]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [200 TYPE is now 8-bit binary]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,70,175)]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [LIST]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [3156] FtpWebRequest#32099333::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [7324] FtpWebRequest#38104455::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [3164] FtpWebRequest#38104455::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Associating FtpWebRequest#38104455 with FtpControlStream#36610825
+System.Net Information: 0 : [3164] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,73,207)]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [LIST]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [3156] FtpWebRequest#38104455::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [7324] FtpWebRequest#21411931::.ctor(ftp://ftp.kimsavinfo.fr//www)
+System.Net Information: 0 : [3164] FtpWebRequest#21411931::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Associating FtpWebRequest#21411931 with FtpControlStream#36610825
+System.Net Information: 0 : [3164] FtpControlStream#36610825 - Sending command [CWD /]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,74,43)]
+System.Net Information: 0 : [3156] FtpControlStream#36610825 - Sending command [LIST www]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 20 matches total]
+System.Net Information: 0 : [8992] FtpWebRequest#21411931::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [7324] FtpWebRequest#53469156::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2)
+System.Net Information: 0 : [3164] FtpWebRequest#53469156::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Associating FtpWebRequest#53469156 with FtpControlStream#36610825
+System.Net Information: 0 : [3164] FtpControlStream#36610825 - Sending command [CWD /www]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [250 OK. Current directory is /www]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,75,84)]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Sending command [LIST a_ftpTestEPSI2]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [8992] FtpWebRequest#53469156::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [7324] FtpWebRequest#50613424::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src)
+System.Net Information: 0 : [3164] FtpWebRequest#50613424::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Associating FtpWebRequest#50613424 with FtpControlStream#36610825
+System.Net Information: 0 : [3164] FtpControlStream#36610825 - Sending command [CWD /]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Sending command [CWD /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,75,253)]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Sending command [LIST src]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 4 matches total]
+System.Net Information: 0 : [8992] FtpWebRequest#50613424::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [7324] FtpWebRequest#33431070::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib)
+System.Net Information: 0 : [3164] FtpWebRequest#33431070::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3164] Associating FtpWebRequest#33431070 with FtpControlStream#36610825
+System.Net Information: 0 : [3164] FtpControlStream#36610825 - Sending command [CWD /]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Sending command [CWD /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Sending command [PASV]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Received response [227 Entering Passive Mode (213,186,33,206,77,89)]
+System.Net Information: 0 : [6904] FtpControlStream#36610825 - Sending command [LIST lib]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [8992] FtpControlStream#36610825 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [8992] FtpWebRequest#33431070::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [10200] FtpWebRequest#11090012::.ctor(ftp://ftp.kimsavinfo.fr/)
+System.Net Information: 0 : [4932] FtpWebRequest#11090012::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4932] Current OS installation type is 'Client'.
+System.Net Information: 0 : [4932] RAS supported: True
+System.Net Error: 0 : [4932] Can't retrieve proxy settings for Uri 'ftp://ftp.kimsavinfo.fr/'. Error code: 12180.
+System.Net Information: 0 : [2400] FtpControlStream#20974680 - Created connection from 192.168.8.54:56049 to 213.186.33.206:21.
+System.Net Information: 0 : [2400] Associating FtpWebRequest#11090012 with FtpControlStream#20974680
+System.Net Information: 0 : [2400] FtpControlStream#20974680 - Received response [220-Bienvenue,
+220-
+220-    On Vous Héberge ?
+220-
+220-Vous êtes connecté sur webm362.
+220 This is a private system - No anonymous login]
+System.Net Information: 0 : [2400] FtpControlStream#20974680 - Sending command [USER kimsavin]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [331 User kimsavin OK. Password required]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [PASS ********]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [230-User kimsavin has group access to:  users     
+230 OK. Current restricted directory is /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [200 OK, UTF-8 enabled]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [PWD]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [257 "/" is your current location]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [TYPE I]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [200 TYPE is now 8-bit binary]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,232,28)]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [LIST]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 7 matches total]
+System.Net Information: 0 : [0884] FtpWebRequest#11090012::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#12162820::.ctor(ftp://ftp.kimsavinfo.fr//www)
+System.Net Information: 0 : [4932] FtpWebRequest#12162820::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4932] Associating FtpWebRequest#12162820 with FtpControlStream#20974680
+System.Net Information: 0 : [4932] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,232,213)]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [LIST www]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 20 matches total]
+System.Net Information: 0 : [3056] FtpWebRequest#12162820::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#44606316::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2)
+System.Net Information: 0 : [4932] FtpWebRequest#44606316::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4932] Associating FtpWebRequest#44606316 with FtpControlStream#20974680
+System.Net Information: 0 : [4932] FtpControlStream#20974680 - Sending command [CWD /www]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,233,174)]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [LIST a_ftpTestEPSI2]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [3056] FtpWebRequest#44606316::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#22616502::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src)
+System.Net Information: 0 : [4932] FtpWebRequest#22616502::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4932] Associating FtpWebRequest#22616502 with FtpControlStream#20974680
+System.Net Information: 0 : [4932] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [CWD /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,234,113)]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [LIST src]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 4 matches total]
+System.Net Information: 0 : [0884] FtpWebRequest#22616502::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#34723915::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib)
+System.Net Information: 0 : [4932] FtpWebRequest#34723915::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4932] Associating FtpWebRequest#34723915 with FtpControlStream#20974680
+System.Net Information: 0 : [4932] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [CWD /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,235,67)]
+System.Net Information: 0 : [3056] FtpControlStream#20974680 - Sending command [LIST lib]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [0884] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [0884] FtpWebRequest#34723915::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [1772] FtpWebRequest#45653674::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/maths.js)
+System.Net Information: 0 : [1772] FtpWebRequest#45653674::GetResponse(Method=RETR.)
+System.Net Information: 0 : [1772] Associating FtpWebRequest#45653674 with FtpControlStream#20974680
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,237,99)]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Sending command [RETR /www/a_ftpTestEPSI2/src/lib/maths.js]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [226-File successfully transferred
+226 0.000 seconds (measured here), 23.37 Mbytes per second]
+System.Net Information: 0 : [1772] FtpWebRequest#45653674::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [1772] FtpWebRequest#39785641::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/preview_canvas.js)
+System.Net Information: 0 : [1772] FtpWebRequest#39785641::GetResponse(Method=RETR.)
+System.Net Information: 0 : [1772] Associating FtpWebRequest#39785641 with FtpControlStream#20974680
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,237,149)]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Sending command [RETR /www/a_ftpTestEPSI2/src/lib/preview_canvas.js]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [1772] FtpControlStream#20974680 - Received response [226-File successfully transferred
+226 0.000 seconds (measured here), 47.93 Mbytes per second]
+System.Net Information: 0 : [1772] FtpWebRequest#39785641::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [7932] FtpWebRequest#49538252::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/user_canvas.js)
+System.Net Information: 0 : [7932] FtpWebRequest#49538252::GetResponse(Method=RETR.)
+System.Net Information: 0 : [7932] Associating FtpWebRequest#49538252 with FtpControlStream#20974680
+System.Net Information: 0 : [7932] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [7932] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,237,234)]
+System.Net Information: 0 : [7932] FtpControlStream#20974680 - Sending command [RETR /www/a_ftpTestEPSI2/src/lib/user_canvas.js]
+System.Net Information: 0 : [7932] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [7932] FtpControlStream#20974680 - Received response [226-File successfully transferred
+226 0.000 seconds (measured here), 129.92 Mbytes per second]
+System.Net Information: 0 : [7932] FtpWebRequest#49538252::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#53299218::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib)
+System.Net Information: 0 : [10200] FtpWebRequest#53299218::GetResponse(Method=LIST.)
+System.Net Warning: 0 : [10200] ScriptEngine was notified of a potential change in the system's proxy settings and will update WebProxy settings.
+System.Net Information: 0 : [10200] Associating FtpWebRequest#53299218 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [CWD /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2/src]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,4,39)]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [LIST lib]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 5 matches total]
+System.Net Information: 0 : [10200] FtpWebRequest#53299218::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#5653620::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/maths.js)
+System.Net Information: 0 : [10200] FtpWebRequest#5653620::GetResponse(Method=DELE.)
+System.Net Information: 0 : [10200] Associating FtpWebRequest#5653620 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [CWD /]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 OK. Current directory is /]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [DELE /www/a_ftpTestEPSI2/src/lib/maths.js]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 Deleted /www/a_ftpTestEPSI2/src/lib/maths.js]
+System.Net Information: 0 : [10200] FtpWebRequest#5653620::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#41386841::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/preview_canvas.js)
+System.Net Information: 0 : [10200] FtpWebRequest#41386841::GetResponse(Method=DELE.)
+System.Net Information: 0 : [10200] Associating FtpWebRequest#41386841 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [DELE /www/a_ftpTestEPSI2/src/lib/preview_canvas.js]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 Deleted /www/a_ftpTestEPSI2/src/lib/preview_canvas.js]
+System.Net Information: 0 : [10200] FtpWebRequest#41386841::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#46497064::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib/user_canvas.js)
+System.Net Information: 0 : [10200] FtpWebRequest#46497064::GetResponse(Method=DELE.)
+System.Net Information: 0 : [10200] Associating FtpWebRequest#46497064 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [DELE /www/a_ftpTestEPSI2/src/lib/user_canvas.js]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 Deleted /www/a_ftpTestEPSI2/src/lib/user_canvas.js]
+System.Net Information: 0 : [10200] FtpWebRequest#46497064::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#46847177::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/lib)
+System.Net Information: 0 : [10200] FtpWebRequest#46847177::GetResponse(Method=RMD.)
+System.Net Information: 0 : [10200] Associating FtpWebRequest#46847177 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [RMD /www/a_ftpTestEPSI2/src/lib]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 The directory was successfully removed]
+System.Net Information: 0 : [10200] FtpWebRequest#46847177::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#31408037::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src/index.html)
+System.Net Information: 0 : [10200] FtpWebRequest#31408037::GetResponse(Method=DELE.)
+System.Net Information: 0 : [10200] Associating FtpWebRequest#31408037 with FtpControlStream#20974680
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Sending command [DELE /www/a_ftpTestEPSI2/src/index.html]
+System.Net Information: 0 : [10200] FtpControlStream#20974680 - Received response [250 Deleted /www/a_ftpTestEPSI2/src/index.html]
+System.Net Information: 0 : [10200] FtpWebRequest#31408037::(Releasing FTP connection#20974680.)
+System.Net Information: 0 : [10200] FtpWebRequest#49343907::.ctor(ftp://ftp.kimsavinfo.fr//www/a_ftpTestEPSI2/src)
+System.Net Information: 0 : [3788] FtpWebRequest#49343907::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [3788] Associating FtpWebRequest#49343907 with FtpControlStream#20974680
+System.Net Information: 0 : [3788] FtpControlStream#20974680 - Sending command [CWD /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [3724] FtpControlStream#20974680 - Received response [250 OK. Current directory is /www/a_ftpTestEPSI2]
+System.Net Information: 0 : [3724] FtpControlStream#20974680 - Sending command [PASV]
+System.Net Information: 0 : [4364] FtpControlStream#20974680 - Received response [227 Entering Passive Mode (213,186,33,206,8,131)]
+System.Net Information: 0 : [4364] FtpControlStream#20974680 - Sending command [LIST src]
+System.Net Information: 0 : [3724] FtpControlStream#20974680 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [3724] FtpControlStream#20974680 - Received response [226-Options: -a -l 
+226 2 matches total]
+System.Net Information: 0 : [3724] FtpWebRequest#49343907::(Releasing FTP connection#20974680.)
