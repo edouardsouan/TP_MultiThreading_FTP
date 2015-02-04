@@ -5635,3 +5635,96 @@ System.Net Information: 0 : [3288] FtpControlStream#36610825 - Received response
 System.Net Information: 0 : [3288] FtpControlStream#36610825 - Received response [226-Options: -a -l 
 226 5 matches total]
 System.Net Information: 0 : [3288] FtpWebRequest#21411931::(Releasing FTP connection#36610825.)
+System.Net Information: 0 : [5520] FtpWebRequest#8990007::.ctor(ftp://192.168.8.6:1200/)
+System.Net Information: 0 : [4880] FtpWebRequest#8990007::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4880] Current OS installation type is 'Client'.
+System.Net Information: 0 : [4880] RAS supported: True
+System.Net Error: 0 : [4880] Can't retrieve proxy settings for Uri 'ftp://192.168.8.6:1200/'. Error code: 12180.
+System.Net Error: 0 : [2420] Exception in FtpWebRequest#8990007::EndGetResponse - Unable to connect to the remote server.
+   at System.Net.FtpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+System.Net Information: 0 : [5520] FtpWebRequest#4463106::.ctor(ftp://192.168.8.6:1200/)
+System.Net Information: 0 : [8132] FtpWebRequest#4463106::BeginGetResponse(Method=LIST.)
+System.Net Warning: 0 : [8132] ScriptEngine was notified of a potential change in the system's proxy settings and will update WebProxy settings.
+System.Net Error: 0 : [2420] Exception in FtpWebRequest#4463106::EndGetResponse - Unable to connect to the remote server.
+   at System.Net.FtpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+System.Net Information: 0 : [5520] FtpWebRequest#66622070::.ctor(ftp://192.168.43.237:1200/)
+System.Net Information: 0 : [6872] FtpWebRequest#66622070::BeginGetResponse(Method=LIST.)
+System.Net Warning: 0 : [6872] ScriptEngine was notified of a potential change in the system's proxy settings and will update WebProxy settings.
+System.Net Information: 0 : [2420] FtpControlStream#8627704 - Created connection from 192.168.43.58:56302 to 192.168.43.237:1200.
+System.Net Information: 0 : [2420] Associating FtpWebRequest#66622070 with FtpControlStream#8627704
+System.Net Information: 0 : [2420] FtpControlStream#8627704 - Received response [220-Welcome
+220 FTP Server provided by us]
+System.Net Information: 0 : [2420] FtpControlStream#8627704 - Sending command [USER kimSavaroche]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Received response [331 Password required forkimSavaroche]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Sending command [PASS ********]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [230 User logged in]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Received response [500 unknown command OPTS utf8 on]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Sending command [PWD]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [257 C:\test]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Sending command [TYPE I]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Received response [200 we don't care about this command...]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Sending command [PASV]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [227 Entering passive mode (192,168,8,6,10,101)]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Sending command [LIST]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Received response [150 Opening data channel]
+System.Net Information: 0 : [3524] FtpControlStream#8627704 - Received response [226 Transfer complete.]
+System.Net Information: 0 : [3524] FtpWebRequest#66622070::(Releasing FTP connection#8627704.)
+System.Net Information: 0 : [6872] FtpWebRequest#53053185::.ctor(ftp://192.168.43.237:1200///tea_battery.jpg)
+System.Net Information: 0 : [6872] FtpWebRequest#53053185::GetRequestStream(Method=STOR.)
+System.Net Information: 0 : [6872] Associating FtpWebRequest#53053185 with FtpControlStream#8627704
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Sending command [PASV]
+System.Net Information: 0 : [5520] FtpWebRequest#20876819::.ctor(ftp://192.168.43.237:1200/)
+System.Net Information: 0 : [6796] FtpWebRequest#20876819::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [227 Entering passive mode (192,168,8,6,10,101)]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Created connection from 192.168.43.58:56304 to 192.168.43.237:1200.
+System.Net Information: 0 : [5136] Associating FtpWebRequest#20876819 with FtpControlStream#32334210
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Sending command [STOR //tea_battery.jpg]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Received response [220-Welcome
+220 FTP Server provided by us]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Sending command [USER kimSavaroche]
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [150 Accepted data connection]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Received response [331 Password required forkimSavaroche]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Sending command [PASS ********]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Received response [230 User logged in]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Sending command [OPTS utf8 on]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Received response [500 unknown command OPTS utf8 on]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Sending command [PWD]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Received response [257 C:\test]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Sending command [TYPE I]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Received response [200 we don't care about this command...]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Sending command [PASV]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Received response [227 Entering passive mode (192,168,8,6,8,162)]
+System.Net Information: 0 : [5136] FtpControlStream#32334210 - Sending command [LIST]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Received response [150 Opening data channel]
+System.Net Information: 0 : [3524] FtpControlStream#32334210 - Received response [226 Transfer complete.]
+System.Net Information: 0 : [3524] FtpWebRequest#20876819::(Releasing FTP connection#32334210.)
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [226 File successfully transferred]
+System.Net Information: 0 : [6872] FtpWebRequest#53053185::(Releasing FTP connection#8627704.)
+System.Net Information: 0 : [6872] FtpWebRequest#16810797::.ctor(ftp://192.168.43.237:1200//zzzzzzzzzz.html)
+System.Net Information: 0 : [6872] FtpWebRequest#16810797::GetResponse(Method=RETR.)
+System.Net Information: 0 : [6872] Associating FtpWebRequest#16810797 with FtpControlStream#8627704
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Sending command [PASV]
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [227 Entering passive mode (192,168,8,6,10,101)]
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Sending command [RETR /zzzzzzzzzz.html]
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [150-Accepted data connection
+150       4246o to download]
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Received response [226 File successfully transferred]
+System.Net Information: 0 : [6872] FtpWebRequest#16810797::(Releasing FTP connection#8627704.)
+System.Net Information: 0 : [5520] FtpWebRequest#64083652::.ctor(ftp://192.168.43.237:1200//eeeeee/eeeeee)
+System.Net Information: 0 : [6872] FtpWebRequest#64083652::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [6872] Associating FtpWebRequest#64083652 with FtpControlStream#8627704
+System.Net Information: 0 : [6872] FtpControlStream#8627704 - Sending command [CWD /eeeeee]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [250 Current directory is C:\test\eeeeee]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Sending command [PASV]
+System.Net Information: 0 : [7652] FtpControlStream#8627704 - Received response [227 Entering passive mode (192,168,8,6,10,101)]
+System.Net Information: 0 : [7652] FtpControlStream#8627704 - Sending command [LIST eeeeee]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [150 Opening data channel]
+System.Net Information: 0 : [5136] FtpControlStream#8627704 - Received response [550 C:\test\eeeeee no such file or directory]
+System.Net Information: 0 : [5136] FtpWebRequest#64083652::(Releasing FTP connection#8627704.)
+System.Net Information: 0 : [5296] ServicePoint#5238555 - Closed as idle.
+System.Net Information: 0 : [7772] FtpWebRequest#11090012::.ctor(ftp://192.168.43.238:1200/)
+System.Net Information: 0 : [4736] FtpWebRequest#11090012::BeginGetResponse(Method=LIST.)
+System.Net Information: 0 : [4736] Current OS installation type is 'Client'.
+System.Net Information: 0 : [4736] RAS supported: True
+System.Net Error: 0 : [4736] Can't retrieve proxy settings for Uri 'ftp://192.168.43.238:1200/'. Error code: 12180.
