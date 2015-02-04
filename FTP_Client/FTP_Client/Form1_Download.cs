@@ -28,7 +28,6 @@ namespace FTP_Client
                 try
                 {
                     Directory.CreateDirectory(localPathTarget);
-                    Local_RefreshView();
                 }
                 catch (System.IO.IOException exception)
                 {
@@ -105,7 +104,6 @@ namespace FTP_Client
             }, cancellationToken);
 
             logWindow.WriteLog();
-            Local_RefreshView();
         }
     }
 }

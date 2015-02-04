@@ -40,7 +40,6 @@ namespace FTP_Client
         private void Upload_Directory(DirectoryInfo directoryToUpload, string serverPathTarget)
         {
             Server_CreateDirectory(serverPathTarget);
-            Server_RefreshView();
             string subServerPathTarget = serverPathTarget + "/";
 
             List<DirectoryInfo> subDirectories = Local_GetLocalDirectories(directoryToUpload);
@@ -103,7 +102,6 @@ namespace FTP_Client
             }, cancellationToken);
 
             logWindow.WriteLog("Response:	226-File successfully transferred", Color.Green);
-            Server_RefreshView();
         }
     }
 }
