@@ -35,17 +35,26 @@ namespace FTP_Client.InfoEntities
 
         public void WriteLog()
         {
-            this.Text = "";
-
-            FileStream logFileStream = new FileStream(logLocation, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            StreamReader logFileReader = new StreamReader(logFileStream);
-            while (!logFileReader.EndOfStream)
+            Task.Factory.StartNew(() =>
             {
-                string line = logFileReader.ReadLine();
-                this.AppendText(line + "\n");
-            }
-            logFileReader.Close();
-            logFileStream.Close();
+                FileStream logFileStream = new FileStream(logLocation, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader logFileReader = new StreamReader(logFileStream);
+
+                if (logFileReader.BaseStream.Length > 2048)
+                {
+                    logFileReader.BaseStream.Seek(-2048, SeekOrigin.End);
+                }
+
+                string line;
+                while ((line = logFileReader.ReadLine()) != null)
+                {
+                    this.Invoke(new Action(() =>
+                        AppendText(line + "\n")
+                    ));
+                }
+                logFileReader.Close();
+                logFileStream.Close();
+            });
 
             ScrollToEnd();
         }
