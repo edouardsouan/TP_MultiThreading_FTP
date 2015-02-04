@@ -114,6 +114,7 @@
     <None Include="Resources\connexion.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\delete.png" />
     <Content Include="Resources\EPSI.ico" />
     <None Include="Resources\file_delete.png" />
     <Content Include="Resources\folder.png" />

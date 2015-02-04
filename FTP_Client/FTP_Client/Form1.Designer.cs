@@ -37,7 +37,7 @@ namespace FTP_Client
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnDeleteServer = new System.Windows.Forms.Button();
             this.btnConnection = new System.Windows.Forms.Button();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
@@ -56,6 +56,7 @@ namespace FTP_Client
             this.btnCancel = new System.Windows.Forms.Button();
             this.fileTransfertBar = new System.Windows.Forms.ProgressBar();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.btnDeleteLocal = new System.Windows.Forms.Button();
             this.logWindow = new FTP_Client.InfoEntities.LogFTPWindow(this.components);
             this.localTreeView = new FTP_Client.LocalEntities.LocalTreeView();
             this.serverTreeView = new FTP_Client.ServerEntities.ServerTreeView(this.components);
@@ -151,7 +152,8 @@ namespace FTP_Client
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.btnDeleteLocal);
+            this.panel1.Controls.Add(this.btnDeleteServer);
             this.panel1.Controls.Add(this.btnConnection);
             this.panel1.Controls.Add(this.txtPort);
             this.panel1.Controls.Add(this.labelPort);
@@ -168,22 +170,22 @@ namespace FTP_Client
             this.panel1.Size = new System.Drawing.Size(934, 38);
             this.panel1.TabIndex = 0;
             // 
-            // btnDelete
+            // btnDeleteServer
             // 
-            this.btnDelete.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDelete.Image = global::FTP_Client.Properties.Resources.file_delete;
-            this.btnDelete.Location = new System.Drawing.Point(839, 6);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(48, 31);
-            this.btnDelete.TabIndex = 9;
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDeleteServer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDeleteServer.Image = global::FTP_Client.Properties.Resources.file_delete;
+            this.btnDeleteServer.Location = new System.Drawing.Point(874, 6);
+            this.btnDeleteServer.Name = "btnDeleteServer";
+            this.btnDeleteServer.Size = new System.Drawing.Size(48, 31);
+            this.btnDeleteServer.TabIndex = 9;
+            this.btnDeleteServer.UseVisualStyleBackColor = false;
+            this.btnDeleteServer.Click += new System.EventHandler(this.btnDeleteServer_Click);
             // 
             // btnConnection
             // 
             this.btnConnection.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnConnection.Image = global::FTP_Client.Properties.Resources.connexion;
-            this.btnConnection.Location = new System.Drawing.Point(788, 6);
+            this.btnConnection.Location = new System.Drawing.Point(824, 6);
             this.btnConnection.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnection.Name = "btnConnection";
             this.btnConnection.Size = new System.Drawing.Size(43, 31);
@@ -193,7 +195,7 @@ namespace FTP_Client
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(692, 10);
+            this.txtPort.Location = new System.Drawing.Point(736, 7);
             this.txtPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(80, 27);
@@ -203,7 +205,7 @@ namespace FTP_Client
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(644, 9);
+            this.labelPort.Location = new System.Drawing.Point(688, 9);
             this.labelPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(40, 17);
@@ -212,7 +214,7 @@ namespace FTP_Client
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(315, 10);
+            this.txtUserName.Location = new System.Drawing.Point(391, 7);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(100, 27);
@@ -221,7 +223,7 @@ namespace FTP_Client
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(521, 10);
+            this.txtPassword.Location = new System.Drawing.Point(580, 7);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -232,7 +234,7 @@ namespace FTP_Client
             // labelUserName
             // 
             this.labelUserName.AutoSize = true;
-            this.labelUserName.Location = new System.Drawing.Point(221, 9);
+            this.labelUserName.Location = new System.Drawing.Point(297, 6);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUserName.Name = "labelUserName";
             this.labelUserName.Size = new System.Drawing.Size(86, 17);
@@ -241,7 +243,7 @@ namespace FTP_Client
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(65, 9);
+            this.txtServer.Location = new System.Drawing.Point(153, 6);
             this.txtServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(136, 27);
@@ -251,7 +253,7 @@ namespace FTP_Client
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(440, 9);
+            this.labelPassword.Location = new System.Drawing.Point(499, 9);
             this.labelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(73, 17);
@@ -261,7 +263,7 @@ namespace FTP_Client
             // labelServer
             // 
             this.labelServer.AutoSize = true;
-            this.labelServer.Location = new System.Drawing.Point(4, 9);
+            this.labelServer.Location = new System.Drawing.Point(90, 9);
             this.labelServer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelServer.Name = "labelServer";
             this.labelServer.Size = new System.Drawing.Size(55, 17);
@@ -394,6 +396,17 @@ namespace FTP_Client
             this.splitter1.Size = new System.Drawing.Size(4, 639);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
+            // 
+            // btnDeleteLocal
+            // 
+            this.btnDeleteLocal.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDeleteLocal.Image = global::FTP_Client.Properties.Resources.delete;
+            this.btnDeleteLocal.Location = new System.Drawing.Point(12, 4);
+            this.btnDeleteLocal.Name = "btnDeleteLocal";
+            this.btnDeleteLocal.Size = new System.Drawing.Size(45, 31);
+            this.btnDeleteLocal.TabIndex = 10;
+            this.btnDeleteLocal.UseVisualStyleBackColor = false;
+            this.btnDeleteLocal.Click += new System.EventHandler(this.btnDeleteLocal_Click);
             // 
             // logWindow
             // 
@@ -661,7 +674,8 @@ namespace FTP_Client
         private System.Windows.Forms.ColumnHeader time;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ProgressBar fileTransfertBar;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnDeleteServer;
+        private System.Windows.Forms.Button btnDeleteLocal;
     }
 }
 

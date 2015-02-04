@@ -17,8 +17,7 @@ namespace FTP_Client
 {
     public partial class Form1 : Form
     {
-        #region Variables
-        bool showConnectionLog = true;
+        #region Variables;
         string localPath = "";
         string serverPath = "";
         CancellationTokenSource cancellationTokenSource;
@@ -29,7 +28,6 @@ namespace FTP_Client
         {
             InitializeComponent();
 
-            
             txtServer.Text = "ftp.kimsavinfo.fr";
             txtUserName.Text = "kimsavin";
             txtPassword.Text = "Se8yBapG";
@@ -58,7 +56,6 @@ namespace FTP_Client
             serverTreeView.Nodes.Clear();
             serverTreeView.InitRoot();
             serverListView.Items.Clear();
-            showConnectionLog = true;
 
             ftpManager = new FTPManager(this.txtUserName.Text, this.txtPassword.Text, this.txtServer.Text, this.txtPort.Text);
             Server_ShowLinkedFTPElements("", serverTreeView.Nodes[0]);
