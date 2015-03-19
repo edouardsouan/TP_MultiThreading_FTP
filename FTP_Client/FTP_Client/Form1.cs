@@ -28,11 +28,6 @@ namespace FTP_Client
         {
             InitializeComponent();
 
-            txtServer.Text = "ftp.kimsavinfo.fr";
-            txtUserName.Text = "kimsavin";
-            txtPassword.Text = "Se8yBapG";
-            txtPort.Text = "21";
-
             cancellationTokenSource = new CancellationTokenSource();
         }
 
